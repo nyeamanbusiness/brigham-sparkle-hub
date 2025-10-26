@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, MapPin, Phone, Mail } from 'lucide-react';
+import logo from '@/assets/sparkle-logo.webp';
 
 export default function Footer() {
   const services = [
@@ -16,9 +17,11 @@ export default function Footer() {
           {/* About */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-accent-foreground font-bold text-xl">S</span>
-              </div>
+              <img 
+                src={logo} 
+                alt="Sparkle Auto Detailing Logo" 
+                className="h-12 w-auto"
+              />
               <span className="font-bold text-lg">Sparkle Auto Detailing</span>
             </div>
             <p className="text-sm text-secondary-foreground/80 mb-4">

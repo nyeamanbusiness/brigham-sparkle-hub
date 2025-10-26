@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, X, Phone } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import logo from '@/assets/sparkle-logo.webp';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -53,9 +54,11 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between py-4">
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center">
-              <span className="text-primary font-bold text-xl">S</span>
-            </div>
+            <img 
+              src={logo} 
+              alt="Sparkle Auto Detailing Logo" 
+              className="h-12 w-auto"
+            />
             <span className="text-primary-foreground font-bold text-xl hidden sm:block">
               Sparkle Auto Detailing
             </span>
