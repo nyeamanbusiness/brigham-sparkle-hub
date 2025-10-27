@@ -19,6 +19,37 @@ export default function AutoDetailingExterior() {
     'Window cleaning (inside & out)',
   ];
 
+  const packages = [
+    {
+      name: 'Clay & Seal',
+      price: '$149.00',
+      vehicle: 'SUV/Truck',
+      duration: '2 hrs',
+      description: 'Complete decontamination and protection for larger vehicles.',
+    },
+    {
+      name: 'Clay & Seal',
+      price: '$139.00',
+      vehicle: 'Coupe/Sedan',
+      duration: '2 hrs',
+      description: 'Full clay bar treatment with premium sealant protection.',
+    },
+    {
+      name: 'Wash & Wax',
+      price: '$109.00',
+      vehicle: 'SUV/Truck',
+      duration: '2 hrs',
+      description: 'Professional hand wash with carnauba wax protection.',
+    },
+    {
+      name: 'Wash & Wax',
+      price: '$99.00',
+      vehicle: 'Coupe/Sedan',
+      duration: '2 hrs',
+      description: 'Hand wash and premium wax for lasting shine and protection.',
+    },
+  ];
+
   return (
     <>
       <Meta
@@ -111,6 +142,51 @@ export default function AutoDetailingExterior() {
                 Next, we use a clay bar treatment to create a perfectly smooth surface, followed by paint polishing to remove minor swirls and restore gloss. Finally, we apply a durable wax or sealant for long-lasting protection and shine. Your wheels, tires, and trim receive specialized attention to complete the transformation.
               </p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">
+              Exterior Detailing Packages
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Professional exterior care with premium products and expert techniques
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {packages.map((pkg, index) => (
+              <motion.div
+                key={`${pkg.name}-${pkg.vehicle}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift"
+              >
+                <div className={`${index < 2 ? 'bg-primary' : 'bg-secondary'} text-white p-6`}>
+                  <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
+                  <p className="text-3xl font-bold mb-1">{pkg.price}</p>
+                  <p className="text-sm opacity-90">{pkg.vehicle} • {pkg.duration}</p>
+                </div>
+                <div className="p-6">
+                  <p className="text-muted-foreground mb-6">{pkg.description}</p>
+                  <Button asChild className="w-full gradient-cta">
+                    <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
+                  </Button>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
