@@ -1,42 +1,42 @@
-import { Meta } from '@/utils/seo';
-import BreadcrumbsJsonLd from '@/components/BreadcrumbsJsonLd';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
-import { useState } from 'react';
-import { toast } from 'sonner';
+import { Meta } from "@/utils/seo";
+import BreadcrumbsJsonLd from "@/components/BreadcrumbsJsonLd";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    vehicle: '',
-    service: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    vehicle: "",
+    service: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real implementation, this would send to a backend
-    toast.success('Thank you! We\'ll contact you soon.');
+    toast.success("Thank you! We'll contact you soon.");
     setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      vehicle: '',
-      service: '',
-      message: ''
+      name: "",
+      email: "",
+      phone: "",
+      vehicle: "",
+      service: "",
+      message: "",
     });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -47,24 +47,21 @@ export default function Contact() {
         description="Contact Sparkle Auto Detailing in Brigham City, Utah. Call +1 435-535-6484 or fill out our form to schedule your detailing service today."
         canonical="https://sparkleautodetailingllc.com/contact"
       />
-      <BreadcrumbsJsonLd items={[
-        { name: 'Home', item: 'https://sparkleautodetailingllc.com/' },
-        { name: 'Contact', item: 'https://sparkleautodetailingllc.com/contact' }
-      ]} />
+      <BreadcrumbsJsonLd
+        items={[
+          { name: "Home", item: "https://sparkleautodetailingllc.com/" },
+          { name: "Contact", item: "https://sparkleautodetailingllc.com/contact" },
+        ]}
+      />
 
       {/* Hero Section */}
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Book Your Service Today
-            </h1>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Have Questions ?</h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-              Give your vehicle the luxury treatment it deserves. Experience a shine that lasts, protection you can count on, and effortless maintenance.
+              Give your vehicle the luxury treatment it deserves. Experience a shine that lasts, protection you can
+              count on, and effortless maintenance.
             </p>
           </motion.div>
         </div>
@@ -86,47 +83,47 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <Label htmlFor="name">Full Name *</Label>
-                    <Input 
-                      id="name" 
+                    <Input
+                      id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="John Doe" 
-                      required 
+                      placeholder="John Doe"
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input 
-                      id="email" 
+                    <Input
+                      id="email"
                       name="email"
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="john@example.com" 
-                      required 
+                      placeholder="john@example.com"
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="phone">Phone Number *</Label>
-                    <Input 
-                      id="phone" 
+                    <Input
+                      id="phone"
                       name="phone"
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="(435) 555-0123" 
-                      required 
+                      placeholder="(435) 555-0123"
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="vehicle">Vehicle Type</Label>
-                    <Input 
-                      id="vehicle" 
+                    <Input
+                      id="vehicle"
                       name="vehicle"
                       value={formData.vehicle}
                       onChange={handleChange}
-                      placeholder="e.g., 2020 Honda Accord" 
+                      placeholder="e.g., 2020 Honda Accord"
                     />
                   </div>
                   <div>
@@ -148,17 +145,17 @@ export default function Contact() {
                   </div>
                   <div>
                     <Label htmlFor="message">Message</Label>
-                    <Textarea 
-                      id="message" 
+                    <Textarea
+                      id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your vehicle and what service you're interested in..." 
+                      placeholder="Tell us about your vehicle and what service you're interested in..."
                       rows={4}
                     />
                   </div>
                   <Button type="submit" className="w-full gradient-cta" size="lg">
-                    Book Now
+                    Send Message
                   </Button>
                 </form>
               </div>
@@ -186,14 +183,17 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4">
                     <div className="bg-accent/10 p-3 rounded-lg">
                       <Mail className="h-6 w-6 text-accent" />
                     </div>
                     <div>
                       <h3 className="font-bold mb-1">Email</h3>
-                      <a href="mailto:nyeamanbusiness@gmail.com" className="text-muted-foreground hover:text-accent transition-colors">
+                      <a
+                        href="mailto:nyeamanbusiness@gmail.com"
+                        className="text-muted-foreground hover:text-accent transition-colors"
+                      >
                         nyeamanbusiness@gmail.com
                       </a>
                     </div>
@@ -206,7 +206,8 @@ export default function Contact() {
                     <div>
                       <h3 className="font-bold mb-1">Location</h3>
                       <p className="text-muted-foreground">
-                        121n 400w, Brigham City, UT<br />
+                        121n 400w, Brigham City, UT
+                        <br />
                         United States, 84302
                       </p>
                     </div>
@@ -219,7 +220,8 @@ export default function Contact() {
                     <div>
                       <h3 className="font-bold mb-1">Hours</h3>
                       <p className="text-muted-foreground">
-                        Monday - Saturday: 8:00 AM - 6:00 PM<br />
+                        Monday - Saturday: 8:00 AM - 6:00 PM
+                        <br />
                         Sunday: Closed
                       </p>
                     </div>
