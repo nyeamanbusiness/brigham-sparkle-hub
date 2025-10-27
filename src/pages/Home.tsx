@@ -46,7 +46,7 @@ export default function Home() {
       title: "Ceramic Coating",
       description: "2-5 year protection with hydrophobic properties and gloss enhancement.",
       href: "/services/ceramic-coating",
-      image: "/placeholder.svg",
+      image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/ceramic-coating-sedan.webp",
     },
     {
       title: "Paint Correction",
@@ -214,7 +214,8 @@ export default function Home() {
                 Proudly Serving Brigham City & Surrounding Areas
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                As a local business, we understand the unique needs of vehicles in Northern Utah. Our team provides reliable auto detailing service throughout Box Elder County and beyond.
+                As a local business, we understand the unique needs of vehicles in Northern Utah. Our team provides
+                reliable auto detailing service throughout Box Elder County and beyond.
               </p>
 
               <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-8">
@@ -288,13 +289,13 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative rounded-lg overflow-hidden shadow-lg"
             >
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47800.31595114912!2d-112.04515505!3d41.51468105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2830d73ff227efe1%3A0x3e3a3d58e3d5a3aa!2sSparkle%20Auto%20Detailing!5e0!3m2!1sen!2sus!4v1761578977290!5m2!1sen!2sus" 
-                width="100%" 
-                height="450" 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47800.31595114912!2d-112.04515505!3d41.51468105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2830d73ff227efe1%3A0x3e3a3d58e3d5a3aa!2sSparkle%20Auto%20Detailing!5e0!3m2!1sen!2sus!4v1761578977290!5m2!1sen!2sus"
+                width="100%"
+                height="450"
                 style={{ border: 0 }}
                 allowFullScreen
-                loading="lazy" 
+                loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Sparkle Auto Detailing service area map"
               ></iframe>
