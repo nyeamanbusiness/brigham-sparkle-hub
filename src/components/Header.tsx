@@ -1,8 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
 import logo from '@/assets/sparkle-logo.webp';
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -10,22 +17,6 @@ export default function Header() {
   const navigation = [{
     name: 'Home',
     href: '/'
-  }, {
-    name: 'Auto Detailing',
-    href: '/services',
-    submenu: [{
-      name: 'Interior Detailing',
-      href: '/services/auto-detailing-interior'
-    }, {
-      name: 'Exterior Detailing',
-      href: '/services/auto-detailing-exterior'
-    }]
-  }, {
-    name: 'Ceramic Coating',
-    href: '/services/ceramic-coating'
-  }, {
-    name: 'Paint Correction',
-    href: '/services/paint-correction'
   }, {
     name: 'Pricing',
     href: '/pricing'
@@ -41,6 +32,23 @@ export default function Header() {
   }, {
     name: 'Contact',
     href: '/contact'
+  }];
+
+  const services = [{
+    name: 'All Services',
+    href: '/services'
+  }, {
+    name: 'Interior Detailing',
+    href: '/services/auto-detailing-interior'
+  }, {
+    name: 'Exterior Detailing',
+    href: '/services/auto-detailing-exterior'
+  }, {
+    name: 'Ceramic Coating',
+    href: '/services/ceramic-coating'
+  }, {
+    name: 'Paint Correction',
+    href: '/services/paint-correction'
   }];
   const isActive = (href: string) => location.pathname === href;
   return <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm shadow-md">
@@ -77,6 +85,24 @@ export default function Header() {
             {navigation.map(item => <Link key={item.name} to={item.href} className={`text-sm font-medium transition-colors ${isActive(item.href) ? 'text-accent' : 'text-primary-foreground hover:text-accent'}`}>
                 {item.name}
               </Link>)}
+            
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent text-sm font-medium text-primary-foreground hover:text-accent data-[state=open]:text-accent">
+                    Services
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-background border border-border shadow-lg">
+                    <div className="w-48 p-2">
+                      {services.map(service => <Link key={service.name} to={service.href} className={`block px-4 py-2 text-sm rounded-md transition-colors ${isActive(service.href) ? 'text-accent bg-accent/10' : 'text-foreground hover:bg-accent/10 hover:text-accent'}`}>
+                          {service.name}
+                        </Link>)}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+
             <Button asChild variant="default" className="gradient-cta">
               <Link to="/contact">Book Now</Link>
             </Button>
@@ -105,6 +131,14 @@ export default function Header() {
               {navigation.map(item => <Link key={item.name} to={item.href} onClick={() => setMobileMenuOpen(false)} className={`block py-2 text-sm font-medium ${isActive(item.href) ? 'text-accent' : 'text-primary-foreground'}`}>
                   {item.name}
                 </Link>)}
+              
+              <div className="border-t border-primary-light/20 pt-3">
+                <div className="text-sm font-medium text-primary-foreground mb-2">Services</div>
+                {services.map(service => <Link key={service.name} to={service.href} onClick={() => setMobileMenuOpen(false)} className={`block py-2 pl-4 text-sm ${isActive(service.href) ? 'text-accent' : 'text-primary-foreground/80'}`}>
+                    {service.name}
+                  </Link>)}
+              </div>
+
               <Button asChild variant="default" className="w-full gradient-cta">
                 <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                   Book Now
