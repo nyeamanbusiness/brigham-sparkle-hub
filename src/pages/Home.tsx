@@ -34,14 +34,14 @@ export default function Home() {
       title: "Interior Detailing",
       description: "Deep clean and restore your vehicle's interior to pristine condition.",
       href: "/services/auto-detailing-interior",
-      image:
-        "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detailing-car.webp",
+      image: "/placeholder.svg",
     },
     {
       title: "Exterior Detailing",
       description: "Professional wash, clay bar, and wax for a brilliant shine.",
       href: "/services/auto-detailing-exterior",
-      image: "/placeholder.svg",
+      image:
+        "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/exterior-detailing-sports-car.webp",
     },
     {
       title: "Ceramic Coating",
