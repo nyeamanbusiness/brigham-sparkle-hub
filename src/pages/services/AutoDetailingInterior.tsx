@@ -77,7 +77,7 @@ export default function AutoDetailingInterior() {
             <p className="text-lg mb-8 text-primary-foreground/90">
               Looking to restore that fresh, clean feeling inside your vehicle? At Sparkle Auto Detailing, our Interior Detail service delivers a deep, professional clean that goes far beyond surface-level. Our expert team meticulously cleans and sanitizes every inch of your car's interior — from the dashboard and center console to the seats, carpets, and door panels.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="gradient-cta">
                 <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
               </Button>
@@ -85,6 +85,18 @@ export default function AutoDetailingInterior() {
                 <a href="tel:+14355356484">Call Now</a>
               </Button>
             </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="rounded-lg overflow-hidden shadow-2xl"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sports-car-interior-detailing.webp"
+                alt="Professional sports car interior detailing showing pristine clean seats and dashboard"
+                className="w-full h-auto"
+              />
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -130,6 +142,36 @@ export default function AutoDetailingInterior() {
                 With a <strong>meticulous approach</strong> and <strong>competitive local pricing</strong>, Sparkle Auto Detailing is your trusted choice for superior interior detailing in New Orleans. For the ultimate refresh, explore our full-service <strong>"In & Out" detailing packages</strong> — your vehicle deserves it.
               </p>
             </div>
+
+            {/* Image Gallery */}
+            <div className="grid md:grid-cols-2 gap-6 mt-12">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="rounded-lg overflow-hidden shadow-lg"
+              >
+                <img
+                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-interior-detailing.webp"
+                  alt="Professional truck interior detailing showing deep cleaned seats and surfaces"
+                  className="w-full h-auto hover-scale"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="rounded-lg overflow-hidden shadow-lg"
+              >
+                <img
+                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-seat-interior-detail.webp"
+                  alt="Close-up of pristine truck seat after professional interior detailing"
+                  className="w-full h-auto hover-scale"
+                />
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -137,6 +179,36 @@ export default function AutoDetailingInterior() {
       {/* Pricing Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
+          {/* Image Gallery Before Pricing */}
+          <div className="grid md:grid-cols-2 gap-6 mb-16 max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/suv-interior-detailing.webp"
+                alt="Professional SUV interior detailing showcasing clean interior cabin"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sparkle-auto-detailing-interior-detail-truck.webp"
+                alt="Sparkle Auto Detailing truck interior detail work showing professional results"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
