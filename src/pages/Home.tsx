@@ -34,7 +34,8 @@ export default function Home() {
       title: "Interior Detailing",
       description: "Deep clean and restore your vehicle's interior to pristine condition.",
       href: "/services/auto-detailing-interior",
-      image: "/placeholder.svg",
+      image:
+        "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detailing-car.webp",
     },
     {
       title: "Exterior Detailing",
@@ -53,7 +54,7 @@ export default function Home() {
       title: "Paint Correction",
       description: "Remove swirls, scratches, and imperfections for a flawless finish.",
       href: "/services/paint-correction",
-      image: "/placeholder.svg",
+      image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/paint-correction-car.webp",
     },
   ];
 
