@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
+import CustomerReviews from "@/components/CustomerReviews";
 export default function Home() {
   const benefits = [{
     icon: <Shield className="h-8 w-8" />,
@@ -199,6 +200,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Customer Reviews Section */}
+      <CustomerReviews />
 
       {/* Service Areas Section */}
       <section className="py-20 bg-background">
