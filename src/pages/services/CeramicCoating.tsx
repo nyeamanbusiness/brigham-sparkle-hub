@@ -31,18 +31,14 @@ export default function CeramicCoating() {
     },
   ];
 
-  const packages = [
-    {
-      name: 'Coupe/Sedan',
-      price: '$689.00',
-      description: 'Give your sedan the ultimate protection and showroom shine with our professional ceramic coating service.'
-    },
-    {
-      name: 'SUV/Truck',
-      price: '$799.00',
-      description: 'Protect your investment with our premium ceramic coating designed specifically for SUVs and trucks.'
-    },
-  ];
+  const package_info = {
+    name: 'Professional Ceramic Coating',
+    prices: [
+      { vehicle: 'Coupe/Sedan', price: '$689.00' },
+      { vehicle: 'SUV/Truck', price: '$799.00' }
+    ],
+    description: 'Give your vehicle the ultimate protection and showroom shine with our professional ceramic coating service.'
+  };
 
   return (
     <>
@@ -155,29 +151,33 @@ export default function CeramicCoating() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {packages.map((pkg, index) => (
-              <motion.div
-                key={pkg.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift"
-              >
-                <div className="gradient-primary text-primary-foreground p-8 text-center">
-                  <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                  <p className="text-4xl font-bold">{pkg.price}</p>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mx-auto"
+          >
+            <div className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift">
+              <div className="gradient-primary text-primary-foreground p-8">
+                <h3 className="text-2xl font-bold mb-6 text-center">{package_info.name}</h3>
+                <div className="space-y-3">
+                  {package_info.prices.map((priceItem) => (
+                    <div key={priceItem.vehicle} className="flex justify-between items-center border-t border-white/20 pt-3">
+                      <span className="text-lg opacity-90">{priceItem.vehicle}</span>
+                      <span className="text-3xl font-bold">{priceItem.price}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="p-8">
-                  <p className="text-muted-foreground mb-6">{pkg.description}</p>
-                  <Button asChild className="w-full gradient-cta">
-                    <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+              <div className="p-8">
+                <p className="text-muted-foreground mb-6">{package_info.description}</p>
+                <Button asChild className="w-full gradient-cta">
+                  <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
+                </Button>
+              </div>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}

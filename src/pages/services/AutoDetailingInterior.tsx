@@ -22,27 +22,19 @@ export default function AutoDetailingInterior() {
   const packages = [
     {
       name: "Standard Full Detail",
-      price: "$295.00",
-      vehicle: "Coupe/Sedan",
+      prices: [
+        { vehicle: "Coupe/Sedan", price: "$295.00" },
+        { vehicle: "SUV/Truck", price: "$299.00" }
+      ],
       description: "Perfect for regular maintenance and keeping your interior fresh.",
     },
     {
-      name: "Standard Full Detail",
-      price: "$299.00",
-      vehicle: "SUV/Truck",
-      description: "Comprehensive cleaning for larger vehicles.",
-    },
-    {
       name: "Deep Full Detail",
-      price: "$599.00",
-      vehicle: "Coupe/Sedan",
+      prices: [
+        { vehicle: "Coupe/Sedan", price: "$599.00" },
+        { vehicle: "SUV/Truck", price: "$605.00" }
+      ],
       description: "Intensive deep cleaning with ceramic coating preparation.",
-    },
-    {
-      name: "Deep Full Detail",
-      price: "$605.00",
-      vehicle: "SUV/Truck",
-      description: "Maximum care for larger vehicles with full protection.",
     },
   ];
 
@@ -218,20 +210,26 @@ export default function AutoDetailingInterior() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {packages.map((pkg, index) => (
               <motion.div
-                key={`${pkg.name}-${pkg.vehicle}`}
+                key={pkg.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift"
               >
-                <div className={`${index < 2 ? "bg-primary" : "bg-secondary"} text-white p-6`}>
-                  <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
-                  <p className="text-2xl font-bold mb-1">{pkg.price}</p>
-                  <p className="text-sm opacity-90">{pkg.vehicle}</p>
+                <div className={`${index === 0 ? "bg-primary" : "bg-secondary"} text-white p-6`}>
+                  <h3 className="text-2xl font-bold mb-4">{pkg.name}</h3>
+                  <div className="space-y-2">
+                    {pkg.prices.map((priceItem) => (
+                      <div key={priceItem.vehicle} className="flex justify-between items-center border-t border-white/20 pt-2">
+                        <span className="text-sm opacity-90">{priceItem.vehicle}</span>
+                        <span className="text-2xl font-bold">{priceItem.price}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <div className="p-6">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>

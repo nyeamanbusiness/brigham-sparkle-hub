@@ -22,30 +22,20 @@ export default function AutoDetailingExterior() {
   const packages = [
     {
       name: 'Clay & Seal',
-      price: '$149.00',
-      vehicle: 'SUV/Truck',
       duration: '2 hrs',
-      description: 'Complete decontamination and protection for larger vehicles.',
-    },
-    {
-      name: 'Clay & Seal',
-      price: '$139.00',
-      vehicle: 'Coupe/Sedan',
-      duration: '2 hrs',
+      prices: [
+        { vehicle: 'Coupe/Sedan', price: '$139.00' },
+        { vehicle: 'SUV/Truck', price: '$149.00' }
+      ],
       description: 'Full clay bar treatment with premium sealant protection.',
     },
     {
       name: 'Wash & Wax',
-      price: '$109.00',
-      vehicle: 'SUV/Truck',
       duration: '2 hrs',
-      description: 'Professional hand wash with carnauba wax protection.',
-    },
-    {
-      name: 'Wash & Wax',
-      price: '$99.00',
-      vehicle: 'Coupe/Sedan',
-      duration: '2 hrs',
+      prices: [
+        { vehicle: 'Coupe/Sedan', price: '$99.00' },
+        { vehicle: 'SUV/Truck', price: '$109.00' }
+      ],
       description: 'Hand wash and premium wax for lasting shine and protection.',
     },
   ];
@@ -224,20 +214,27 @@ export default function AutoDetailingExterior() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {packages.map((pkg, index) => (
               <motion.div
-                key={`${pkg.name}-${pkg.vehicle}`}
+                key={pkg.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift"
               >
-                <div className={`${index < 2 ? 'bg-primary' : 'bg-secondary'} text-white p-6`}>
-                  <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
-                  <p className="text-3xl font-bold mb-1">{pkg.price}</p>
-                  <p className="text-sm opacity-90">{pkg.vehicle} • {pkg.duration}</p>
+                <div className={`${index === 0 ? 'bg-primary' : 'bg-secondary'} text-white p-6`}>
+                  <h3 className="text-2xl font-bold mb-1">{pkg.name}</h3>
+                  <p className="text-sm opacity-90 mb-4">{pkg.duration}</p>
+                  <div className="space-y-2">
+                    {pkg.prices.map((priceItem) => (
+                      <div key={priceItem.vehicle} className="flex justify-between items-center border-t border-white/20 pt-2">
+                        <span className="text-sm opacity-90">{priceItem.vehicle}</span>
+                        <span className="text-2xl font-bold">{priceItem.price}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <div className="p-6">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>

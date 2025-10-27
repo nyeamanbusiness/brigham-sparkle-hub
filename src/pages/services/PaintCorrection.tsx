@@ -21,45 +21,30 @@ export default function PaintCorrection() {
 
   const packages = [
     {
-      name: 'Copy of Stage 2 Paint Correction',
-      price: '$559.00',
-      vehicle: 'SUV/Truck',
-      duration: '2 hrs',
-      description: 'Advanced multi-stage correction for larger vehicles with heavy imperfections.',
-    },
-    {
       name: 'Stage 2 Paint Correction',
-      price: '$549.00',
-      vehicle: 'Coupe/Sedan',
       duration: '2 hrs',
+      prices: [
+        { vehicle: 'Coupe/Sedan', price: '$549.00' },
+        { vehicle: 'SUV/Truck', price: '$559.00' }
+      ],
       description: 'Multi-stage polishing to remove moderate to heavy swirls and scratches.',
     },
     {
       name: 'Stage One Paint Correction',
-      price: '$409.00',
-      vehicle: 'SUV/Truck',
       duration: '2 hrs',
-      description: 'Single-stage correction to improve gloss and remove light imperfections.',
-    },
-    {
-      name: 'Stage One Paint Correction',
-      price: '$399.00',
-      vehicle: 'Coupe/Sedan',
-      duration: '2 hrs',
+      prices: [
+        { vehicle: 'Coupe/Sedan', price: '$399.00' },
+        { vehicle: 'SUV/Truck', price: '$409.00' }
+      ],
       description: 'Single-stage polish perfect for newer vehicles with minor swirls.',
     },
     {
       name: 'Enhancement Polish - Gloss Reset',
-      price: '$279.00',
-      vehicle: 'SUV/Truck',
       duration: '2 hrs',
-      description: 'Light polish to enhance gloss and prepare for protection.',
-    },
-    {
-      name: 'Enhancement Polish - Gloss Reset',
-      price: '$269.00',
-      vehicle: 'Coupe/Sedan',
-      duration: '2 hrs',
+      prices: [
+        { vehicle: 'Coupe/Sedan', price: '$269.00' },
+        { vehicle: 'SUV/Truck', price: '$279.00' }
+      ],
       description: 'Quick gloss enhancement ideal for well-maintained paint.',
     },
   ];
@@ -178,20 +163,27 @@ export default function PaintCorrection() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {packages.map((pkg, index) => (
               <motion.div
-                key={`${pkg.name}-${pkg.vehicle}`}
+                key={pkg.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift"
               >
-                <div className={`${index < 2 ? 'bg-primary' : index < 4 ? 'bg-secondary' : 'bg-accent'} text-white p-6`}>
-                  <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
-                  <p className="text-3xl font-bold mb-1">{pkg.price}</p>
-                  <p className="text-sm opacity-90">{pkg.vehicle} • {pkg.duration}</p>
+                <div className={`${index === 0 ? 'bg-primary' : index === 1 ? 'bg-secondary' : 'bg-accent'} text-white p-6`}>
+                  <h3 className="text-xl font-bold mb-1">{pkg.name}</h3>
+                  <p className="text-sm opacity-90 mb-4">{pkg.duration}</p>
+                  <div className="space-y-2">
+                    {pkg.prices.map((priceItem) => (
+                      <div key={priceItem.vehicle} className="flex justify-between items-center border-t border-white/20 pt-2">
+                        <span className="text-sm opacity-90">{priceItem.vehicle}</span>
+                        <span className="text-2xl font-bold">{priceItem.price}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <div className="p-6">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>
