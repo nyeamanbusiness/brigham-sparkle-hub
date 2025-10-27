@@ -85,18 +85,6 @@ export default function AutoDetailingInterior() {
                 <a href="tel:+14355356484">Call Now</a>
               </Button>
             </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="rounded-lg overflow-hidden shadow-2xl"
-            >
-              <img
-                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sports-car-interior-detailing.webp"
-                alt="Professional sports car interior detailing showing pristine clean seats and dashboard"
-                className="w-full h-auto"
-              />
-            </motion.div>
           </motion.div>
         </div>
       </section>
