@@ -18,14 +18,8 @@ export default function Header() {
     name: 'Home',
     href: '/'
   }, {
-    name: 'Pricing',
-    href: '/pricing'
-  }, {
     name: 'Gallery',
     href: '/gallery'
-  }, {
-    name: 'Reviews',
-    href: '/reviews'
   }, {
     name: 'FAQ',
     href: '/faq'

@@ -12,9 +12,7 @@ import AutoDetailingInterior from "./pages/services/AutoDetailingInterior";
 import AutoDetailingExterior from "./pages/services/AutoDetailingExterior";
 import PaintCorrection from "./pages/services/PaintCorrection";
 import CeramicCoating from "./pages/services/CeramicCoating";
-import Pricing from "./pages/Pricing";
 import Gallery from "./pages/Gallery";
-import ReviewsPage from "./pages/ReviewsPage";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -36,9 +34,7 @@ const App = () => (
               <Route path="services/auto-detailing-exterior" element={<AutoDetailingExterior />} />
               <Route path="services/paint-correction" element={<PaintCorrection />} />
               <Route path="services/ceramic-coating" element={<CeramicCoating />} />
-              <Route path="pricing" element={<Pricing />} />
               <Route path="gallery" element={<Gallery />} />
-              <Route path="reviews" element={<ReviewsPage />} />
               <Route path="faq" element={<FAQ />} />
               <Route path="contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
