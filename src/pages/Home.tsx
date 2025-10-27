@@ -200,6 +200,109 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Service Areas Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gradient">
+                Proudly Serving Brigham City & Surrounding Areas
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                As a local business, we understand the unique needs of vehicles in Northern Utah. Our team provides reliable auto detailing service throughout Box Elder County and beyond.
+              </p>
+
+              <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-8">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Brigham City</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Perry</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Willard</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Mantua</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Corinne</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Tremonton</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Pleasant View</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">West Haven</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Honeyville</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Bear River City</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Hooper</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Ogden</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Plain City</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Farr West</span>
+                </div>
+              </div>
+
+              <p className="text-muted-foreground italic">
+                Don't see your area listed? Give us a call - we may still be able to help!
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative rounded-lg overflow-hidden shadow-lg"
+            >
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47800.31595114912!2d-112.04515505!3d41.51468105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2830d73ff227efe1%3A0x3e3a3d58e3d5a3aa!2sSparkle%20Auto%20Detailing!5e0!3m2!1sen!2sus!4v1761578977290!5m2!1sen!2sus" 
+                width="100%" 
+                height="450" 
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Sparkle Auto Detailing service area map"
+              ></iframe>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
