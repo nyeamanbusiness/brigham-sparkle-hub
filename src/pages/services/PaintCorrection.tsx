@@ -19,6 +19,51 @@ export default function PaintCorrection() {
     'Showroom-quality finish',
   ];
 
+  const packages = [
+    {
+      name: 'Copy of Stage 2 Paint Correction',
+      price: '$559.00',
+      vehicle: 'SUV/Truck',
+      duration: '2 hrs',
+      description: 'Advanced multi-stage correction for larger vehicles with heavy imperfections.',
+    },
+    {
+      name: 'Stage 2 Paint Correction',
+      price: '$549.00',
+      vehicle: 'Coupe/Sedan',
+      duration: '2 hrs',
+      description: 'Multi-stage polishing to remove moderate to heavy swirls and scratches.',
+    },
+    {
+      name: 'Stage One Paint Correction',
+      price: '$409.00',
+      vehicle: 'SUV/Truck',
+      duration: '2 hrs',
+      description: 'Single-stage correction to improve gloss and remove light imperfections.',
+    },
+    {
+      name: 'Stage One Paint Correction',
+      price: '$399.00',
+      vehicle: 'Coupe/Sedan',
+      duration: '2 hrs',
+      description: 'Single-stage polish perfect for newer vehicles with minor swirls.',
+    },
+    {
+      name: 'Enhancement Polish - Gloss Reset',
+      price: '$279.00',
+      vehicle: 'SUV/Truck',
+      duration: '2 hrs',
+      description: 'Light polish to enhance gloss and prepare for protection.',
+    },
+    {
+      name: 'Enhancement Polish - Gloss Reset',
+      price: '$269.00',
+      vehicle: 'Coupe/Sedan',
+      duration: '2 hrs',
+      description: 'Quick gloss enhancement ideal for well-maintained paint.',
+    },
+  ];
+
   return (
     <>
       <Meta
@@ -111,6 +156,51 @@ export default function PaintCorrection() {
                 Paint correction removes these imperfections through a systematic, multi-stage polishing process. The result is restored paint clarity, enhanced gloss, and a mirror-like finish that looks better than new. It's also the perfect foundation for applying ceramic coating for long-term protection.
               </p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">
+              Paint Correction Packages
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Professional paint restoration with precision polishing and correction
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {packages.map((pkg, index) => (
+              <motion.div
+                key={`${pkg.name}-${pkg.vehicle}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift"
+              >
+                <div className={`${index < 2 ? 'bg-primary' : index < 4 ? 'bg-secondary' : 'bg-accent'} text-white p-6`}>
+                  <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
+                  <p className="text-3xl font-bold mb-1">{pkg.price}</p>
+                  <p className="text-sm opacity-90">{pkg.vehicle} • {pkg.duration}</p>
+                </div>
+                <div className="p-6">
+                  <p className="text-muted-foreground mb-6">{pkg.description}</p>
+                  <Button asChild className="w-full gradient-cta">
+                    <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
+                  </Button>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
