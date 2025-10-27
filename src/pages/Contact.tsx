@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -19,9 +20,19 @@ export default function Contact() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real implementation, this would send to a backend
+    
+    const { error } = await supabase
+      .from("site_messages")
+      .insert([formData]);
+
+    if (error) {
+      toast.error("Failed to send message. Please try again.");
+      console.error("Error submitting form:", error);
+      return;
+    }
+
     toast.success("Thank you! We'll contact you soon.");
     setFormData({
       name: "",
