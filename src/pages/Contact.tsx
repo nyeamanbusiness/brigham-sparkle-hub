@@ -33,6 +33,16 @@ export default function Contact() {
       return;
     }
 
+    // Send confirmation email
+    try {
+      await supabase.functions.invoke("send-contact-email", {
+        body: formData,
+      });
+    } catch (emailError) {
+      console.error("Error sending email:", emailError);
+      // Don't show error to user since the form was saved successfully
+    }
+
     toast.success("Thank you! We'll contact you soon.");
     setFormData({
       name: "",
