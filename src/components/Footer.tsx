@@ -73,12 +73,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Location */}
+          {/* Location & Hours */}
           <div>
             <h3 className="font-bold text-lg mb-4">Location</h3>
             <div className="flex items-start gap-2 text-sm mb-4">
               <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" />
               <span>121n 400w, Brigham City, UT, United States, 84302</span>
+            </div>
+            <h3 className="font-bold text-lg mb-4 mt-6">Business Hours</h3>
+            <div className="text-sm text-secondary-foreground/80">
+              <p>Monday - Sunday</p>
+              <p className="font-semibold">7:00 AM - 7:00 PM</p>
             </div>
           </div>
         </div>
