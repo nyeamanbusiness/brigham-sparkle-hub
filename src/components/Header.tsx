@@ -98,7 +98,7 @@ export default function Header() {
             </NavigationMenu>
 
             <Button asChild variant="default" className="gradient-cta">
-              <Link to="/contact">Book Now</Link>
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
             </Button>
           </div>
 
@@ -134,9 +134,9 @@ export default function Header() {
               </div>
 
               <Button asChild variant="default" className="w-full gradient-cta">
-                <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                   Book Now
-                </Link>
+                </a>
               </Button>
             </div>
           </motion.div>}

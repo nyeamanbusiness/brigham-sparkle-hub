@@ -105,7 +105,7 @@ export default function Gallery() {
               Let us transform your vehicle. Book your detailing service today and see the Sparkle difference.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <Link to="/contact">Book Now</Link>
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
             </Button>
           </motion.div>
         </div>

@@ -86,7 +86,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="gradient-cta text-lg">
-                  <Link to="/contact">Book Now</Link>
+                  <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
                 </Button>
                 <Button asChild size="lg" variant="secondary">
                   <a href="tel:+14355356484">Call Now</a>
@@ -321,7 +321,7 @@ export default function Home() {
               the Sparkle difference.
             </p>
             <Button asChild size="lg" className="gradient-cta text-lg">
-              <Link to="/contact">Book Now</Link>
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
             </Button>
           </motion.div>
         </div>

@@ -79,7 +79,7 @@ export default function AutoDetailingInterior() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="gradient-cta">
-                <Link to="/contact">Book Now</Link>
+                <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
               </Button>
               <Button asChild size="lg" variant="secondary">
                 <a href="tel:+14355356484">Call Now</a>
@@ -167,7 +167,7 @@ export default function AutoDetailingInterior() {
                 <div className="p-6">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>
                   <Button asChild className="w-full gradient-cta">
-                    <Link to="/contact">Book Now</Link>
+                    <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
                   </Button>
                 </div>
               </motion.div>
