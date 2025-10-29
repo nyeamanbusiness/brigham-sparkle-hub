@@ -1,6 +1,5 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import React from "react";
 
 const reviews = [
   {
@@ -81,11 +80,10 @@ const CustomerReviews = () => {
   return (
     <section
       id="customer-reviews"
-      className="py-16 bg-black text-white relative overflow-hidden"
+      className="py-10 md:py-12 bg-black text-white relative overflow-hidden"
       itemScope
       itemType="https://schema.org/Review"
     >
-      {/* Subtle background dots for texture */}
       <div className="absolute inset-0 opacity-10">
         <div
           className="absolute inset-0 bg-repeat bg-center"
@@ -95,9 +93,9 @@ const CustomerReviews = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
-        <h2 className="text-4xl font-bold mb-8 tracking-wide">Customer Reviews</h2>
-        <p className="text-gray-400 mb-12 max-w-2xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4 relative z-10 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-wide">Customer Reviews</h2>
+        <p className="text-gray-400 mb-8 max-w-xl mx-auto text-sm md:text-base">
           See what our customers in Brigham City are saying about <strong>Sparkle Auto Detailing</strong>.
         </p>
 
@@ -110,22 +108,22 @@ const CustomerReviews = () => {
                 itemScope
                 itemType="https://schema.org/Review"
               >
-                <article className="bg-white text-gray-900 rounded-lg p-6 border border-gray-200 h-full flex flex-col items-center text-center shadow-md hover:shadow-xl transition-shadow duration-300">
+                <article className="bg-white text-gray-900 rounded-lg p-5 border border-gray-200 h-full flex flex-col items-center text-center shadow-md hover:shadow-xl transition-shadow duration-300">
                   <img
                     src={review.avatar}
                     alt={`${review.author} profile photo`}
-                    className="w-12 h-12 rounded-full object-cover border border-gray-200 mb-3"
+                    className="w-12 h-12 rounded-full object-cover border border-gray-200 mb-2"
                     loading="lazy"
                     itemProp="image"
                   />
                   <h3 itemProp="author" className="font-semibold text-base mb-1">
                     {review.author}
                   </h3>
-                  <p className="text-xs text-gray-600 mb-3" itemProp="datePublished">
+                  <p className="text-xs text-gray-600 mb-2" itemProp="datePublished">
                     {review.time}
                   </p>
                   <div
-                    className="text-yellow-400 text-base tracking-wider mb-3"
+                    className="text-yellow-400 text-base tracking-wider mb-2"
                     aria-label={`Rated ${review.rating} out of 5 stars`}
                     itemProp="reviewRating"
                     itemScope
@@ -135,7 +133,7 @@ const CustomerReviews = () => {
                     <meta itemProp="ratingValue" content={String(review.rating)} />
                   </div>
                   <p
-                    className="text-sm text-gray-900 leading-relaxed mb-4 flex-grow line-clamp-4 max-w-[260px]"
+                    className="text-sm text-gray-900 leading-relaxed mb-3 flex-grow line-clamp-4 max-w-[260px]"
                     itemProp="reviewBody"
                   >
                     {review.text}
@@ -143,7 +141,7 @@ const CustomerReviews = () => {
                   <img
                     src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_74x24dp.png"
                     alt="Google Reviews"
-                    className="h-5 object-contain"
+                    className="h-4 object-contain"
                     loading="lazy"
                   />
                 </article>
@@ -151,16 +149,16 @@ const CustomerReviews = () => {
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="left-2 md:-left-12 bg-white text-black border border-white shadow-lg hover:shadow-2xl w-10 h-10 rounded-full flex items-center justify-center" />
-          <CarouselNext className="right-2 md:-right-12 bg-white text-black border border-white shadow-lg hover:shadow-2xl w-10 h-10 rounded-full flex items-center justify-center" />
+          <CarouselPrevious className="left-2 md:-left-12 bg-white text-black border border-white shadow-lg hover:shadow-2xl w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center" />
+          <CarouselNext className="right-2 md:-right-12 bg-white text-black border border-white shadow-lg hover:shadow-2xl w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center" />
         </Carousel>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-8">
           <a
             href="https://www.google.com/search?q=sparkle+auto+detailing+brigham+city&rlz=1C1RXQR_enUS1052US1052"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-6 py-3 rounded transition-all hover:shadow-lg inline-block"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-5 py-2.5 rounded transition-all hover:shadow-lg inline-block"
           >
             Leave a review on Google
           </a>
