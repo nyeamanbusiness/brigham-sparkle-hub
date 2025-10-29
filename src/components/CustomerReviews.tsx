@@ -96,7 +96,7 @@ const CustomerReviews = () => {
       <div className="max-w-6xl mx-auto px-4 relative z-10 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-wide">Customer Reviews</h2>
         <p className="text-gray-400 mb-8 max-w-xl mx-auto text-sm md:text-base">
-          See what our customers in Brigham City are saying about <strong>Sparkle Auto Detailing</strong>.
+          See what our customers are saying about <strong>Sparkle Auto Detailing</strong>.
         </p>
 
         <Carousel opts={{ align: "start", loop: true }} plugins={[Autoplay({ delay: 5000 })]} className="w-full">
