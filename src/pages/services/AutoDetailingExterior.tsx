@@ -133,35 +133,6 @@ export default function AutoDetailingExterior() {
               </p>
             </motion.div>
 
-            {/* Image Gallery */}
-            <div className="grid md:grid-cols-2 gap-6 mt-12">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-lg overflow-hidden shadow-lg"
-              >
-                <img
-                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-exterior-detailing.webp"
-                  alt="Professional truck exterior detailing showing clean paint and shine"
-                  className="w-full h-auto hover-scale"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-lg overflow-hidden shadow-lg"
-              >
-                <img
-                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sparkle-auto-detailing-exterior-detail-suv.webp"
-                  alt="Sparkle Auto Detailing SUV exterior detail showing pristine finish"
-                  className="w-full h-auto hover-scale"
-                />
-              </motion.div>
-            </div>
           </div>
         </div>
       </section>
@@ -169,36 +140,6 @@ export default function AutoDetailingExterior() {
       {/* Pricing Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          {/* Image Gallery Before Pricing */}
-          <div className="grid md:grid-cols-2 gap-6 mb-16 max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="rounded-lg overflow-hidden shadow-lg"
-            >
-              <img
-                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/exterior-detailing-job.webp"
-                alt="Professional exterior detailing job showcasing clean vehicle finish"
-                className="w-full h-auto hover-scale"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="rounded-lg overflow-hidden shadow-lg"
-            >
-              <img
-                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sports-car-exterior-detailing.webp"
-                alt="Sports car exterior detailing showing professional results and shine"
-                className="w-full h-auto hover-scale"
-              />
-            </motion.div>
-          </div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -214,7 +155,7 @@ export default function AutoDetailingExterior() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
             {packages.map((pkg, index) => (
               <motion.div
                 key={pkg.name}
@@ -244,6 +185,62 @@ export default function AutoDetailingExterior() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Image Gallery */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-exterior-detailing.webp"
+                alt="Professional truck exterior detailing showing clean paint and shine"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sparkle-auto-detailing-exterior-detail-suv.webp"
+                alt="Sparkle Auto Detailing SUV exterior detail showing pristine finish"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/exterior-detailing-job.webp"
+                alt="Professional exterior detailing job showcasing clean vehicle finish"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sports-car-exterior-detailing.webp"
+                alt="Sports car exterior detailing showing professional results and shine"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
           </div>
         </div>
       </section>

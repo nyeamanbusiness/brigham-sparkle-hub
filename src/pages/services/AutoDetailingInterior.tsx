@@ -132,35 +132,6 @@ export default function AutoDetailingInterior() {
               </p>
             </div>
 
-            {/* Image Gallery */}
-            <div className="grid md:grid-cols-2 gap-6 mt-12">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-lg overflow-hidden shadow-lg"
-              >
-                <img
-                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-interior-detailing.webp"
-                  alt="Professional truck interior detailing showing deep cleaned seats and surfaces"
-                  className="w-full h-auto hover-scale"
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-lg overflow-hidden shadow-lg"
-              >
-                <img
-                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-seat-interior-detail.webp"
-                  alt="Close-up of pristine truck seat after professional interior detailing"
-                  className="w-full h-auto hover-scale"
-                />
-              </motion.div>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -168,36 +139,6 @@ export default function AutoDetailingInterior() {
       {/* Pricing Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          {/* Image Gallery Before Pricing */}
-          <div className="grid md:grid-cols-2 gap-6 mb-16 max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="rounded-lg overflow-hidden shadow-lg"
-            >
-              <img
-                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/suv-interior-detailing.webp"
-                alt="Professional SUV interior detailing showcasing clean interior cabin"
-                className="w-full h-auto hover-scale"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="rounded-lg overflow-hidden shadow-lg"
-            >
-              <img
-                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sports-car-interior-detailing.webp"
-                alt="Sparkle Auto Detailing corvette interior detail work showing professional results"
-                className="w-full h-auto hover-scale"
-              />
-            </motion.div>
-          </div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -210,7 +151,7 @@ export default function AutoDetailingInterior() {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
             {packages.map((pkg, index) => (
               <motion.div
                 key={pkg.name}
@@ -241,6 +182,62 @@ export default function AutoDetailingInterior() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Image Gallery */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-interior-detailing.webp"
+                alt="Professional truck interior detailing showing deep cleaned seats and surfaces"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/truck-seat-interior-detail.webp"
+                alt="Close-up of pristine truck seat after professional interior detailing"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/suv-interior-detailing.webp"
+                alt="Professional SUV interior detailing showcasing clean interior cabin"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-lg overflow-hidden shadow-lg"
+            >
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/sports-car-interior-detailing.webp"
+                alt="Sparkle Auto Detailing corvette interior detail work showing professional results"
+                className="w-full h-auto hover-scale"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
