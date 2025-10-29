@@ -27,14 +27,14 @@ const CustomerReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { data, error } = await supabase.functions.invoke('reviews');
-        
+        const { data, error } = await supabase.functions.invoke("reviews");
+
         if (error) throw error;
-        
+
         setReviewsData(data);
       } catch (err) {
-        console.error('Error fetching reviews:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load reviews');
+        console.error("Error fetching reviews:", err);
+        setError(err instanceof Error ? err.message : "Failed to load reviews");
       } finally {
         setLoading(false);
       }
@@ -115,10 +115,7 @@ const CustomerReviews = () => {
               >
                 <CarouselContent className="-ml-4">
                   {reviewsData.reviews.map((review, index) => (
-                    <CarouselItem
-                      key={index}
-                      className="pl-4 md:basis-1/2 lg:basis-1/4"
-                    >
+                    <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/4">
                       <div className="h-full">
                         <div className="bg-white text-gray-900 rounded-lg p-6 border border-gray-200 h-full flex flex-col items-center text-center">
                           <img
@@ -151,12 +148,8 @@ const CustomerReviews = () => {
                   ))}
                 </CarouselContent>
 
-                <CarouselPrevious
-                  className="left-2 md:-left-12 bg-white text-black border border-white shadow-xl hover:bg-white hover:text-black hover:shadow-2xl w-10 h-10 rounded-full flex items-center justify-center"
-                />
-                <CarouselNext
-                  className="right-2 md:-right-12 bg-white text-black border border-white shadow-xl hover:bg-white hover:text-black hover:shadow-2xl w-10 h-10 rounded-full flex items-center justify-center"
-                />
+                <CarouselPrevious className="left-2 md:-left-12 bg-white text-black border border-white shadow-xl hover:bg-white hover:text-black hover:shadow-2xl w-10 h-10 rounded-full flex items-center justify-center" />
+                <CarouselNext className="right-2 md:-right-12 bg-white text-black border border-white shadow-xl hover:bg-white hover:text-black hover:shadow-2xl w-10 h-10 rounded-full flex items-center justify-center" />
               </Carousel>
             </div>
           </>
