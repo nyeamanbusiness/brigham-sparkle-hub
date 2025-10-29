@@ -28,7 +28,7 @@ const reviews = [
     avatar: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/googlereviews/Kelsey%20Noorda).webp",
     rating: 5,
     time: "8 months ago",
-    text: "Nathan is awesome to work with. They were on time and very affordable. Very kind, honest guys! My car was messy with kids and they made it look brand new again!",
+    text: "Nathan is awesome to work with. They were on time and very affordable. Very kind young honest guys! Plus they did an AMAZING JOB on my car. I have 3 kids and so my car was pretty messy! They did a fantastic job! Here’s a before and after! The pictures speak for themselves. Book with Nathan, you won’t regret it and you’ll want him to come back!",
   },
   {
     author: "Bryson Roberts",
