@@ -213,7 +213,7 @@ export default function CeramicCoating() {
               Schedule your ceramic coating service and enjoy years of protection and shine.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <Link to="/contact">Get Started</Link>
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Get Started</a>
             </Button>
           </motion.div>
         </div>

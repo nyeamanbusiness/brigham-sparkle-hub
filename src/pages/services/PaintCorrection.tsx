@@ -213,7 +213,7 @@ export default function PaintCorrection() {
               Schedule your paint correction service and rediscover your vehicle's true beauty.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <Link to="/contact">Schedule Now</Link>
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Schedule Now</a>
             </Button>
           </motion.div>
         </div>

@@ -259,7 +259,7 @@ export default function AutoDetailingInterior() {
               Book your interior detailing service today and experience a showroom-fresh cabin.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <Link to="/contact">Schedule Service</Link>
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Schedule Service</a>
             </Button>
           </motion.div>
         </div>

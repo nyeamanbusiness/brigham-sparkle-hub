@@ -264,7 +264,7 @@ export default function AutoDetailingExterior() {
               Schedule your exterior detailing service and see the difference professional care makes.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <Link to="/contact">Get Started</Link>
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Get Started</a>
             </Button>
           </motion.div>
         </div>
