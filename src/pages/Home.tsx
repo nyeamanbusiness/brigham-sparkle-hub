@@ -164,25 +164,18 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => <motion.div key={benefit.title} initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6,
-            delay: index * 0.1
-          }} className="rotating-border-card h-64">
-                <div className="rotating-border-card-content">
-                  <div className="text-accent">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold">{benefit.title}</h3>
-                  <p className="text-muted-foreground text-sm">{benefit.description}</p>
+          <div className="flex justify-center items-center min-h-[400px]">
+            <div className="carousel-3d">
+              {benefits.map((benefit, index) => (
+                <div key={benefit.title} className="carousel-3d-card rotating-border-card">
+                  <div className="rotating-border-card-content h-full">
+                    <div className="text-accent">{benefit.icon}</div>
+                    <h3 className="text-xl font-bold">{benefit.title}</h3>
+                    <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                  </div>
                 </div>
-              </motion.div>)}
+              ))}
+            </div>
           </div>
         </div>
       </section>
