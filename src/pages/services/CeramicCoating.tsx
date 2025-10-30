@@ -149,12 +149,12 @@ export default function CeramicCoating() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="rounded-lg overflow-hidden shadow-lg hover-lift"
+              className="rounded-lg overflow-hidden shadow-lg hover-lift h-[400px] md:h-[500px]"
             >
               <img
                 src={ceramicCoatingTruck}
                 alt="Ceramic coating applied to truck showing glossy finish"
-                className="w-full h-auto"
+                className="w-full h-full object-cover object-center"
               />
             </motion.div>
             <motion.div
@@ -162,12 +162,12 @@ export default function CeramicCoating() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="rounded-lg overflow-hidden shadow-lg hover-lift"
+              className="rounded-lg overflow-hidden shadow-lg hover-lift h-[400px] md:h-[500px]"
             >
               <img
                 src={ceramicCoatingTesla}
                 alt="Ceramic coating on Tesla showcasing superior shine and protection"
-                className="w-full h-auto"
+                className="w-full h-full object-cover object-center"
               />
             </motion.div>
           </div>
