@@ -1,7 +1,6 @@
 import { Meta } from '@/utils/seo';
 import BreadcrumbsJsonLd from '@/components/BreadcrumbsJsonLd';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -78,7 +77,7 @@ export default function PaintCorrection() {
               Restore Your Paint's Depth, Gloss, and Clarity
             </p>
             <p className="text-lg mb-8 text-primary-foreground/90">
-              Our Paint Correction service is designed to restore the depth, gloss, and clarity of your paint — making your vehicle look showroom-ready. Whether you're prepping for ceramic coating or just want your car to turn heads again, trust Sparkle to bring out the flawless finish your vehicle deserves.
+              Our Paint Correction service restores depth, gloss, and clarity—making your vehicle look showroom-ready. It’s also the perfect prep for ceramic coating.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="gradient-cta">
@@ -106,7 +105,7 @@ export default function PaintCorrection() {
                 Professional Paint Restoration
               </h2>
               <p className="text-lg text-muted-foreground mb-8 text-center">
-                Our skilled technicians use advanced tools and proven techniques to safely remove surface imperfections through precision sanding, machine polishing, and buffing. Every correction is done with care to ensure your paint is smooth, vibrant, and protected.
+                We use advanced tools and a careful, multi-stage approach—sanding, machine polishing, and buffing—to safely remove surface defects and revive gloss.
               </p>
             </motion.div>
 
@@ -135,10 +134,10 @@ export default function PaintCorrection() {
             >
               <h3 className="text-2xl font-bold mb-4">Why Paint Correction?</h3>
               <p className="text-lg leading-relaxed mb-4">
-                Over time, your vehicle's paint accumulates swirl marks, light scratches, oxidation, and other imperfections from washing, environmental exposure, and daily wear. These defects dull the paint and reduce its visual appeal.
+                Swirls, scratches, and oxidation dull paint over time. Paint correction removes these defects to restore clarity and deep gloss.
               </p>
               <p className="text-lg leading-relaxed">
-                Paint correction removes these imperfections through a systematic, multi-stage polishing process. The result is restored paint clarity, enhanced gloss, and a mirror-like finish that looks better than new. It's also the perfect foundation for applying ceramic coating for long-term protection.
+                The result: a mirror-like finish that looks better than new—and the ideal base for long-term ceramic coating protection.
               </p>
             </motion.div>
           </div>
@@ -163,8 +162,8 @@ export default function PaintCorrection() {
             </p>
           </motion.div>
 
-          {/* IMPORTANT CHANGES: items-stretch + h-full flex layout in cards, fixed min height in header, button at bottom */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+          {/* KEY: items-stretch + auto-rows-fr; cards are full-height flex columns */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch auto-rows-fr">
             {packages.map((pkg, index) => (
               <motion.div
                 key={pkg.name}
@@ -174,12 +173,14 @@ export default function PaintCorrection() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift h-full flex flex-col"
               >
-                {/* Give the colored header a consistent minimum height so titles wrapping don't change card height */}
+                {/* FIXED header height so wrapping titles don't change total card height */}
                 <div
-                  className={`${index === 0 ? 'bg-primary' : index === 1 ? 'bg-secondary' : 'bg-accent'} text-white p-6 min-h-40 flex flex-col justify-start`}
+                  className={`${index === 0 ? 'bg-primary' : index === 1 ? 'bg-secondary' : 'bg-accent'} text-white p-6 h-60 flex flex-col`}
                 >
-                  <h3 className="text-xl font-bold mb-1">{pkg.name}</h3>
+                  <h3 className="text-xl font-bold mb-1 leading-snug">{pkg.name}</h3>
                   <p className="text-sm opacity-90 mb-4">{pkg.duration}</p>
+
+                  {/* Prices locked to bottom of header */}
                   <div className="space-y-2 mt-auto">
                     {pkg.prices.map((priceItem) => (
                       <div key={priceItem.vehicle} className="flex justify-between items-center border-t border-white/20 pt-2">
@@ -190,7 +191,7 @@ export default function PaintCorrection() {
                   </div>
                 </div>
 
-                {/* Content grows to fill; button pinned to bottom */}
+                {/* Body grows; CTA pinned to bottom so all buttons align */}
                 <div className="p-6 flex flex-col grow">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>
                   <Button asChild className="w-full gradient-cta mt-auto">
