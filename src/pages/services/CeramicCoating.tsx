@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shield, Droplet, Sun, Sparkles } from 'lucide-react';
+import ceramicCoatingTruck from '@/assets/ceramic-coating-truck.webp';
+import ceramicCoatingTesla from '@/assets/ceramic-coating-tesla.webp';
 
 export default function CeramicCoating() {
   const url = 'https://sparkleautodetailingllc.com/services/ceramic-coating';
@@ -130,6 +132,36 @@ export default function CeramicCoating() {
               With easier maintenance, enhanced depth, and unmatched shine, ceramic coating from Sparkle is the gold standard in vehicle protection. Whether you drive daily or showcase your car, ceramic coating keeps it looking immaculate with minimal effort.
             </p>
           </motion.div>
+
+          {/* Gallery */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-12">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-lg overflow-hidden shadow-lg hover-lift"
+            >
+              <img 
+                src={ceramicCoatingTruck} 
+                alt="Ceramic coating applied to truck showing glossy finish" 
+                className="w-full h-auto"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="rounded-lg overflow-hidden shadow-lg hover-lift"
+            >
+              <img 
+                src={ceramicCoatingTesla} 
+                alt="Ceramic coating on Tesla showcasing superior shine and protection" 
+                className="w-full h-auto"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
