@@ -194,9 +194,6 @@ export default function AutoDetailingInterior() {
                 </div>
                 <div className="p-6">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>
-                  <div className="space-y-3 mb-6">
-                    {pkg.features.map(feature => {})}
-                  </div>
                   <Button asChild className="w-full gradient-cta">
                     <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
                       Book Now
