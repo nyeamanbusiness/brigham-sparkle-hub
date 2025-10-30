@@ -102,7 +102,7 @@ export default function AutoDetailingInterior() {
             {/* Standard Full Detail */}
             <div className="mb-10">
               <h3 className="text-2xl font-bold mb-4 text-primary">Standard Full Detail</h3>
-              <p className="text-muted-foreground mb-4">Perfect for regular maintenance and fresh interior.</p>
+              <p className="text-muted-foreground mb-4">Perfect for regular maintenance andfresh interior.</p>
               <div className="grid md:grid-cols-2 gap-4">
                 {standardFeatures.map((feature, index) => <motion.div key={feature} initial={{
                 opacity: 0,
