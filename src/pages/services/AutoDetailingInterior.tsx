@@ -8,15 +8,25 @@ import { CheckCircle2 } from "lucide-react";
 export default function AutoDetailingInterior() {
   const url = "https://sparkleautodetailingllc.com/services/auto-detailing-interior";
 
-  const features = [
-    "Full interior refresh (seats, floors, panels, dashboard, windows)",
-    "Light stain removal",
-    "Interior scenting",
-    "Exterior hand wash (gentle foam + hand mitts)",
-    "Chemical decontamination (iron fallout remover)",
-    "Clay bar treatment (light)",
-    "Hand-applied wax (2-3 months protection)",
-    "Tire shine + trim dressing",
+  const standardFeatures = [
+    "Full Interior Refresh (Seats, Floors, Panels, Dashboard, Windows)",
+    "Light Stain Removal",
+    "Interior Scenting",
+    "Exterior Hand Wash (Gentle Foam + Hand Mitts)",
+    "Chemical Decontamination (Iron Fallout Remover)",
+    "Clay Bar Treatment (Light)",
+    "Hand-Applied Wax (2–3 months protection)",
+    "Tire Shine + Trim Dressing",
+  ];
+
+  const deepFeatures = [
+    "Deep Interior Cleaning (Seats, Panels, Plastics, Windows)",
+    "Full Surface Prep for Interior Ceramic Coating",
+    "Interior Ceramic Coating (Fabrics, Leather, Plastics)",
+    "Exterior Hand Wash + Full Chemical Decontamination",
+    "Clay Bar Treatment (Medium)",
+    "Premium Paint Sealant Application (6–9 months protection)",
+    "Tire Shine + Trim Dressing",
   ];
 
   const packages = [
@@ -120,20 +130,46 @@ export default function AutoDetailingInterior() {
               techniques, we tackle the toughest grime and humidity-related wear unique to UTAH.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={feature}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="flex items-start gap-3 bg-card p-4 rounded-lg"
-                >
-                  <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
-                  <span>{feature}</span>
-                </motion.div>
-              ))}
+            {/* Standard Full Detail */}
+            <div className="mb-10">
+              <h3 className="text-2xl font-bold mb-4 text-primary">Standard Full Detail</h3>
+              <p className="text-muted-foreground mb-4">Perfect for regular maintenance and keeping your interior fresh.</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                {standardFeatures.map((feature, index) => (
+                  <motion.div
+                    key={feature}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className="flex items-start gap-3 bg-card p-4 rounded-lg"
+                  >
+                    <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
+                    <span>{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Deep Full Detail */}
+            <div>
+              <h3 className="text-2xl font-bold mb-4 text-secondary">Deep Full Detail</h3>
+              <p className="text-muted-foreground mb-4">Intensive deep cleaning with ceramic coating preparation.</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                {deepFeatures.map((feature, index) => (
+                  <motion.div
+                    key={feature}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className="flex items-start gap-3 bg-card p-4 rounded-lg"
+                  >
+                    <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
+                    <span>{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
             <div className="mt-12 bg-muted p-8 rounded-lg">
