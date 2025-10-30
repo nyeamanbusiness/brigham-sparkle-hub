@@ -176,10 +176,12 @@ export default function Home() {
           }} transition={{
             duration: 0.6,
             delay: index * 0.1
-          }} className="bg-card p-6 rounded-lg shadow-md hover-lift">
-                <div className="text-accent mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground">{benefit.description}</p>
+          }} className="rotating-border-card h-64">
+                <div className="rotating-border-card-content">
+                  <div className="text-accent">{benefit.icon}</div>
+                  <h3 className="text-xl font-bold">{benefit.title}</h3>
+                  <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                </div>
               </motion.div>)}
           </div>
         </div>
