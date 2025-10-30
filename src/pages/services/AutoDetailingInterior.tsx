@@ -27,6 +27,16 @@ export default function AutoDetailingInterior() {
         { vehicle: "SUV/Truck", price: "$299.00" }
       ],
       description: "Perfect for regular maintenance and keeping your interior fresh.",
+      features: [
+        "Full Interior Refresh (Seats, Floors, Panels, Dashboard, Windows)",
+        "Light Stain Removal",
+        "Interior Scenting",
+        "Exterior Hand Wash (Gentle Foam + Hand Mitts)",
+        "Chemical Decontamination (Iron Fallout Remover)",
+        "Clay Bar Treatment (Light)",
+        "Hand-Applied Wax (2–3 months protection)",
+        "Tire Shine + Trim Dressing"
+      ]
     },
     {
       name: "Deep Full Detail",
@@ -35,6 +45,15 @@ export default function AutoDetailingInterior() {
         { vehicle: "SUV/Truck", price: "$605.00" }
       ],
       description: "Intensive deep cleaning with ceramic coating preparation.",
+      features: [
+        "Deep Interior Cleaning (Seats, Panels, Plastics, Windows)",
+        "Full Surface Prep for Interior Ceramic Coating",
+        "Interior Ceramic Coating (Fabrics, Leather, Plastics)",
+        "Exterior Hand Wash + Full Chemical Decontamination",
+        "Clay Bar Treatment (Medium)",
+        "Premium Paint Sealant Application (6–9 months protection)",
+        "Tire Shine + Trim Dressing"
+      ]
     },
   ];
 
@@ -174,6 +193,14 @@ export default function AutoDetailingInterior() {
                 </div>
                 <div className="p-6">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>
+                  <div className="space-y-3 mb-6">
+                    {pkg.features.map((feature) => (
+                      <div key={feature} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                        <span className="text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
                   <Button asChild className="w-full gradient-cta">
                     <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
                       Book Now
