@@ -50,6 +50,43 @@ export default function Home() {
       name: "Home",
       item: "https://sparkleautodetailingllc.com/"
     }]} />
+      
+      {/* Organization Schema with Yelp */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Sparkle Auto Detailing",
+          "image": "https://sparkleautodetailingllc.com/og-image.jpg",
+          "@id": "https://sparkleautodetailingllc.com",
+          "url": "https://sparkleautodetailingllc.com",
+          "telephone": "+1-435-535-6484",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "121 N 400 W",
+            "addressLocality": "Brigham City",
+            "addressRegion": "UT",
+            "postalCode": "84302",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.51468105,
+            "longitude": -112.04515505
+          },
+          "sameAs": [
+            "https://www.facebook.com",
+            "https://www.instagram.com",
+            "https://www.yelp.com/biz/sparkle-auto-detailing-south-elgin-2"
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "100"
+          },
+          "priceRange": "$$"
+        })}
+      </script>
 
       {/* Hero Section */}
       <section className="gradient-hero text-primary-foreground py-20 relative overflow-hidden">

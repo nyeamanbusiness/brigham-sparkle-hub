@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, MapPin, Phone, Mail } from 'lucide-react';
+import { Facebook, Instagram, MapPin, Phone, Mail, Star } from 'lucide-react';
 import logo from '@/assets/sparkle-logo.webp';
 
 export default function Footer() {
@@ -28,11 +28,14 @@ export default function Footer() {
               Welcome to Sparkle Auto Detailing Official Website. Proudly serving UTAH with expert auto detailing services.
             </p>
             <div className="flex gap-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="Visit our Facebook page">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="Visit our Instagram page">
                 <Instagram className="h-5 w-5" />
+              </a>
+              <a href="https://www.yelp.com/biz/sparkle-auto-detailing-south-elgin-2" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="View our Yelp reviews">
+                <Star className="h-5 w-5 fill-current" />
               </a>
             </div>
           </div>
