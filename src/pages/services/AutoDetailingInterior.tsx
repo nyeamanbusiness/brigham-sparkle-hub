@@ -195,10 +195,7 @@ export default function AutoDetailingInterior() {
                 <div className="p-6">
                   <p className="text-muted-foreground mb-6">{pkg.description}</p>
                   <div className="space-y-3 mb-6">
-                    {pkg.features.map(feature => <div key={feature} className="flex items-start gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
-                      </div>)}
+                    {pkg.features.map(feature => {})}
                   </div>
                   <Button asChild className="w-full gradient-cta">
                     <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
