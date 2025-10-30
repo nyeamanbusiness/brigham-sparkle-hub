@@ -54,38 +54,34 @@ export default function Home() {
       {/* Organization Schema with Yelp */}
       <script type="application/ld+json">
         {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Sparkle Auto Detailing",
-          "image": "https://sparkleautodetailingllc.com/og-image.jpg",
-          "@id": "https://sparkleautodetailingllc.com",
-          "url": "https://sparkleautodetailingllc.com",
-          "telephone": "+1-435-535-6484",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "121 N 400 W",
-            "addressLocality": "Brigham City",
-            "addressRegion": "UT",
-            "postalCode": "84302",
-            "addressCountry": "US"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 41.51468105,
-            "longitude": -112.04515505
-          },
-          "sameAs": [
-            "https://www.facebook.com",
-            "https://www.instagram.com",
-            "https://www.yelp.com/biz/sparkle-auto-detailing-south-elgin-2"
-          ],
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "100"
-          },
-          "priceRange": "$$"
-        })}
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Sparkle Auto Detailing",
+        "image": "https://sparkleautodetailingllc.com/og-image.jpg",
+        "@id": "https://sparkleautodetailingllc.com",
+        "url": "https://sparkleautodetailingllc.com",
+        "telephone": "+1-435-535-6484",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "121 N 400 W",
+          "addressLocality": "Brigham City",
+          "addressRegion": "UT",
+          "postalCode": "84302",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.51468105,
+          "longitude": -112.04515505
+        },
+        "sameAs": ["https://www.facebook.com", "https://www.instagram.com", "https://www.yelp.com/biz/sparkle-auto-detailing-south-elgin-2"],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "100"
+        },
+        "priceRange": "$$"
+      })}
       </script>
 
       {/* Hero Section */}
@@ -164,17 +160,15 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="flex justify-center items-center min-h-[400px]">
+          <div className="flex justify-center items-center min-h-[300px]">
             <div className="carousel-3d">
-              {benefits.map((benefit, index) => (
-                <div key={benefit.title} className="carousel-3d-card rotating-border-card">
+              {benefits.map((benefit, index) => <div key={benefit.title} className="carousel-3d-card rotating-border-card">
                   <div className="rotating-border-card-content h-full">
                     <div className="text-accent">{benefit.icon}</div>
                     <h3 className="text-xl font-bold">{benefit.title}</h3>
                     <p className="text-muted-foreground text-sm">{benefit.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
