@@ -101,9 +101,7 @@ export default function Home() {
           }} transition={{
             duration: 0.6
           }}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Car Detailing in Northern Utah: Restore your ride's shine without breaking the bank!
-              </h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Northern Utah’s Trusted Car Detailing Experts – Sparkle Auto Detailing</h1>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="gradient-cta text-lg">
