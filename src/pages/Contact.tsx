@@ -22,10 +22,8 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const { error } = await supabase
-      .from("site_messages")
-      .insert([formData]);
+
+    const { error } = await supabase.from("site_messages").insert([formData]);
 
     if (error) {
       toast.error("Failed to send message. Please try again.");
@@ -240,11 +238,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold mb-1">Hours</h3>
-                      <p className="text-muted-foreground">
-                        Monday - Saturday: 8:00 AM - 6:00 PM
-                        <br />
-                        Sunday: Closed
-                      </p>
+                      <p className="text-muted-foreground">Monday - Sunday: 7:00 AM - 7:00 PM</p>
                     </div>
                   </div>
                 </div>
