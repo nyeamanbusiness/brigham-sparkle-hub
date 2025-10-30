@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, MapPin, Phone, Mail, Star } from 'lucide-react';
+import { Facebook, Instagram, MapPin, Phone, Mail } from 'lucide-react';
+import { FaYelp } from 'react-icons/fa';
 import logo from '@/assets/sparkle-logo.webp';
 
 export default function Footer() {
@@ -35,7 +36,7 @@ export default function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a href="https://www.yelp.com/biz/sparkle-auto-detailing-south-elgin-2" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="View our Yelp reviews">
-                <Star className="h-5 w-5 fill-current" />
+                <FaYelp className="h-5 w-5" />
               </a>
             </div>
           </div>
