@@ -5,43 +5,38 @@
   text-align: center;
 }
 
-/* Base carousel container */
-.carousel-3d {
-  width: 400px;
-  height: 400px;
-  margin: 0 auto;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  animation: spin-y 12s linear infinite;
-  animation-play-state: running;
-  will-change: transform;
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-/* Keep it spinning — even when hovered or clicked */
-.carousel-3d:hover,
-.carousel-3d:active {
-  animation-play-state: running !important;
-}
-
-/* Optional — if you want smoother motion on multiple axes */
-@keyframes spin-y {
-  0% {
-    transform: rotateY(0deg);
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-  100% {
-    transform: rotateY(360deg);
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Optional inner elements */
-.carousel-item {
-  position: absolute;
-  width: 120px;
-  height: 160px;
-  left: 50%;
-  top: 50%;
-  transform-origin: center center -200px;
-  backface-visibility: hidden;
-  border-radius: 1rem;
-  overflow: hidden;
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }
