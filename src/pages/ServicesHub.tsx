@@ -21,7 +21,7 @@ export default function ServicesHub() {
     },
     {
       title: 'Paint Correction',
-      description: 'Remove swirls, scratches, and haze to restore your paint to showroom perfection.',
+      description: 'Remove swirls, scratches, and haze to restore your paint to showroom perfection everytime.',
       href: '/services/paint-correction',
       features: ['Multi-stage polishing', 'Scratch removal', 'Swirl elimination', 'Gloss enhancement']
     },
