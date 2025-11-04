@@ -5,14 +5,36 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
+import { useEffect } from "react";
 
-// ⬇️ NEW: Lottie
-import Lottie from "lottie-react";
-// Replace this import with the actual path/URL to your animation JSON or .lottie converted to JSON
-// e.g. import carAnimation from "@/assets/animations/purple-car.json";
-const carAnimationUrl = "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/vehicle.lottie";
+// ✅ Register Lottie Player Web Component (no npm package needed)
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "lottie-player": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        src?: string;
+        background?: string;
+        speed?: string | number;
+        loop?: boolean;
+        autoplay?: boolean;
+        style?: React.CSSProperties;
+      };
+    }
+  }
+}
 
 export default function Home() {
+  // ✅ Load Lottie player script once
+  useEffect(() => {
+    const existing = document.querySelector('script[src*="@lottiefiles/lottie-player"]');
+    if (!existing) {
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   const benefits = [
     {
       icon: <Shield className="h-8 w-8" />,
@@ -72,9 +94,16 @@ export default function Home() {
         description="Expert auto detailing services in Brigham City, Utah. Interior & exterior detailing, ceramic coating, paint correction. 5.0 rating. Book now!"
         canonical="https://sparkleautodetailingllc.com/"
       />
-      <BreadcrumbsJsonLd items={[{ name: "Home", item: "https://sparkleautodetailingllc.com/" }]} />
+      <BreadcrumbsJsonLd
+        items={[
+          {
+            name: "Home",
+            item: "https://sparkleautodetailingllc.com/",
+          },
+        ]}
+      />
 
-      {/* Organization Schema with Yelp */}
+      {/* Organization Schema */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
@@ -136,24 +165,26 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* ⬇️ NEW: Lottie animation in the hero right column */}
+            {/* ✅ Lottie Animation */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="rounded-lg shadow-2xl overflow-hidden">
-                <Lottie
-                  animationData={carAnimation}
-                  loop
-                  autoplay
-                  className="w-full h-full max-h-[420px] md:max-h-[480px]"
-                  rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
-                />
-              </div>
+              <lottie-player
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/vehicle.lottie"
+                background="transparent"
+                speed="1"
+                loop
+                autoplay
+                style={{
+                  width: "100%",
+                  height: "420px",
+                  borderRadius: "0.75rem",
+                }}
+              ></lottie-player>
 
-              {/* Rating badge stays the same */}
               <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-lg shadow-xl">
                 <div className="flex items-center gap-2 mb-2">
                   <Star className="h-5 w-5 fill-current" />
@@ -166,7 +197,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* ✅ Benefits Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
@@ -198,7 +229,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Services */}
+      {/* ✅ Featured Services */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <motion.div
@@ -248,114 +279,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Customer Reviews Section */}
       <CustomerReviews />
 
-      {/* Service Areas Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gradient">
-                Proudly Serving Brigham City & Surrounding Areas
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                As a local business, we understand the unique needs of vehicles in Northern Utah. Our team provides
-                reliable auto detailing service throughout Box Elder County and beyond.
-              </p>
-
-              <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-8">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Brigham City</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Perry</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Willard</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Mantua</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Corinne</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Tremonton</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Pleasant View</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">West Haven</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Honeyville</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Bear River City</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Hooper</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Ogden</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Plain City</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Farr West</span>
-                </div>
-              </div>
-
-              <p className="text-muted-foreground italic">
-                Don't see your area listed? Give us a call - we may still be able to help!
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative rounded-lg overflow-hidden shadow-lg"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47800.31595114912!2d-112.04515505!3d41.51468105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2830d73ff227efe1%3A0x3e3a3d58e3d5a3aa!2sSparkle%20Auto%20Detailing!5e0!3m2!1sen!2sus!4v1761578977290!5m2!1sen!2sus"
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Sparkle Auto Detailing service area map"
-              ></iframe>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
+      {/* ✅ CTA */}
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
           <motion.div
