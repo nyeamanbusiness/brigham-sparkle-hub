@@ -7,22 +7,20 @@ import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
 import { useEffect, useRef, useState } from "react";
 
-// ✅ Import local .lottie as a URL so Vite treats it like an asset
+/** ✅ Import local .lottie as URL so Vite treats it as an asset */
 import vehicleLottieUrl from "@/assets/vehicle.lottie?url";
 
-/* Allow the Lottie web component in TSX */
+/** ✅ Allow the DotLottie web component in TSX */
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      "lottie-player": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+      "dotlottie-player": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
         src?: string;
         background?: string;
         speed?: string | number;
         loop?: boolean;
         autoplay?: boolean;
         controls?: boolean;
-        mode?: string;
-        renderer?: "svg" | "canvas";
         style?: React.CSSProperties;
       };
     }
@@ -30,21 +28,21 @@ declare global {
 }
 
 export default function Home() {
-  const [canUseLottie, setCanUseLottie] = useState(false);
-  const [lottieFailed, setLottieFailed] = useState(false);
+  /** Load @dotlottie/player-component and render only when defined */
+  const [canUseDotLottie, setCanUseDotLottie] = useState(false);
+  const [animFailed, setAnimFailed] = useState(false);
   const lottieRef = useRef<HTMLElement | null>(null);
 
-  // Load the lottie-player script once and wait until the element is registered
   useEffect(() => {
-    const defined = customElements.get("lottie-player");
+    const defined = customElements.get("dotlottie-player");
     if (defined) {
-      setCanUseLottie(true);
+      setCanUseDotLottie(true);
       return;
     }
-    const existing = document.querySelector('script[src*="@lottiefiles/lottie-player"]') as HTMLScriptElement | null;
+    const existing = document.querySelector('script[src*="@dotlottie/player-component"]') as HTMLScriptElement | null;
 
     const ensureDefined = () => {
-      if (customElements.get("lottie-player")) setCanUseLottie(true);
+      if (customElements.get("dotlottie-player")) setCanUseDotLottie(true);
       else setTimeout(ensureDefined, 50);
     };
 
@@ -52,25 +50,21 @@ export default function Home() {
       ensureDefined();
     } else {
       const script = document.createElement("script");
-      script.src = "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
+      script.src = "https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js";
       script.async = true;
       script.onload = ensureDefined;
       document.body.appendChild(script);
     }
   }, []);
 
-  // Capture load errors to fallback gracefully
+  // If the component emits an error, show the image instead
   useEffect(() => {
-    if (!canUseLottie || !lottieRef.current) return;
+    if (!canUseDotLottie || !lottieRef.current) return;
     const el = lottieRef.current as any;
-    const onErr = () => setLottieFailed(true);
-    el.addEventListener?.("error", onErr);
-    el.addEventListener?.("loadError", onErr);
-    return () => {
-      el.removeEventListener?.("error", onErr);
-      el.removeEventListener?.("loadError", onErr);
-    };
-  }, [canUseLottie]);
+    const onError = () => setAnimFailed(true);
+    el.addEventListener?.("error", onError);
+    return () => el.removeEventListener?.("error", onError);
+  }, [canUseDotLottie]);
 
   const benefits = [
     {
@@ -140,8 +134,49 @@ export default function Home() {
         ]}
       />
 
+      {/* Organization Schema with Yelp */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Sparkle Auto Detailing",
+          image: "https://sparkleautodetailingllc.com/og-image.jpg",
+          "@id": "https://sparkleautodetailingllc.com",
+          url: "https://sparkleautodetailingllc.com",
+          telephone: "+1-435-535-6484",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "121 N 400 W",
+            addressLocality: "Brigham City",
+            addressRegion: "UT",
+            postalCode: "84302",
+            addressCountry: "US",
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 41.51468105,
+            longitude: -112.04515505,
+          },
+          sameAs: [
+            "https://www.facebook.com",
+            "https://www.instagram.com",
+            "https://www.yelp.com/biz/sparkle-auto-detailing-south-elgin-2",
+          ],
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "5.0",
+            reviewCount: "100",
+          },
+          priceRange: "$$",
+        })}
+      </script>
+
       {/* Hero Section */}
       <section className="gradient-hero text-primary-foreground py-20 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.1)_0%,_transparent_50%)]"></div>
+        </div>
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
@@ -161,24 +196,28 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Lottie animation (local file via ?url) with graceful fallback */}
+            {/* ✅ DotLottie animation (local file) with graceful fallback */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              {!lottieFailed && canUseLottie ? (
-                <lottie-player
+              {!animFailed && canUseDotLottie ? (
+                <dotlottie-player
                   ref={(el) => (lottieRef.current = el)}
                   src={vehicleLottieUrl}
                   background="transparent"
                   speed="1"
                   loop
                   autoplay
-                  renderer="svg"
-                  style={{ width: "100%", height: "420px", borderRadius: "0.75rem" }}
-                ></lottie-player>
+                  style={{
+                    width: "100%",
+                    height: "420px",
+                    borderRadius: "0.75rem",
+                    display: "block",
+                  }}
+                ></dotlottie-player>
               ) : (
                 <img
                   src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
