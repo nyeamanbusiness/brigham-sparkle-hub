@@ -219,12 +219,21 @@
     overflow: hidden;
   }
 
-  .carousel-3d:hover {
-    animation-play-state: paused !important;
+  /* 🔥 Always run — no pausing on hover, click, or focus */
+  .carousel-3d,
+  .carousel-3d-card {
+    animation-play-state: running !important;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
-  .carousel-3d:hover .carousel-3d-card {
-    animation-play-state: paused !important;
+  .carousel-3d:hover,
+  .carousel-3d:active,
+  .carousel-3d:focus,
+  .carousel-3d:hover .carousel-3d-card,
+  .carousel-3d:active .carousel-3d-card,
+  .carousel-3d:focus .carousel-3d-card {
+    animation-play-state: running !important;
   }
 
   .carousel-3d-card:nth-child(1) {
