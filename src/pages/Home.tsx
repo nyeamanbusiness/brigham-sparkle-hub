@@ -105,7 +105,6 @@ export default function Home() {
       image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/paint-correction-car.webp",
     },
   ];
-
   return (
     <>
       <Meta
@@ -167,6 +166,7 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* LEFT: Headline & CTAs */}
             <motion.div
               initial={{
                 opacity: 0,
@@ -194,10 +194,18 @@ export default function Home() {
                   <a href="tel:+14355356484">Call Now</a>
                 </Button>
               </div>
+            </motion.div>
 
-              {/* NEW: subtle DotLottie animation under the CTAs */}
+            {/* RIGHT: Animation above image on desktop; centered on mobile */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
+              {/* Animation container */}
               {canUseDotLottie && (
-                <div className="mt-6 md:mt-8 pointer-events-none" aria-hidden="true">
+                <div className="w-full mb-6 flex justify-center lg:justify-start">
                   <dotlottie-player
                     src={vehicleLottieUrl}
                     background="transparent"
@@ -205,43 +213,28 @@ export default function Home() {
                     loop
                     autoplay
                     style={{
-                      width: "220px",
-                      height: "120px",
+                      width: "260px", // a nice size on desktop
+                      height: "140px",
                       display: "block",
-                      marginLeft: "0",
                     }}
                   ></dotlottie-player>
                 </div>
               )}
-            </motion.div>
 
-            {/* Keep your original hero image on the right */}
-            <motion.div
-              initial={{
-                opacity: 0,
-                x: 30,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 0.2,
-              }}
-              className="relative"
-            >
-              <img
-                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
-                alt="Luxury car detailing"
-                className="rounded-lg shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-lg shadow-xl">
-                <div className="flex items-center gap-2 mb-2">
-                  <Star className="h-5 w-5 fill-current" />
-                  <span className="text-2xl font-bold">5.0</span>
+              {/* Image with overlay badge */}
+              <div className="relative rounded-lg overflow-hidden shadow-2xl">
+                <img
+                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
+                  alt="Luxury car detailing"
+                  className="rounded-lg"
+                />
+                <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-lg shadow-xl z-10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Star className="h-5 w-5 fill-current" />
+                    <span className="text-2xl font-bold">5.0</span>
+                  </div>
+                  <p className="text-sm">Google Reviews</p>
                 </div>
-                <p className="text-sm">Google Reviews</p>
               </div>
             </motion.div>
           </div>
