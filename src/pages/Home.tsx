@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* Allow the Lottie web component in TSX */
 declare global {
@@ -19,6 +19,7 @@ declare global {
         autoplay?: boolean;
         controls?: boolean;
         mode?: string;
+        renderer?: "svg" | "canvas";
         style?: React.CSSProperties;
       };
     }
@@ -26,16 +27,62 @@ declare global {
 }
 
 export default function Home() {
-  // Load the lottie-player script once
+  const LOTTIE_SRC = "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/vehicle.lottie";
+
+  const [canUseLottie, setCanUseLottie] = useState(false);
+  const [lottieFailed, setLottieFailed] = useState(false);
+  const lottieRef = useRef<HTMLElement | null>(null);
+
+  // Load the lottie-player script and only render when defined
   useEffect(() => {
-    const existing = document.querySelector('script[src*="@lottiefiles/lottie-player"]');
-    if (!existing) {
+    const alreadyDefined = (customElements && customElements.get("lottie-player")) as any;
+    if (alreadyDefined) {
+      setCanUseLottie(true);
+      return;
+    }
+
+    const existing = document.querySelector('script[src*="@lottiefiles/lottie-player"]') as HTMLScriptElement | null;
+
+    const onDefined = () => setCanUseLottie(true);
+
+    if (existing) {
+      // If the script tag already exists, wait until the element is defined
+      const check = () => {
+        if (customElements.get("lottie-player")) onDefined();
+        else setTimeout(check, 50);
+      };
+      check();
+    } else {
       const script = document.createElement("script");
       script.src = "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
       script.async = true;
+      script.onload = () => {
+        const check = () => {
+          if (customElements.get("lottie-player")) onDefined();
+          else setTimeout(check, 50);
+        };
+        check();
+      };
       document.body.appendChild(script);
     }
   }, []);
+
+  // Listen for load errors to fall back gracefully
+  useEffect(() => {
+    if (!canUseLottie || !lottieRef.current) return;
+
+    const el = lottieRef.current as any;
+    const handleError = () => setLottieFailed(true);
+
+    // Some versions emit 'error' or 'loadError'
+    el.addEventListener?.("error", handleError);
+    el.addEventListener?.("loadError", handleError);
+
+    return () => {
+      el.removeEventListener?.("error", handleError);
+      el.removeEventListener?.("loadError", handleError);
+    };
+  }, [canUseLottie]);
 
   const benefits = [
     {
@@ -59,6 +106,7 @@ export default function Home() {
       description: "Rated 5.0 on Google Reviews with over 100+ satisfied customers.",
     },
   ];
+
   const services = [
     {
       title: "Interior Detailing",
@@ -87,6 +135,7 @@ export default function Home() {
       image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/paint-correction-car.webp",
     },
   ];
+
   return (
     <>
       <Meta
@@ -177,7 +226,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Lottie animation (uses your hosted .lottie URL) */}
+            {/* Lottie animation with graceful fallback */}
             <motion.div
               initial={{
                 opacity: 0,
@@ -193,14 +242,24 @@ export default function Home() {
               }}
               className="relative"
             >
-              <lottie-player
-                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/vehicle.lottie"
-                background="transparent"
-                speed="1"
-                loop
-                autoplay
-                style={{ width: "100%", height: "420px", borderRadius: "0.75rem" }}
-              ></lottie-player>
+              {!lottieFailed && canUseLottie ? (
+                <lottie-player
+                  ref={(el) => (lottieRef.current = el)}
+                  src={LOTTIE_SRC}
+                  background="transparent"
+                  speed="1"
+                  loop
+                  autoplay
+                  renderer="svg"
+                  style={{ width: "100%", height: "420px", borderRadius: "0.75rem" }}
+                ></lottie-player>
+              ) : (
+                <img
+                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
+                  alt="Luxury car detailing"
+                  className="rounded-lg shadow-2xl"
+                />
+              )}
               <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-lg shadow-xl">
                 <div className="flex items-center gap-2 mb-2">
                   <Star className="h-5 w-5 fill-current" />
