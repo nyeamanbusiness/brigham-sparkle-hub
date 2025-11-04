@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-/** ✅ Import local .lottie as URL so Vite treats it as an asset */
+/** Import local .lottie as a URL so Vite treats it as an asset */
 import vehicleLottieUrl from "@/assets/vehicle.lottie?url";
 
-/** ✅ Allow the DotLottie web component in TSX */
+/** Allow the DotLottie web component in TSX */
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -28,10 +28,8 @@ declare global {
 }
 
 export default function Home() {
-  /** Load @dotlottie/player-component and render only when defined */
+  // Load @dotlottie/player-component and render only when defined
   const [canUseDotLottie, setCanUseDotLottie] = useState(false);
-  const [animFailed, setAnimFailed] = useState(false);
-  const lottieRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const defined = customElements.get("dotlottie-player");
@@ -57,15 +55,6 @@ export default function Home() {
     }
   }, []);
 
-  // If the component emits an error, show the image instead
-  useEffect(() => {
-    if (!canUseDotLottie || !lottieRef.current) return;
-    const el = lottieRef.current as any;
-    const onError = () => setAnimFailed(true);
-    el.addEventListener?.("error", onError);
-    return () => el.removeEventListener?.("error", onError);
-  }, [canUseDotLottie]);
-
   const benefits = [
     {
       icon: <Shield className="h-8 w-8" />,
@@ -88,7 +77,6 @@ export default function Home() {
       description: "Rated 5.0 on Google Reviews with over 100+ satisfied customers.",
     },
   ];
-
   const services = [
     {
       title: "Interior Detailing",
@@ -179,7 +167,19 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+            <motion.div
+              initial={{
+                opacity: 0,
+                x: -30,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              transition={{
+                duration: 0.6,
+              }}
+            >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Northern Utah’s Trusted Car Detailing Experts – Sparkle Auto Detailing
               </h1>
@@ -194,37 +194,48 @@ export default function Home() {
                   <a href="tel:+14355356484">Call Now</a>
                 </Button>
               </div>
+
+              {/* NEW: subtle DotLottie animation under the CTAs */}
+              {canUseDotLottie && (
+                <div className="mt-6 md:mt-8 pointer-events-none" aria-hidden="true">
+                  <dotlottie-player
+                    src={vehicleLottieUrl}
+                    background="transparent"
+                    speed="1"
+                    loop
+                    autoplay
+                    style={{
+                      width: "220px",
+                      height: "120px",
+                      display: "block",
+                      marginLeft: "0",
+                    }}
+                  ></dotlottie-player>
+                </div>
+              )}
             </motion.div>
 
-            {/* ✅ DotLottie animation (local file) with graceful fallback */}
+            {/* Keep your original hero image on the right */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{
+                opacity: 0,
+                x: 30,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              transition={{
+                duration: 0.6,
+                delay: 0.2,
+              }}
               className="relative"
             >
-              {!animFailed && canUseDotLottie ? (
-                <dotlottie-player
-                  ref={(el) => (lottieRef.current = el)}
-                  src={vehicleLottieUrl}
-                  background="transparent"
-                  speed="1"
-                  loop
-                  autoplay
-                  style={{
-                    width: "100%",
-                    height: "420px",
-                    borderRadius: "0.75rem",
-                    display: "block",
-                  }}
-                ></dotlottie-player>
-              ) : (
-                <img
-                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
-                  alt="Luxury car detailing"
-                  className="rounded-lg shadow-2xl"
-                />
-              )}
+              <img
+                src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
+                alt="Luxury car detailing"
+                className="rounded-lg shadow-2xl"
+              />
               <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-lg shadow-xl">
                 <div className="flex items-center gap-2 mb-2">
                   <Star className="h-5 w-5 fill-current" />
@@ -241,10 +252,20 @@ export default function Home() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
@@ -255,7 +276,7 @@ export default function Home() {
 
           <div className="flex justify-center items-center min-h-[300px]">
             <div className="carousel-3d">
-              {benefits.map((benefit) => (
+              {benefits.map((benefit, index) => (
                 <div key={benefit.title} className="carousel-3d-card rotating-border-card">
                   <div className="rotating-border-card-content h-full">
                     <div className="text-accent">{benefit.icon}</div>
@@ -273,10 +294,20 @@ export default function Home() {
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Popular Detailing Services</h2>
@@ -289,10 +320,21 @@ export default function Home() {
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{
+                  opacity: 0,
+                  y: 30,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.1,
+                }}
               >
                 <Link to={service.href} className="group block bg-card rounded-lg overflow-hidden shadow-md hover-lift">
                   <div className="aspect-video bg-gradient-hero relative overflow-hidden">
@@ -322,14 +364,151 @@ export default function Home() {
       {/* Customer Reviews Section */}
       <CustomerReviews />
 
+      {/* Service Areas Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <motion.div
+              initial={{
+                opacity: 0,
+                x: -30,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.6,
+              }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gradient">
+                Proudly Serving Brigham City & Surrounding Areas
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                As a local business, we understand the unique needs of vehicles in Northern Utah. Our team provides
+                reliable auto detailing service throughout Box Elder County and beyond.
+              </p>
+
+              <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-8">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Brigham City</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Perry</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Willard</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Mantua</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Corinne</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Tremonton</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Pleasant View</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">West Haven</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Honeyville</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Bear River City</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Hooper</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Ogden</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Plain City</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
+                  <span className="text-foreground">Farr West</span>
+                </div>
+              </div>
+
+              <p className="text-muted-foreground italic">
+                Don't see your area listed? Give us a call - we may still be able to help!
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{
+                opacity: 0,
+                x: 30,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.6,
+                delay: 0.2,
+              }}
+              className="relative rounded-lg overflow-hidden shadow-lg"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47800.31595114912!2d-112.04515505!3d41.51468105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2830d73ff227efe1%3A0x3e3a3d58e3d5a3aa!2sSparkle%20Auto%20Detailing!5e0!3m2!1sen!2sus!4v1761578977290!5m2!1sen!2sus"
+                width="100%"
+                height="450"
+                style={{
+                  border: 0,
+                }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Sparkle Auto Detailing service area map"
+              ></iframe>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Make Your Car Sparkle?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
