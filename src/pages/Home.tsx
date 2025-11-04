@@ -221,19 +221,21 @@ export default function Home() {
                 </div>
               )}
 
-              {/* Image with overlay badge */}
+              {/* Image with purple glass overlay badge */}
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
                 <img
                   src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
                   alt="Luxury car detailing"
                   className="rounded-lg"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-lg shadow-xl z-10">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Star className="h-5 w-5 fill-current" />
-                    <span className="text-2xl font-bold">5.0</span>
+                <div className="absolute bottom-4 right-4 z-20">
+                  <div className="rounded-xl px-5 py-4 shadow-2xl ring-1 ring-white/10 backdrop-blur-sm bg-purple-700/85 text-white">
+                    <div className="flex items-center gap-2">
+                      <Star className="h-5 w-5 fill-current" />
+                      <span className="text-xl font-bold">5.0</span>
+                    </div>
+                    <p className="text-xs opacity-90">Google Reviews</p>
                   </div>
-                  <p className="text-sm">Google Reviews</p>
                 </div>
               </div>
             </motion.div>
