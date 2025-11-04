@@ -243,50 +243,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 30,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Professional auto detailing services designed to keep your vehicle looking its absolute best
-            </p>
-          </motion.div>
-
-          <div className="flex justify-center items-center min-h-[300px]">
-            <div className="carousel-3d">
-              {benefits.map((benefit, index) => (
-                <div key={benefit.title} className="carousel-3d-card rotating-border-card">
-                  <div className="rotating-border-card-content h-full">
-                    <div className="text-accent">{benefit.icon}</div>
-                    <h3 className="text-xl font-bold">{benefit.title}</h3>
-                    <p className="text-muted-foreground text-sm">{benefit.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Services */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{
@@ -352,6 +310,48 @@ export default function Home() {
                 </Link>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Professional auto detailing services designed to keep your vehicle looking its absolute best
+            </p>
+          </motion.div>
+
+          <div className="flex justify-center items-center min-h-[300px]">
+            <div className="carousel-3d">
+              {benefits.map((benefit, index) => (
+                <div key={benefit.title} className="carousel-3d-card rotating-border-card">
+                  <div className="rotating-border-card-content h-full">
+                    <div className="text-accent">{benefit.icon}</div>
+                    <h3 className="text-xl font-bold">{benefit.title}</h3>
+                    <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
