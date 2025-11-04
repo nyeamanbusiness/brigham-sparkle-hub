@@ -10,7 +10,7 @@ import CustomerReviews from "@/components/CustomerReviews";
 import Lottie from "lottie-react";
 // Replace this import with the actual path/URL to your animation JSON or .lottie converted to JSON
 // e.g. import carAnimation from "@/assets/animations/purple-car.json";
-import carAnimation from "@/assets/animations/purple-car.json";
+const carAnimationUrl = "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/vehicle.lottie";
 
 export default function Home() {
   const benefits = [
