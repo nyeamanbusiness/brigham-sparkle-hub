@@ -6,9 +6,11 @@ import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
 import { useEffect, useRef, useState } from "react";
-import vehicleLottie from "@/assets/vehicle.lottie"; // ✅ Local Lottie file
 
-/* Allow <lottie-player> element */
+// ✅ Import local .lottie as a URL so Vite treats it like an asset
+import vehicleLottieUrl from "@/assets/vehicle.lottie?url";
+
+/* Allow the Lottie web component in TSX */
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -32,37 +34,41 @@ export default function Home() {
   const [lottieFailed, setLottieFailed] = useState(false);
   const lottieRef = useRef<HTMLElement | null>(null);
 
-  // Load the Lottie player script dynamically
+  // Load the lottie-player script once and wait until the element is registered
   useEffect(() => {
-    const alreadyDefined = customElements.get("lottie-player");
-    if (alreadyDefined) {
+    const defined = customElements.get("lottie-player");
+    if (defined) {
       setCanUseLottie(true);
       return;
     }
+    const existing = document.querySelector('script[src*="@lottiefiles/lottie-player"]') as HTMLScriptElement | null;
 
-    const script = document.createElement("script");
-    script.src = "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
-    script.async = true;
-    script.onload = () => {
-      const check = () => {
-        if (customElements.get("lottie-player")) setCanUseLottie(true);
-        else setTimeout(check, 50);
-      };
-      check();
+    const ensureDefined = () => {
+      if (customElements.get("lottie-player")) setCanUseLottie(true);
+      else setTimeout(ensureDefined, 50);
     };
-    document.body.appendChild(script);
+
+    if (existing) {
+      ensureDefined();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
+      script.async = true;
+      script.onload = ensureDefined;
+      document.body.appendChild(script);
+    }
   }, []);
 
-  // Handle potential load errors
+  // Capture load errors to fallback gracefully
   useEffect(() => {
     if (!canUseLottie || !lottieRef.current) return;
     const el = lottieRef.current as any;
-    const handleError = () => setLottieFailed(true);
-    el.addEventListener?.("error", handleError);
-    el.addEventListener?.("loadError", handleError);
+    const onErr = () => setLottieFailed(true);
+    el.addEventListener?.("error", onErr);
+    el.addEventListener?.("loadError", onErr);
     return () => {
-      el.removeEventListener?.("error", handleError);
-      el.removeEventListener?.("loadError", handleError);
+      el.removeEventListener?.("error", onErr);
+      el.removeEventListener?.("loadError", onErr);
     };
   }, [canUseLottie]);
 
@@ -125,7 +131,14 @@ export default function Home() {
         description="Expert auto detailing services in Brigham City, Utah. Interior & exterior detailing, ceramic coating, paint correction. 5.0 rating. Book now!"
         canonical="https://sparkleautodetailingllc.com/"
       />
-      <BreadcrumbsJsonLd items={[{ name: "Home", item: "https://sparkleautodetailingllc.com/" }]} />
+      <BreadcrumbsJsonLd
+        items={[
+          {
+            name: "Home",
+            item: "https://sparkleautodetailingllc.com/",
+          },
+        ]}
+      />
 
       {/* Hero Section */}
       <section className="gradient-hero text-primary-foreground py-20 relative overflow-hidden">
@@ -148,7 +161,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* ✅ Local Lottie animation */}
+            {/* Lottie animation (local file via ?url) with graceful fallback */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -158,17 +171,13 @@ export default function Home() {
               {!lottieFailed && canUseLottie ? (
                 <lottie-player
                   ref={(el) => (lottieRef.current = el)}
-                  src={vehicleLottie}
+                  src={vehicleLottieUrl}
                   background="transparent"
                   speed="1"
                   loop
                   autoplay
                   renderer="svg"
-                  style={{
-                    width: "100%",
-                    height: "420px",
-                    borderRadius: "0.75rem",
-                  }}
+                  style={{ width: "100%", height: "420px", borderRadius: "0.75rem" }}
                 ></lottie-player>
               ) : (
                 <img
@@ -189,8 +198,113 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Other sections below... */}
+      {/* Benefits Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Professional auto detailing services designed to keep your vehicle looking its absolute best
+            </p>
+          </motion.div>
+
+          <div className="flex justify-center items-center min-h-[300px]">
+            <div className="carousel-3d">
+              {benefits.map((benefit) => (
+                <div key={benefit.title} className="carousel-3d-card rotating-border-card">
+                  <div className="rotating-border-card-content h-full">
+                    <div className="text-accent">{benefit.icon}</div>
+                    <h3 className="text-xl font-bold">{benefit.title}</h3>
+                    <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Services */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Popular Detailing Services</h2>
+            <p className="text-xl text-muted-foreground">
+              Professional auto detailing services designed to keep your vehicle looking its absolute best
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Link to={service.href} className="group block bg-card rounded-lg overflow-hidden shadow-md hover-lift">
+                  <div className="aspect-video bg-gradient-hero relative overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">{service.description}</p>
+                    <span className="text-accent font-semibold inline-flex items-center gap-2">
+                      Learn More
+                      <CheckCircle2 className="h-4 w-4" />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Reviews Section */}
       <CustomerReviews />
+
+      {/* CTA Section */}
+      <section className="gradient-hero text-primary-foreground py-20">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Make Your Car Sparkle?</h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Don't wait - give your vehicle the premium care it deserves. Book your appointment today and experience
+              the Sparkle difference.
+            </p>
+            <Button asChild size="lg" className="gradient-cta text-lg">
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book Now
+              </a>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 }
