@@ -311,63 +311,25 @@ export default function Home() {
                 reliable auto detailing service throughout Box Elder County and beyond.
               </p>
 
-              <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-8">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Brigham City</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Perry</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Willard</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Mantua</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Corinne</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Tremonton</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Pleasant View</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">West Haven</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Honeyville</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Bear River City</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Hooper</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Ogden</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Plain City</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-accent flex-shrink-0"></div>
-                  <span className="text-foreground">Farr West</span>
-                </div>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-2 mb-8">
+                <ul className="space-y-2">
+                  <li className="text-foreground list-disc ml-5">Brigham City</li>
+                  <li className="text-foreground list-disc ml-5">Perry</li>
+                  <li className="text-foreground list-disc ml-5">Willard</li>
+                  <li className="text-foreground list-disc ml-5">Mantua</li>
+                  <li className="text-foreground list-disc ml-5">Corinne</li>
+                  <li className="text-foreground list-disc ml-5">Tremonton</li>
+                  <li className="text-foreground list-disc ml-5">Pleasant View</li>
+                </ul>
+                <ul className="space-y-2">
+                  <li className="text-foreground list-disc ml-5">West Haven</li>
+                  <li className="text-foreground list-disc ml-5">Honeyville</li>
+                  <li className="text-foreground list-disc ml-5">Bear River City</li>
+                  <li className="text-foreground list-disc ml-5">Hooper</li>
+                  <li className="text-foreground list-disc ml-5">Ogden</li>
+                  <li className="text-foreground list-disc ml-5">Plain City</li>
+                  <li className="text-foreground list-disc ml-5">Farr West</li>
+                </ul>
               </div>
 
               <p className="text-muted-foreground italic">
