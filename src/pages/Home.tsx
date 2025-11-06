@@ -50,19 +50,19 @@ export default function Home() {
     }
   }, []);
   const benefits = [{
-    icon: <Shield className="h-8 w-8" />,
+    icon: <Shield className="h-6 w-6" />,
     title: "Premium Protection",
     description: "Long-lasting protection against UV rays, dirt, and environmental damage."
   }, {
-    icon: <Sparkles className="h-8 w-8" />,
+    icon: <Sparkles className="h-6 w-6" />,
     title: "Showroom Shine",
     description: "Restore your vehicle to showroom quality with our expert detailing services."
   }, {
-    icon: <Clock className="h-8 w-8" />,
+    icon: <Clock className="h-6 w-6" />,
     title: "Time-Saving",
     description: "Professional service that saves you time while delivering superior results."
   }, {
-    icon: <Star className="h-8 w-8" />,
+    icon: <Star className="h-6 w-6" />,
     title: "5-Star Service",
     description: "Rated 5.0 on Google Reviews with over 100+ satisfied customers."
   }];
@@ -218,7 +218,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {services.map((service, index) => <motion.div key={service.title} initial={{
             opacity: 0,
             y: 30
@@ -235,12 +235,12 @@ export default function Home() {
                   <div className="aspect-video bg-gradient-hero relative overflow-hidden">
                     <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold mb-2 group-hover:text-accent transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-muted-foreground mb-4">{service.description}</p>
-                    <span className="text-accent font-semibold inline-flex items-center gap-2">
+                    <p className="text-muted-foreground text-sm mb-3">{service.description}</p>
+                    <span className="text-accent font-semibold inline-flex items-center gap-2 text-sm">
                       Learn More
                       <CheckCircle2 className="h-4 w-4" />
                     </span>
@@ -271,13 +271,13 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="flex justify-center items-center min-h-[300px]">
+          <div className="flex justify-center items-center min-h-[245px]">
             <div className="carousel-3d">
               {benefits.map((benefit, index) => <div key={benefit.title} className="carousel-3d-card rotating-border-card">
                   <div className="rotating-border-card-content h-full">
                     <div className="text-accent">{benefit.icon}</div>
-                    <h3 className="text-xl font-bold">{benefit.title}</h3>
-                    <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                    <h3 className="text-base font-bold">{benefit.title}</h3>
+                    <p className="text-muted-foreground text-xs">{benefit.description}</p>
                   </div>
                 </div>)}
             </div>
