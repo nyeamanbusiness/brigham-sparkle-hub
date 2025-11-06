@@ -2,17 +2,63 @@ import { Meta } from '@/utils/seo';
 import BreadcrumbsJsonLd from '@/components/BreadcrumbsJsonLd';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 
 export default function Gallery() {
-  // Placeholder gallery items
-  const galleryItems = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    before: '/placeholder.svg',
-    after: '/placeholder.svg',
-    title: `Detailing Project ${i + 1}`,
-    description: 'Professional auto detailing transformation'
-  }));
+  const supabaseUrl = 'https://dreeuacqovhldjhlynio.supabase.co';
+  
+  // Real gallery items from Supabase storage
+  const galleryItems = [
+    {
+      id: 1,
+      before: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-before-truck.webp`,
+      after: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-after-truck.webp`,
+      title: 'Truck Exterior Detailing',
+      description: 'Complete exterior restoration and ceramic coating'
+    },
+    {
+      id: 2,
+      before: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-before-northern-utah.webp`,
+      after: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-after-northern-utah.webp`,
+      title: 'Northern Utah Service',
+      description: 'Professional paint correction and detailing'
+    },
+    {
+      id: 3,
+      before: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-before-brigham-city.webp`,
+      after: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-after-brigham-city.webp`,
+      title: 'Brigham City Detail',
+      description: 'Complete auto detailing transformation'
+    },
+    {
+      id: 4,
+      before: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-carpet-shampoo-before.webp`,
+      after: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-carpet-shampoo-after.webp`,
+      title: 'Carpet Shampooing',
+      description: 'Deep carpet cleaning and restoration'
+    },
+    {
+      id: 5,
+      before: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-before-interior-cleaning.webp`,
+      after: `${supabaseUrl}/storage/v1/object/public/gallery/sparkle-auto-detailing-after-interior-cleaning.webp`,
+      title: 'Interior Deep Clean',
+      description: 'Complete interior detailing and sanitization'
+    },
+    {
+      id: 6,
+      before: `${supabaseUrl}/storage/v1/object/public/gallery/before-auto-detailing-sparkle-auto-detailing-floor.webp`,
+      after: `${supabaseUrl}/storage/v1/object/public/gallery/after-auto-detailing-sparkle-auto-detailing-floor.webp`,
+      title: 'Floor Mat Restoration',
+      description: 'Floor mat deep cleaning and treatment'
+    },
+    {
+      id: 7,
+      before: `${supabaseUrl}/storage/v1/object/public/gallery/before-auto-detailing-sparkle-auto-detailing.webp`,
+      after: `${supabaseUrl}/storage/v1/object/public/gallery/after-auto-detailing-sparkle-auto-detailing.webp`,
+      title: 'Full Interior Detail',
+      description: 'Professional interior detailing service'
+    }
+  ];
 
   return (
     <>
