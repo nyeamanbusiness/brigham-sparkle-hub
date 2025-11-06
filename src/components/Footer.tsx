@@ -9,6 +9,8 @@ export default function Footer() {
     { name: 'Exterior Detailing', href: '/services/auto-detailing-exterior' },
     { name: 'Ceramic Coating', href: '/services/ceramic-coating' },
     { name: 'Paint Correction', href: '/services/paint-correction' },
+    { name: 'Engine Bay Cleaning', href: '/contact' },
+    { name: 'Headlight Restoration', href: '/contact' },
   ];
 
   return (

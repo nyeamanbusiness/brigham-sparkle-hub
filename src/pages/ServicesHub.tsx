@@ -37,7 +37,7 @@ export default function ServicesHub() {
     <>
       <Meta
         title="Auto Detailing Services in Brigham City, UT | Sparkle Auto Detailing"
-        description="Complete auto detailing services: interior, exterior, paint correction, and ceramic coating. Professional car care in Brigham City, Utah."
+        description="Complete auto detailing services: interior, exterior, paint correction, ceramic coating, engine bay cleaning, and headlight restoration. Professional car care in Brigham City, Utah."
         canonical="https://sparkleautodetailingllc.com/services"
       />
       <BreadcrumbsJsonLd items={[
