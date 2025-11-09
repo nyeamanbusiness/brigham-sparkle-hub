@@ -26,9 +26,10 @@ declare global {
     }
   }
 }
+
 export default function Home() {
-  // Load @dotlottie/player-component and render only when defined
   const [canUseDotLottie, setCanUseDotLottie] = useState(false);
+
   useEffect(() => {
     const defined = customElements.get("dotlottie-player");
     if (defined) {
@@ -50,6 +51,7 @@ export default function Home() {
       document.body.appendChild(script);
     }
   }, []);
+
   const benefits = [
     {
       icon: <Shield className="h-6 w-6" />,
@@ -72,6 +74,7 @@ export default function Home() {
       description: "Rated 5.0 on Google Reviews with over 100+ satisfied customers.",
     },
   ];
+
   const services = [
     {
       title: "Interior Detailing",
@@ -100,6 +103,7 @@ export default function Home() {
       image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/paint-correction-car.webp",
     },
   ];
+
   return (
     <>
       <Meta
@@ -116,43 +120,6 @@ export default function Home() {
         ]}
       />
 
-      {/* Organization Schema with Yelp */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          name: "Sparkle Auto Detailing",
-          image: "https://sparkleautodetailingllc.com/og-image.jpg",
-          "@id": "https://sparkleautodetailingllc.com",
-          url: "https://sparkleautodetailingllc.com",
-          telephone: "+1-435-535-6484",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "121 N 400 W",
-            addressLocality: "Brigham City",
-            addressRegion: "UT",
-            postalCode: "84302",
-            addressCountry: "US",
-          },
-          geo: {
-            "@type": "GeoCoordinates",
-            latitude: 41.51468105,
-            longitude: -112.04515505,
-          },
-          sameAs: [
-            "https://www.facebook.com",
-            "https://www.instagram.com",
-            "https://www.yelp.com/biz/sparkle-auto-detailing-south-elgin-2",
-          ],
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "5.0",
-            reviewCount: "100",
-          },
-          priceRange: "$$",
-        })}
-      </script>
-
       {/* Hero Section */}
       <section className="gradient-hero text-primary-foreground py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -161,20 +128,7 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* LEFT: Headline & CTAs */}
-            <motion.div
-              initial={{
-                opacity: 0,
-                x: -30,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
-            >
+            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Northern Utah’s Trusted Car Detailing Experts
               </h1>
@@ -191,23 +145,12 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* RIGHT: Animation above image on desktop; centered on mobile */}
             <motion.div
-              initial={{
-                opacity: 0,
-                x: 30,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 0.2,
-              }}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              {/* Animation container */}
               {canUseDotLottie && (
                 <div className="w-full mb-6 flex justify-center lg:justify-start">
                   <dotlottie-player
@@ -225,7 +168,6 @@ export default function Home() {
                 </div>
               )}
 
-              {/* Image with purple glass overlay badge */}
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
                 <img
                   src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
@@ -257,7 +199,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient">Popular Detailing Services</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-gradient">Popular Detailing Services</h2>
             <p className="text-xl text-muted-foreground">
               Professional auto detailing services designed to keep your vehicle looking its absolute best
             </p>
@@ -307,7 +249,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Professional auto detailing services designed to keep your vehicle looking its absolute best
             </p>
@@ -342,7 +284,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gradient">
+              <h2 className="text-xl md:text-2xl font-bold mb-6 text-gradient">
                 Proudly Serving Brigham City & Surrounding Areas
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
@@ -407,7 +349,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">Ready to Make Your Car Sparkle?</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-6">Ready to Make Your Car Sparkle?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Don't wait - give your vehicle the premium care it deserves. Book your appointment today and experience
               the Sparkle difference.
