@@ -18,21 +18,6 @@ export default function AutoDetailingExterior() {
   ];
   const packages = [
     {
-      name: "Clay & Seal",
-      duration: "2 hrs",
-      prices: [
-        {
-          vehicle: "Coupe/Sedan",
-          price: "$139.00",
-        },
-        {
-          vehicle: "SUV/Truck",
-          price: "$149.00",
-        },
-      ],
-      description: "Full clay bar treatment with premium sealant protection.",
-    },
-    {
       name: "Wash & Wax",
       duration: "2 hrs",
       prices: [
