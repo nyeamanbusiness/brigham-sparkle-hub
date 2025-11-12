@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+
 export default function AutoDetailingExterior() {
   const url = "https://sparkleautodetailingllc.com/services/auto-detailing-exterior";
   const benefits = [
@@ -33,6 +34,7 @@ export default function AutoDetailingExterior() {
       description: "Hand wash and premium wax for lasting shine and protection.",
     },
   ];
+
   return (
     <>
       <Meta
@@ -61,17 +63,9 @@ export default function AutoDetailingExterior() {
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 30,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Exterior Auto Detailing in Brigham City, UT</h1>
@@ -99,20 +93,10 @@ export default function AutoDetailingExterior() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gradient">
                 Comprehensive Exterior Care
@@ -127,21 +111,10 @@ export default function AutoDetailingExterior() {
               {benefits.map((benefit, index) => (
                 <motion.div
                   key={benefit}
-                  initial={{
-                    opacity: 0,
-                    x: -20,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    duration: 0.4,
-                    delay: index * 0.05,
-                  }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="flex items-start gap-3 bg-card p-4 rounded-lg"
                 >
                   <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
@@ -151,20 +124,10 @@ export default function AutoDetailingExterior() {
             </div>
 
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
               className="bg-muted p-8 rounded-lg"
             >
               <h3 className="text-2xl font-bold mb-4">The Sparkle Difference</h3>
@@ -188,20 +151,10 @@ export default function AutoDetailingExterior() {
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 30,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Exterior Detailing Packages</h2>
@@ -210,28 +163,18 @@ export default function AutoDetailingExterior() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+          {/* Centered pricing card */}
+          <div className="grid place-items-center max-w-5xl mx-auto mb-16">
             {packages.map((pkg, index) => (
               <motion.div
                 key={pkg.name}
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                }}
-                className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift w-full sm:w-96"
               >
-                <div className={`${index === 0 ? "bg-primary" : "bg-secondary"} text-white p-6`}>
+                <div className="bg-primary text-white p-6">
                   <h3 className="text-2xl font-bold mb-1">{pkg.name}</h3>
                   <p className="text-sm opacity-90 mb-4">{pkg.duration}</p>
                   <div className="space-y-2">
@@ -260,20 +203,10 @@ export default function AutoDetailingExterior() {
           {/* Image Gallery */}
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
               className="rounded-lg overflow-hidden shadow-lg"
             >
               <img
@@ -283,20 +216,10 @@ export default function AutoDetailingExterior() {
               />
             </motion.div>
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
               className="rounded-lg overflow-hidden shadow-lg"
             >
               <img
@@ -306,21 +229,10 @@ export default function AutoDetailingExterior() {
               />
             </motion.div>
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 0.2,
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="rounded-lg overflow-hidden shadow-lg"
             >
               <img
@@ -330,21 +242,10 @@ export default function AutoDetailingExterior() {
               />
             </motion.div>
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: 0.2,
-              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="rounded-lg overflow-hidden shadow-lg"
             >
               <img
@@ -361,20 +262,10 @@ export default function AutoDetailingExterior() {
       <section className="gradient-hero text-primary-foreground py-16">
         <div className="container mx-auto px-4 text-center">
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 30,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.6,
-            }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Transform Your Vehicle's Exterior</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
