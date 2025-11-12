@@ -6,27 +6,27 @@ import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 export default function AutoDetailingInterior() {
   const url = "https://sparkleautodetailingllc.com/services/auto-detailing-interior";
-  const standardFeatures = ["Full Interior Refresh (Seats, Floors, Panels, Dashboard, Windows)", "Light Stain Removal", "Interior Scenting", "Exterior Hand Wash (Gentle Foam + Hand Mitts)", "Chemical Decontamination (Iron Fallout Remover)", "Clay Bar Treatment (Light)", "Hand-Applied Wax (2–3 months protection)", "Tire Shine + Trim Dressing"];
-  const deepFeatures = ["Deep Interior Cleaning (Seats, Panels, Plastics, Windows)", "Full Surface Prep for Interior Ceramic Coating", "Interior Ceramic Coating (Fabrics, Leather, Plastics)", "Exterior Hand Wash + Full Chemical Decontamination", "Clay Bar Treatment (Medium)", "Premium Paint Sealant Application (6–9 months protection)", "Tire Shine + Trim Dressing"];
+  const basicFeatures = ["Full Interior Refresh (Seats, Floors, Panels, Dashboard, Windows)", "Light Stain Removal", "Interior Scenting", "Exterior Hand Wash (Gentle Foam + Hand Mitts)", "Chemical Decontamination (Iron Fallout Remover)", "Clay Bar Treatment (Light)", "Hand-Applied Wax (2–3 months protection)", "Tire Shine + Trim Dressing"];
+  const standardFeatures = ["Deep Interior Cleaning (Seats, Panels, Plastics, Windows)", "Full Surface Prep for Interior Ceramic Coating", "Interior Ceramic Coating (Fabrics, Leather, Plastics)", "Exterior Hand Wash + Full Chemical Decontamination", "Clay Bar Treatment (Medium)", "Premium Paint Sealant Application (6–9 months protection)", "Tire Shine + Trim Dressing"];
   const packages = [{
-    name: "Standard Full Detail",
+    name: "Basic",
     prices: [{
       vehicle: "Coupe/Sedan",
-      price: "$295.00"
+      price: "$199.00"
     }, {
       vehicle: "SUV/Truck",
-      price: "$299.00"
+      price: "$229.00"
     }],
     description: "Perfect for regular maintenance and keeping your interior fresh.",
     features: ["Full Interior Refresh (Seats, Floors, Panels, Dashboard, Windows)", "Light Stain Removal", "Interior Scenting", "Exterior Hand Wash (Gentle Foam + Hand Mitts)", "Chemical Decontamination (Iron Fallout Remover)", "Clay Bar Treatment (Light)", "Hand-Applied Wax (2–3 months protection)", "Tire Shine + Trim Dressing"]
   }, {
-    name: "Deep Full Detail",
+    name: "Standard",
     prices: [{
       vehicle: "Coupe/Sedan",
-      price: "$599.00"
+      price: "$299.00"
     }, {
       vehicle: "SUV/Truck",
-      price: "$605.00"
+      price: "$329.00"
     }],
     description: "Intensive deep cleaning with ceramic coating preparation.",
     features: ["Deep Interior Cleaning (Seats, Panels, Plastics, Windows)", "Full Surface Prep for Interior Ceramic Coating", "Interior Ceramic Coating (Fabrics, Leather, Plastics)", "Exterior Hand Wash + Full Chemical Decontamination", "Clay Bar Treatment (Medium)", "Premium Paint Sealant Application (6–9 months protection)", "Tire Shine + Trim Dressing"]
@@ -99,12 +99,12 @@ export default function AutoDetailingInterior() {
               techniques, we tackle the toughest grime and humidity-related wear unique to UTAH.
             </p>
 
-            {/* Standard Full Detail */}
+            {/* Basic */}
             <div className="mb-10">
-              <h3 className="text-2xl font-bold mb-4 text-primary">Standard Full Detail</h3>
+              <h3 className="text-2xl font-bold mb-4 text-primary">Basic</h3>
               <p className="text-muted-foreground mb-4">Perfect for regular maintenance and fresh interior.</p>
               <div className="grid md:grid-cols-2 gap-4">
-                {standardFeatures.map((feature, index) => <motion.div key={feature} initial={{
+                {basicFeatures.map((feature, index) => <motion.div key={feature} initial={{
                 opacity: 0,
                 x: -20
               }} whileInView={{
@@ -122,14 +122,14 @@ export default function AutoDetailingInterior() {
               </div>
             </div>
 
-            {/* Deep Full Detail */}
+            {/* Standard */}
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-secondary">Deep Full Detail</h3>
+              <h3 className="text-2xl font-bold mb-4 text-secondary">Standard</h3>
               <p className="text-muted-foreground mb-4">
                 Intensive deep cleaning with ceramic coating preparation bonus.
               </p>
               <div className="grid md:grid-cols-2 gap-4">
-                {deepFeatures.map((feature, index) => <motion.div key={feature} initial={{
+                {standardFeatures.map((feature, index) => <motion.div key={feature} initial={{
                 opacity: 0,
                 x: -20
               }} whileInView={{
