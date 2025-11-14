@@ -8,7 +8,6 @@ import CustomerReviews from "@/components/CustomerReviews";
 import CarSpinModel from "@/components/CarSpinModel";
 
 export default function Home() {
-
   const benefits = [
     {
       icon: <Shield className="h-6 w-6" />,
@@ -84,6 +83,13 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
+          {/* ✅ Centered Car 3D Model */}
+          <div className="w-full flex justify-center items-center mb-16">
+            <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] mx-auto">
+              <CarSpinModel />
+            </div>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -108,10 +114,6 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="w-full mb-6">
-                <CarSpinModel />
-              </div>
-
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
                 <img
                   src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
