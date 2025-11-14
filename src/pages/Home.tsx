@@ -77,20 +77,20 @@ export default function Home() {
       />
 
       {/* Hero Section */}
-      <section className="gradient-hero text-primary-foreground py-20 relative overflow-hidden">
+      <section className="gradient-hero text-primary-foreground pt-8 pb-14 md:pt-10 md:pb-16 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.1)_0%,_transparent_50%)]"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          {/* 3D CAR MODEL — FIXED & CENTERED */}
-          <div className="w-full flex justify-center items-center mb-12">
-            <div className="w-[260px] h-[260px] md:w-[380px] md:h-[380px] mx-auto relative z-20">
+          {/* 3D CAR – centered, not tiny, not taking over whole viewport */}
+          <div className="w-full flex justify-center items-center mb-6">
+            <div className="w-[260px] h-[180px] md:w-[340px] md:h-[220px] lg:w-[380px] lg:h-[240px] mx-auto">
               <CarSpinModel />
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Northern Utah’s Trusted Car Detailing Experts

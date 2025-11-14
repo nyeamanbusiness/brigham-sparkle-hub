@@ -1,64 +1,77 @@
-import { useRef, useEffect, Suspense } from "react";
+import React, { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
-function CarModel() {
+function InnerCarModel() {
   const { scene } = useGLTF("/2019_chevrolet_corvette_c8_stingray.glb");
-  const groupRef = useRef<THREE.Group>(null);
+
+  const groupRef = useRef<THREE.Group>(null!);
   const velRef = useRef(0);
   const dragging = useRef(false);
   const lastX = useRef(0);
 
-  useEffect(() => {
-    if (groupRef.current) {
-      // Center the model
-      const box = new THREE.Box3().setFromObject(scene);
-      const center = box.getCenter(new THREE.Vector3());
-      scene.position.sub(center);
+  // Normalize size & center the model so it always fits nicely
+  const normalizedCar = useMemo(() => {
+    const cloned = scene.clone(true);
 
-      // Scale model
-      groupRef.current.scale.set(0.5, 0.5, 0.5);
+    const box = new THREE.Box3().setFromObject(cloned);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
 
-      // ★ Lift car upward so it sits closer to navbar
-      scene.position.y += 1.2;
-    }
+    const targetSize = 3.5; // how “big” in world units we want it
+    const scale = targetSize / maxDim;
+
+    cloned.scale.setScalar(scale);
+
+    const center = new THREE.Vector3();
+    box.getCenter(center);
+    cloned.position.sub(center);
+
+    // Drop it slightly so it doesn’t float too high
+    cloned.position.y -= 0.6;
+
+    return cloned;
   }, [scene]);
 
-  // Drag → spin speed
+  // Drag → spin speed (mouse + touch)
   useEffect(() => {
-    const down = (e: MouseEvent | TouchEvent) => {
+    const handleDown = (e: MouseEvent | TouchEvent) => {
       dragging.current = true;
       lastX.current = "touches" in e ? e.touches[0].clientX : e.clientX;
     };
 
-    const move = (e: MouseEvent | TouchEvent) => {
-      if (!dragging.current || !groupRef.current) return;
+    const handleMove = (e: MouseEvent | TouchEvent) => {
+      if (!dragging.current) return;
+      const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+      const deltaX = clientX - lastX.current;
+      lastX.current = clientX;
 
-      const x = "touches" in e ? e.touches[0].clientX : e.clientX;
-      const delta = x - lastX.current;
-      velRef.current = delta * 0.01;
-      lastX.current = x;
+      // Swipe sensitivity
+      velRef.current += (deltaX / window.innerWidth) * Math.PI * 2;
     };
 
-    const up = () => (dragging.current = false);
+    const handleUp = () => {
+      dragging.current = false;
+    };
 
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
+    window.addEventListener("mousedown", handleDown);
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("mouseup", handleUp);
 
-    window.addEventListener("touchstart", down);
-    window.addEventListener("touchmove", move);
-    window.addEventListener("touchend", up);
+    window.addEventListener("touchstart", handleDown, { passive: true });
+    window.addEventListener("touchmove", handleMove, { passive: true });
+    window.addEventListener("touchend", handleUp);
 
     return () => {
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", up);
+      window.removeEventListener("mousedown", handleDown);
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseup", handleUp);
 
-      window.removeEventListener("touchstart", down);
-      window.removeEventListener("touchmove", move);
-      window.removeEventListener("touchend", up);
+      window.removeEventListener("touchstart", handleDown as any);
+      window.removeEventListener("touchmove", handleMove as any);
+      window.removeEventListener("touchend", handleUp);
     };
   }, []);
 
@@ -66,33 +79,36 @@ function CarModel() {
   useFrame((_, delta) => {
     if (!groupRef.current) return;
 
-    // Auto-spin
+    // Auto spin when not dragging
     if (!dragging.current) {
-      velRef.current += (0.6 * delta - velRef.current) * 0.1;
+      const autoSpeed = 0.7; // rad/sec
+      velRef.current += (autoSpeed * delta - velRef.current) * 0.08;
     } else {
+      // Damping when user flings it
       velRef.current *= 0.95;
     }
 
-    groupRef.current.rotateY(velRef.current * delta * 60);
+    groupRef.current.rotation.y += velRef.current;
   });
 
   return (
     <group ref={groupRef}>
-      <primitive object={scene} />
+      {/* Simple lighting */}
+      <hemisphereLight intensity={0.7} groundColor={"#222222"} />
+      <directionalLight position={[5, 8, 8]} intensity={1.4} />
+      <directionalLight position={[-4, 5, -3]} intensity={0.6} />
+
+      <primitive object={normalizedCar} />
     </group>
   );
 }
 
 export default function CarSpinModel() {
   return (
-    // ★ Reduced height so hero section isn't massive
-    <div className="relative w-full h-[170px] md:h-[200px] lg:h-[220px]">
-      <Canvas camera={{ position: [0, 0, 10] }} gl={{ antialias: true, alpha: true }}>
-        <ambientLight intensity={0.7} />
-        <directionalLight position={[5, 5, 5]} intensity={1.3} />
-        <directionalLight position={[-5, 5, -5]} intensity={0.6} />
+    <div className="w-full h-full">
+      <Canvas camera={{ position: [0, 0.8, 7], fov: 35 }} gl={{ antialias: true, alpha: true }}>
         <Suspense fallback={null}>
-          <CarModel />
+          <InnerCarModel />
         </Suspense>
       </Canvas>
     </div>
