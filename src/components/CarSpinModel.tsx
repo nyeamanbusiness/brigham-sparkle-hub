@@ -12,81 +12,65 @@ function CarModel() {
 
   useEffect(() => {
     if (groupRef.current) {
-      // Center the model using Box3
+      // Center the model
       const box = new THREE.Box3().setFromObject(scene);
       const center = box.getCenter(new THREE.Vector3());
       scene.position.sub(center);
 
-      // Scale the model
-      groupRef.current.scale.set(3, 3, 3);
+      // ↓↓↓ SCALE FIX — car was massive
+      groupRef.current.scale.set(0.5, 0.5, 0.5);
     }
   }, [scene]);
 
-  // Mouse + touch drag rotation
+  // Drag → spin speed
   useEffect(() => {
-    const handleMouseDown = (e: MouseEvent) => {
+    const down = (e: MouseEvent | TouchEvent) => {
       dragging.current = true;
-      lastX.current = e.clientX;
+      lastX.current = "touches" in e ? e.touches[0].clientX : e.clientX;
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (dragging.current && groupRef.current) {
-        const deltaX = e.clientX - lastX.current;
-        velRef.current = deltaX * 0.01;
-        lastX.current = e.clientX;
-      }
+    const move = (e: MouseEvent | TouchEvent) => {
+      if (!dragging.current || !groupRef.current) return;
+
+      const x = "touches" in e ? e.touches[0].clientX : e.clientX;
+      const delta = x - lastX.current;
+      velRef.current = delta * 0.01;
+      lastX.current = x;
     };
 
-    const handleMouseUp = () => {
-      dragging.current = false;
-    };
+    const up = () => (dragging.current = false);
 
-    const handleTouchStart = (e: TouchEvent) => {
-      dragging.current = true;
-      lastX.current = e.touches[0].clientX;
-    };
+    window.addEventListener("mousedown", down);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (dragging.current && groupRef.current) {
-        const deltaX = e.touches[0].clientX - lastX.current;
-        velRef.current = deltaX * 0.01;
-        lastX.current = e.touches[0].clientX;
-      }
-    };
-
-    const handleTouchEnd = () => {
-      dragging.current = false;
-    };
-
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("touchstart", down);
+    window.addEventListener("touchmove", move);
+    window.addEventListener("touchend", up);
 
     return () => {
-      window.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("mousedown", down);
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseup", up);
+
+      window.removeEventListener("touchstart", down);
+      window.removeEventListener("touchmove", move);
+      window.removeEventListener("touchend", up);
     };
   }, []);
 
-  // Rotation logic
-  useFrame((state, delta) => {
-    if (groupRef.current) {
-      if (!dragging.current) {
-        // Auto-spin speed
-        velRef.current += (0.6 * delta - velRef.current) * 0.1;
-      } else {
-        velRef.current *= 0.95;
-      }
+  // Animation loop
+  useFrame((_, delta) => {
+    if (!groupRef.current) return;
 
-      groupRef.current.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), velRef.current * delta * 60);
+    // Auto-spin when not dragging
+    if (!dragging.current) {
+      velRef.current += (0.6 * delta - velRef.current) * 0.1;
+    } else {
+      velRef.current *= 0.95;
     }
+
+    groupRef.current.rotateY(velRef.current * delta * 60);
   });
 
   return (
@@ -98,11 +82,14 @@ function CarModel() {
 
 export default function CarSpinModel() {
   return (
-    <div className="w-full h-[300px] lg:h-[400px]">
-      <Canvas camera={{ position: [0, 0, 8.5] }} gl={{ antialias: true, alpha: true }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <directionalLight position={[-5, 5, -5]} intensity={0.5} />
+    <div className="w-full h-[320px] lg:h-[420px]">
+      <Canvas
+        camera={{ position: [0, 0, 10] }} // ← pulled camera back
+        gl={{ antialias: true, alpha: true }}
+      >
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[5, 5, 5]} intensity={1.3} />
+        <directionalLight position={[-5, 5, -5]} intensity={0.6} />
         <Suspense fallback={null}>
           <CarModel />
         </Suspense>
