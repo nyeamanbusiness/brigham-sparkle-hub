@@ -6,11 +6,32 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
+/** Import local .lottie as a URL so Vite treats it as an asset */
+import vehicleLottieUrl from "@/assets/vehicle.lottie?url";
+
+/** Allow the DotLottie web component in TSX */
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "dotlottie-player": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        src?: string;
+        background?: string;
+        speed?: string | number;
+        loop?: boolean;
+        autoplay?: boolean;
+        controls?: boolean;
+        style?: React.CSSProperties;
+      };
+    }
+  }
+}
+
 export default function Contact() {
+  const [canUseDotLottie, setCanUseDotLottie] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,6 +40,28 @@ export default function Contact() {
     service: "",
     message: "",
   });
+
+  useEffect(() => {
+    const defined = customElements.get("dotlottie-player");
+    if (defined) {
+      setCanUseDotLottie(true);
+      return;
+    }
+    const existing = document.querySelector('script[src*="@dotlottie/player-component"]') as HTMLScriptElement | null;
+    const ensureDefined = () => {
+      if (customElements.get("dotlottie-player")) setCanUseDotLottie(true);
+      else setTimeout(ensureDefined, 50);
+    };
+    if (existing) {
+      ensureDefined();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js";
+      script.async = true;
+      script.onload = ensureDefined;
+      document.body.appendChild(script);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,6 +120,22 @@ export default function Contact() {
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            {canUseDotLottie && (
+              <div className="w-full mb-6 flex justify-center">
+                <dotlottie-player
+                  src={vehicleLottieUrl}
+                  background="transparent"
+                  speed="1"
+                  loop
+                  autoplay
+                  style={{
+                    width: "260px",
+                    height: "140px",
+                    display: "block",
+                  }}
+                ></dotlottie-player>
+              </div>
+            )}
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Have Questions ?</h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto">
               Give your vehicle the luxury treatment it deserves. Experience a shine that lasts, protection you can
