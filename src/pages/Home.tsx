@@ -56,7 +56,7 @@ export default function Home() {
       title: "Paint Correction",
       description: "Remove swirls, scratches, and imperfections for a flawless finish.",
       href: "/services/paint-correction",
-      image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/pain-correction-car.webp",
+      image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/paint-correction-car.webp",
     },
   ];
 
@@ -76,23 +76,22 @@ export default function Home() {
         ]}
       />
 
-      {/* HERO SECTION */}
-      <section className="gradient-hero text-primary-foreground pt-8 pb-12 relative overflow-hidden">
+      {/* Hero Section */}
+      <section className="gradient-hero text-primary-foreground py-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.1)_0%,_transparent_50%)]"></div>
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          {/* 3D MODEL — FIXED HEIGHT + NEAR NAV */}
-          <div className="w-full flex justify-center mb-6">
-            <div className="w-[260px] h-[160px] md:w-[330px] md:h-[200px]">
+          {/* 3D CAR MODEL — FIXED & CENTERED */}
+          <div className="w-full flex justify-center items-center mb-12">
+            <div className="w-[260px] h-[260px] md:w-[380px] md:h-[380px] mx-auto relative z-20">
               <CarSpinModel />
             </div>
           </div>
 
-          {/* TEXT + IMAGE ROW */}
-          <div className="grid lg:grid-cols-2 gap-10 items-center mt-4">
-            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Northern Utah’s Trusted Car Detailing Experts
               </h1>
@@ -112,7 +111,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
               <div className="relative rounded-lg overflow-hidden shadow-2xl">
@@ -136,15 +135,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="py-16 bg-background">
+      {/* Featured Services */}
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
             <h2 className="text-xl md:text-2xl font-bold mb-4 text-gradient">Popular Detailing Services</h2>
             <p className="text-xl text-muted-foreground">
@@ -186,15 +185,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BENEFITS */}
-      <section className="py-16 bg-muted">
+      {/* Benefits Section */}
+      <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
             <h2 className="text-xl md:text-2xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -218,11 +217,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CUSTOMER REVIEWS */}
+      {/* Customer Reviews */}
       <CustomerReviews />
 
-      {/* SERVICE AREAS */}
-      <section className="py-16 bg-background">
+      {/* Service Areas */}
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <motion.div
@@ -234,7 +233,6 @@ export default function Home() {
               <h2 className="text-xl md:text-2xl font-bold mb-6 text-gradient">
                 Proudly Serving Brigham City & Surrounding Areas
               </h2>
-
               <p className="text-lg text-muted-foreground mb-8">
                 As a local business, we understand the unique needs of vehicles in Northern Utah. Our team provides
                 reliable auto detailing service throughout Box Elder County and beyond.
@@ -250,7 +248,6 @@ export default function Home() {
                   <li className="text-foreground list-disc ml-5">Tremonton</li>
                   <li className="text-foreground list-disc ml-5">Pleasant View</li>
                 </ul>
-
                 <ul className="space-y-2">
                   <li className="text-foreground list-disc ml-5">West Haven</li>
                   <li className="text-foreground list-disc ml-5">Honeyville</li>
@@ -267,12 +264,11 @@ export default function Home() {
               </p>
             </motion.div>
 
-            {/* Map */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="relative rounded-lg overflow-hidden shadow-lg"
             >
               <iframe
@@ -291,7 +287,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="gradient-hero text-primary-foreground py-16">
+      <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
