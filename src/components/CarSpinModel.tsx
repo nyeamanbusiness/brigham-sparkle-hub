@@ -11,22 +11,21 @@ function CarModel() {
   const lastX = useRef(0);
 
   useEffect(() => {
-    if (!groupRef.current) return;
+    if (groupRef.current) {
+      // Center the model
+      const box = new THREE.Box3().setFromObject(scene);
+      const center = box.getCenter(new THREE.Vector3());
+      scene.position.sub(center);
 
-    // Auto-center the Corvette using bounding box
-    const box = new THREE.Box3().setFromObject(scene);
-    const center = box.getCenter(new THREE.Vector3());
-    scene.position.sub(center);
+      // Scale model
+      groupRef.current.scale.set(0.5, 0.5, 0.5);
 
-    // Scale model based on its size so it always fits perfectly
-    const size = box.getSize(new THREE.Vector3());
-    const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 4 / maxDim; // bigger number = bigger model
-
-    groupRef.current.scale.set(scale, scale, scale);
+      // ★ Lift car upward so it sits closer to navbar
+      scene.position.y += 1.2;
+    }
   }, [scene]);
 
-  // Drag → rotation velocity
+  // Drag → spin speed
   useEffect(() => {
     const down = (e: MouseEvent | TouchEvent) => {
       dragging.current = true;
@@ -34,11 +33,11 @@ function CarModel() {
     };
 
     const move = (e: MouseEvent | TouchEvent) => {
-      if (!dragging.current) return;
+      if (!dragging.current || !groupRef.current) return;
 
       const x = "touches" in e ? e.touches[0].clientX : e.clientX;
       const delta = x - lastX.current;
-      velRef.current = delta * 0.015; // faster swipe spin
+      velRef.current = delta * 0.01;
       lastX.current = x;
     };
 
@@ -63,13 +62,15 @@ function CarModel() {
     };
   }, []);
 
+  // Animation loop
   useFrame((_, delta) => {
     if (!groupRef.current) return;
 
+    // Auto-spin
     if (!dragging.current) {
       velRef.current += (0.6 * delta - velRef.current) * 0.1;
     } else {
-      velRef.current *= 0.9;
+      velRef.current *= 0.95;
     }
 
     groupRef.current.rotateY(velRef.current * delta * 60);
@@ -84,12 +85,12 @@ function CarModel() {
 
 export default function CarSpinModel() {
   return (
-    <div className="w-full h-[350px] md:h-[420px] flex justify-center items-center">
-      <Canvas gl={{ antialias: true, alpha: true }} camera={{ position: [0, 1, 6], fov: 35 }}>
-        <ambientLight intensity={1.0} />
-        <directionalLight position={[5, 5, 5]} intensity={1.2} />
+    // ★ Reduced height so hero section isn't massive
+    <div className="relative w-full h-[170px] md:h-[200px] lg:h-[220px]">
+      <Canvas camera={{ position: [0, 0, 10] }} gl={{ antialias: true, alpha: true }}>
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[5, 5, 5]} intensity={1.3} />
         <directionalLight position={[-5, 5, -5]} intensity={0.6} />
-
         <Suspense fallback={null}>
           <CarModel />
         </Suspense>
