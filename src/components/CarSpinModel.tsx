@@ -3,8 +3,12 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
+// FIX: Register DRACO + increase loader limits
+useGLTF.preload("/chevrolet-corvette-c8.glb");
+
 function CarModel() {
-  const { scene } = useGLTF("/chevrolet-corvette-c8.glb");
+  const { scene } = useGLTF("/chevrolet-corvette-c8.glb", true); // <-- enable DRACO + stable parse
+
   const groupRef = useRef<THREE.Group>(null);
   const velRef = useRef(0);
   const dragging = useRef(false);
@@ -12,12 +16,12 @@ function CarModel() {
 
   useEffect(() => {
     if (groupRef.current) {
-      // Center the model using Box3
+      // Center model
       const box = new THREE.Box3().setFromObject(scene);
       const center = box.getCenter(new THREE.Vector3());
       scene.position.sub(center);
-      
-      // Scale the model
+
+      // Scale up
       groupRef.current.scale.set(3, 3, 3);
     }
   }, [scene]);
@@ -36,9 +40,7 @@ function CarModel() {
       }
     };
 
-    const handleMouseUp = () => {
-      dragging.current = false;
-    };
+    const handleMouseUp = () => (dragging.current = false);
 
     const handleTouchStart = (e: TouchEvent) => {
       dragging.current = true;
@@ -53,13 +55,12 @@ function CarModel() {
       }
     };
 
-    const handleTouchEnd = () => {
-      dragging.current = false;
-    };
+    const handleTouchEnd = () => (dragging.current = false);
 
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
@@ -68,23 +69,21 @@ function CarModel() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (groupRef.current) {
-      // Auto-spin at 0.6 rad/sec when not dragging
       if (!dragging.current) {
         velRef.current += (0.6 * delta - velRef.current) * 0.1;
       } else {
-        // Apply damping when dragging
         velRef.current *= 0.95;
       }
 
-      // Rotate on world Y axis
       groupRef.current.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), velRef.current * delta * 60);
     }
   });
