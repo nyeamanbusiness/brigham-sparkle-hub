@@ -3,73 +3,68 @@ import BreadcrumbsJsonLd from '@/components/BreadcrumbsJsonLd';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
-
 export default function PaintCorrection() {
   const url = 'https://sparkleautodetailingllc.com/services/paint-correction';
-
-  const benefits = [
-    'Remove swirls, scratches, and oxidation',
-    'Restore paint depth and clarity',
-    'Multi-stage polishing process',
-    'Professional-grade compounds & polishes',
-    'Machine polishing for even results',
-    'Paint thickness measurements',
-    'Perfect prep for ceramic coating',
-    'Showroom-quality finish',
-  ];
-
-  const packages = [
-    {
-      name: 'Stage 2 Paint Correction',
-      duration: '2 hrs',
-      prices: [
-        { vehicle: 'Coupe/Sedan', price: '$549.00' },
-        { vehicle: 'SUV/Truck', price: '$559.00' }
-      ],
-      description: 'Multi-stage polishing to remove moderate to heavy swirls and scratches.',
-    },
-    {
-      name: 'Stage One Paint Correction',
-      duration: '2 hrs',
-      prices: [
-        { vehicle: 'Coupe/Sedan', price: '$399.00' },
-        { vehicle: 'SUV/Truck', price: '$409.00' }
-      ],
-      description: 'Single-stage polish perfect for newer vehicles with minor swirls.',
-    },
-    {
-      name: 'Enhancement Polish - Gloss Reset',
-      duration: '2 hrs',
-      prices: [
-        { vehicle: 'Coupe/Sedan', price: '$269.00' },
-        { vehicle: 'SUV/Truck', price: '$279.00' }
-      ],
-      description: 'Quick gloss enhancement ideal for well-maintained paint.',
-    },
-  ];
-
-  return (
-    <>
-      <Meta
-        title="Paint Correction in Brigham City, UT | Remove Swirls & Haze"
-        description="Professional paint correction in Brigham City. Multi-stage polishing to remove swirls, scratches, and restore your paint to flawless condition."
-        canonical={url}
-      />
-      <BreadcrumbsJsonLd items={[
-        { name: 'Home', item: 'https://sparkleautodetailingllc.com/' },
-        { name: 'Services', item: 'https://sparkleautodetailingllc.com/services' },
-        { name: 'Paint Correction', item: url }
-      ]} />
+  const benefits = ['Remove swirls, scratches, and oxidation', 'Restore paint depth and clarity', 'Multi-stage polishing process', 'Professional-grade compounds & polishes', 'Machine polishing for even results', 'Paint thickness measurements', 'Perfect prep for ceramic coating', 'Showroom-quality finish'];
+  const packages = [{
+    name: 'Stage 2 Paint Correction',
+    duration: '2 hrs',
+    prices: [{
+      vehicle: 'Coupe/Sedan',
+      price: '$549.00'
+    }, {
+      vehicle: 'SUV/Truck',
+      price: '$559.00'
+    }],
+    description: 'Multi-stage polishing to remove moderate to heavy swirls and scratches.'
+  }, {
+    name: 'Stage One Paint Correction',
+    duration: '2 hrs',
+    prices: [{
+      vehicle: 'Coupe/Sedan',
+      price: '$399.00'
+    }, {
+      vehicle: 'SUV/Truck',
+      price: '$409.00'
+    }],
+    description: 'Single-stage polish perfect for newer vehicles with minor swirls.'
+  }, {
+    name: 'Enhancement Polish - Gloss Reset',
+    duration: '2 hrs',
+    prices: [{
+      vehicle: 'Coupe/Sedan',
+      price: '$269.00'
+    }, {
+      vehicle: 'SUV/Truck',
+      price: '$279.00'
+    }],
+    description: 'Quick gloss enhancement ideal for well-maintained paint.'
+  }];
+  return <>
+      <Meta title="Paint Correction in Brigham City, UT | Remove Swirls & Haze" description="Professional paint correction in Brigham City. Multi-stage polishing to remove swirls, scratches, and restore your paint to flawless condition." canonical={url} />
+      <BreadcrumbsJsonLd items={[{
+      name: 'Home',
+      item: 'https://sparkleautodetailingllc.com/'
+    }, {
+      name: 'Services',
+      item: 'https://sparkleautodetailingllc.com/services'
+    }, {
+      name: 'Paint Correction',
+      item: url
+    }]} />
 
       {/* Hero Section */}
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6
+        }} className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Paint Correction in Brigham City, UT
             </h1>
@@ -95,12 +90,17 @@ export default function PaintCorrection() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6
+          }}>
               <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gradient">
                 Professional Paint Restoration
               </h2>
@@ -110,28 +110,34 @@ export default function PaintCorrection() {
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-4 mb-12">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={benefit}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="flex items-start gap-3 bg-card p-4 rounded-lg"
-                >
+              {benefits.map((benefit, index) => <motion.div key={benefit} initial={{
+              opacity: 0,
+              x: -20
+            }} whileInView={{
+              opacity: 1,
+              x: 0
+            }} viewport={{
+              once: true
+            }} transition={{
+              duration: 0.4,
+              delay: index * 0.05
+            }} className="flex items-start gap-3 bg-card p-4 rounded-lg">
                   <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
                   <span>{benefit}</span>
-                </motion.div>
-              ))}
+                </motion.div>)}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-muted p-8 rounded-lg"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6
+          }} className="bg-muted p-8 rounded-lg">
               <h3 className="text-2xl font-bold mb-4">Why Paint Correction?</h3>
               <p className="text-lg leading-relaxed mb-4">
                 Swirls, scratches, and oxidation dull paint over time. Paint correction removes these defects to restore clarity and deep gloss.
@@ -147,59 +153,28 @@ export default function PaintCorrection() {
       {/* Pricing Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">
-              Paint Correction Packages
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Professional paint restoration with precision polishing and correction
-            </p>
-          </motion.div>
+          
 
           {/* KEY: items-stretch + auto-rows-fr; cards are full-height flex columns */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch auto-rows-fr">
-            {packages.map((pkg, index) => (
-              <motion.div
-                key={pkg.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift h-full flex flex-col"
-              >
+            {packages.map((pkg, index) => <motion.div key={pkg.name} initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: index * 0.1
+          }} className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift h-full flex flex-col">
                 {/* FIXED header height so wrapping titles don't change total card height */}
-                <div
-                  className={`${index === 0 ? 'bg-primary' : index === 1 ? 'bg-secondary' : 'bg-accent'} text-white p-6 h-60 flex flex-col`}
-                >
-                  <h3 className="text-xl font-bold mb-1 leading-snug">{pkg.name}</h3>
-                  <p className="text-sm opacity-90 mb-4">{pkg.duration}</p>
-
-                  {/* Prices locked to bottom of header */}
-                  <div className="space-y-2 mt-auto">
-                    {pkg.prices.map((priceItem) => (
-                      <div key={priceItem.vehicle} className="flex justify-between items-center border-t border-white/20 pt-2">
-                        <span className="text-sm opacity-90">{priceItem.vehicle}</span>
-                        <span className="text-2xl font-bold">{priceItem.price}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                
 
                 {/* Body grows; CTA pinned to bottom so all buttons align */}
-                <div className="p-6 flex flex-col grow">
-                  <p className="text-muted-foreground mb-6">{pkg.description}</p>
-                  <Button asChild className="w-full gradient-cta mt-auto">
-                    <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
+                
+              </motion.div>)}
           </div>
         </div>
       </section>
@@ -207,12 +182,17 @@ export default function PaintCorrection() {
       {/* CTA Section */}
       <section className="gradient-hero text-primary-foreground py-16">
         <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready for a Flawless Finish?
             </h2>
@@ -225,6 +205,5 @@ export default function PaintCorrection() {
           </motion.div>
         </div>
       </section>
-    </>
-  );
+    </>;
 }
