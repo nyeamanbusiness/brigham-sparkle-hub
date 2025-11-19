@@ -12,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
     <HelmetProvider>
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-grow pt-[60px] md:pt-[120px]">
+        <main className="flex-grow pt-[120px]">
           {children}
         </main>
         <Footer />

@@ -36,7 +36,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm shadow-md">
       {/* Top bar */}
-      <div className="border-b border-primary-light/20 hidden md:block">
+      <div className="border-b border-primary-light/20">
         <div className="container mx-auto px-4 py-1.5 flex justify-between items-center text-sm">
           <a
             href="tel:+14355356484"
@@ -70,10 +70,10 @@ export default function Header() {
 
       {/* Main header */}
       <div className="container mx-auto px-4">
-        <nav className="flex items-center justify-between py-2 md:py-3">
+        <nav className="flex items-center justify-between py-3">
           <Link to="/" className="flex items-center gap-3">
             {/* Reduced logo height */}
-            <img src={logo} alt="Sparkle Auto Detailing Logo" className="h-12 md:h-16 w-auto" />
+            <img src={logo} alt="Sparkle Auto Detailing Logo" className="h-16 w-auto" />
 
             <span className="text-primary-foreground font-bold text-xl hidden sm:block">Sparkle Auto Detailing</span>
           </Link>
