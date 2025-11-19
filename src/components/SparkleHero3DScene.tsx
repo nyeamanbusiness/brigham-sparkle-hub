@@ -87,12 +87,26 @@ function CarModel() {
   const sweep = useRef<THREE.PointLight>(null!);
   const cloned = useMemo(() => scene.clone(true), [scene]);
 
-  useFrame(({ clock }) => {
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 6;
+
+  // drag / spin controls
+  const isDragging = useRef(false);
+  const lastX = useRef(0);
+  const dragRotation = useRef(0);
+  const autoRotation = useRef(0);
+
+  useFrame(({ clock }, delta) => {
     const t = clock.getElapsedTime();
+
     if (group.current) {
-      // Spin on a fixed Y axis (no bobbing)
-      group.current.rotation.y = t * 0.4;
+      if (!isDragging.current) {
+        // keep gentle auto-rotation when not dragging
+        autoRotation.current += delta * 0.4;
+      }
+      group.current.rotation.y = autoRotation.current + dragRotation.current;
     }
+
     if (sweep.current) {
       sweep.current.position.x = Math.sin(t * 1.3) * 2.6;
       sweep.current.position.y = 0.6 + Math.sin(t * 0.9) * 0.5;
@@ -100,14 +114,44 @@ function CarModel() {
     }
   });
 
+  const handlePointerDown = (e: any) => {
+    e.stopPropagation();
+    isDragging.current = true;
+    lastX.current = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+  };
+
+  const handlePointerUp = () => {
+    isDragging.current = false;
+  };
+
+  const handlePointerMove = (e: any) => {
+    if (!isDragging.current) return;
+    const clientX = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+    const deltaX = clientX - lastX.current;
+    lastX.current = clientX;
+    dragRotation.current += deltaX * 0.01; // sensitivity
+  };
+
   return (
-    // Car sits above the text, fixed in place, just rotating
-    <group ref={group} position={[0, 0.8, 0]} scale={50.0}>
+    <group
+      ref={group}
+      // higher and slightly smaller on mobile so it clears the text
+      position={[0, isMobile ? 1.4 : 0.8, 0]}
+      scale={isMobile ? 40.0 : 50.0}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerOut={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+      onPointerMove={handlePointerMove}
+      // for touch devices
+      onTouchStart={handlePointerDown}
+      onTouchEnd={handlePointerUp}
+      onTouchMove={handlePointerMove}
+    >
       <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#222222" />
       <directionalLight position={[5, 6, 7]} intensity={1.2} />
       <directionalLight position={[-4, 3, 2]} intensity={0.6} />
       <pointLight ref={sweep} color="#b7a4ff" distance={9} decay={2} intensity={1.1} />
-      {/* No <Float /> here, so no up/down motion */}
       <primitive object={cloned} />
     </group>
   );
@@ -123,7 +167,8 @@ function FloatingText() {
   const subSize = isMobile ? 0.16 : 0.22;
 
   const scale = THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
-  const posY = isMobile ? -0.35 : -0.45;
+  // push text a bit lower on mobile to give more room to the car
+  const posY = isMobile ? -0.6 : -0.45;
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
