@@ -207,7 +207,7 @@ function FloatingText() {
         </Text3D>
       </Center>
 
-      <Center position={[0, -(isMobile ? 0.39 : 0.42), 0]}>
+      <Center position={[0, -(isMobile ? 0.45 : 0.5), 0]}>
         <Text3D font={FONT_PATH} size={subSize} height={0.03}>
           Auto Detailing Service
           <meshStandardMaterial color="#f3e5ff" metalness={0.9} roughness={0.18} />
