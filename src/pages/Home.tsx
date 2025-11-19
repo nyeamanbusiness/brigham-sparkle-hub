@@ -6,75 +6,51 @@ import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
 import { SparkleHero3DScene } from "@/components/SparkleHero3DScene";
-
 export default function Home() {
-  const benefits = [
-    {
-      icon: <Shield className="h-6 w-6" />,
-      title: "Premium Protection",
-      description: "Long-lasting protection against UV rays, dirt, and environmental damage.",
-    },
-    {
-      icon: <Sparkles className="h-6 w-6" />,
-      title: "Showroom Shine",
-      description: "Restore your vehicle to showroom quality with our expert detailing services.",
-    },
-    {
-      icon: <Clock className="h-6 w-6" />,
-      title: "Time-Saving",
-      description: "Professional service that saves you time while delivering superior results.",
-    },
-    {
-      icon: <Star className="h-6 w-6" />,
-      title: "5-Star Service",
-      description: "Rated 5.0 on Google Reviews with over 100+ satisfied customers.",
-    },
-  ];
-
-  const services = [
-    {
-      title: "Interior Detailing",
-      description: "Deep clean and restore your vehicle's interior to pristine condition.",
-      href: "/services/auto-detailing-interior",
-      image:
-        "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detailing-car.webp",
-    },
-    {
-      title: "Exterior Detailing",
-      description: "Professional wash, clay bar, and wax for a brilliant shine everytime.",
-      href: "/services/auto-detailing-exterior",
-      image:
-        "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/exterior-detailing-sports-car.webp",
-    },
-    {
-      title: "Ceramic Coating",
-      description: "2-5 year protection with hydrophobic properties and gloss enhancement.",
-      href: "/services/ceramic-coating",
-      image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/ceramic-coating-sedan.webp",
-    },
-    {
-      title: "Paint Correction",
-      description: "Remove swirls, scratches, and imperfections for a flawless finish.",
-      href: "/services/paint-correction",
-      image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/paint-correction-car.webp",
-    },
-  ];
-
-  return (
-    <>
-      <Meta
-        title="Sparkle Auto Detailing | Professional Car Detailing in Brigham City, UT"
-        description="Expert auto detailing services in Brigham City, Utah. Interior & exterior detailing, ceramic coating, paint correction. 5.0 rating. Book now!"
-        canonical="https://sparkleautodetailingllc.com/"
-      />
-      <BreadcrumbsJsonLd
-        items={[
-          {
-            name: "Home",
-            item: "https://sparkleautodetailingllc.com/",
-          },
-        ]}
-      />
+  const benefits = [{
+    icon: <Shield className="h-6 w-6" />,
+    title: "Premium Protection",
+    description: "Long-lasting protection against UV rays, dirt, and environmental damage."
+  }, {
+    icon: <Sparkles className="h-6 w-6" />,
+    title: "Showroom Shine",
+    description: "Restore your vehicle to showroom quality with our expert detailing services."
+  }, {
+    icon: <Clock className="h-6 w-6" />,
+    title: "Time-Saving",
+    description: "Professional service that saves you time while delivering superior results."
+  }, {
+    icon: <Star className="h-6 w-6" />,
+    title: "5-Star Service",
+    description: "Rated 5.0 on Google Reviews with over 100+ satisfied customers."
+  }];
+  const services = [{
+    title: "Interior Detailing",
+    description: "Deep clean and restore your vehicle's interior to pristine condition.",
+    href: "/services/auto-detailing-interior",
+    image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detailing-car.webp"
+  }, {
+    title: "Exterior Detailing",
+    description: "Professional wash, clay bar, and wax for a brilliant shine everytime.",
+    href: "/services/auto-detailing-exterior",
+    image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/exterior-detailing-sports-car.webp"
+  }, {
+    title: "Ceramic Coating",
+    description: "2-5 year protection with hydrophobic properties and gloss enhancement.",
+    href: "/services/ceramic-coating",
+    image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/ceramic-coating-sedan.webp"
+  }, {
+    title: "Paint Correction",
+    description: "Remove swirls, scratches, and imperfections for a flawless finish.",
+    href: "/services/paint-correction",
+    image: "https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/paint-correction-car.webp"
+  }];
+  return <>
+      <Meta title="Sparkle Auto Detailing | Professional Car Detailing in Brigham City, UT" description="Expert auto detailing services in Brigham City, Utah. Interior & exterior detailing, ceramic coating, paint correction. 5.0 rating. Book now!" canonical="https://sparkleautodetailingllc.com/" />
+      <BreadcrumbsJsonLd items={[{
+      name: "Home",
+      item: "https://sparkleautodetailingllc.com/"
+    }]} />
 
       {/* Hero Section - 3D Scene */}
       <section className="relative w-full h-screen overflow-hidden">
@@ -84,28 +60,37 @@ export default function Home() {
       {/* Pricing Cards Section */}
       <section className="py-20 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Our Most Popular Services</h2>
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }} className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Our Most Popular Packages</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Choose the perfect detailing package for your vehicle
+              Choose the perfect service for your vehicle
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Interior Detailing Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border/50"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.1
+          }} className="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border/50">
               <div className="p-8 text-center">
                 <h3 className="text-2xl font-bold mb-2">Interior Detailing</h3>
                 <div className="mb-6">
@@ -123,13 +108,18 @@ export default function Home() {
             </motion.div>
 
             {/* Full Detail Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-card rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-primary relative"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} className="bg-card rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-primary relative">
               <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
                 Most Popular
               </div>
@@ -150,13 +140,18 @@ export default function Home() {
             </motion.div>
 
             {/* Ceramic Coating Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border/50"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.3
+          }} className="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border/50">
               <div className="p-8 text-center">
                 <h3 className="text-2xl font-bold mb-2">Ceramic Coating</h3>
                 <div className="mb-6">
@@ -179,13 +174,17 @@ export default function Home() {
       {/* Featured Services */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }} className="text-center mb-16">
             <h2 className="text-xl md:text-2xl font-bold mb-4 text-gradient">Popular Detailing Services</h2>
             <p className="text-xl text-muted-foreground">
               Professional auto detailing services designed to keep your vehicle looking its absolute best
@@ -193,21 +192,21 @@ export default function Home() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
+            {services.map((service, index) => <motion.div key={service.title} initial={{
+            opacity: 0,
+            y: 30
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: index * 0.1
+          }}>
                 <Link to={service.href} className="group block bg-card rounded-lg overflow-hidden shadow-md hover-lift">
                   <div className="aspect-video bg-gradient-hero relative overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
+                    <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-bold mb-2 group-hover:text-accent transition-colors">
@@ -220,8 +219,7 @@ export default function Home() {
                     </span>
                   </div>
                 </Link>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </div>
         </div>
       </section>
@@ -229,13 +227,17 @@ export default function Home() {
       {/* Benefits Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }} className="text-center mb-16">
             <h2 className="text-xl md:text-2xl font-bold mb-4 text-gradient">Why Choose Sparkle Auto Detailing?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Professional auto detailing services designed to keep your vehicle looking its absolute best
@@ -244,15 +246,13 @@ export default function Home() {
 
           <div className="flex justify-center items-center min-h-[245px]">
             <div className="carousel-3d">
-              {benefits.map((benefit) => (
-                <div key={benefit.title} className="carousel-3d-card rotating-border-card">
+              {benefits.map(benefit => <div key={benefit.title} className="carousel-3d-card rotating-border-card">
                   <div className="rotating-border-card-content h-full">
                     <div className="text-accent">{benefit.icon}</div>
                     <h3 className="text-base font-bold">{benefit.title}</h3>
                     <p className="text-muted-foreground text-xs">{benefit.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -265,12 +265,17 @@ export default function Home() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: -30
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6
+          }}>
               <h2 className="text-xl md:text-2xl font-bold mb-6 text-gradient">
                 Proudly Serving Brigham City & Surrounding Areas
               </h2>
@@ -305,23 +310,21 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative rounded-lg overflow-hidden shadow-lg"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47800.31595114912!2d-112.04515505!3d41.51468105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2830d73ff227efe1%3A0x3e3a3d58e3d5a3aa!2sSparkle%20Auto%20Detailing!5e0!3m2!1sen!2sus!4v1761578977290!5m2!1sen!2sus"
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Sparkle Auto Detailing service area map"
-              ></iframe>
+            <motion.div initial={{
+            opacity: 0,
+            x: 30
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.6,
+            delay: 0.2
+          }} className="relative rounded-lg overflow-hidden shadow-lg">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47800.31595114912!2d-112.04515505!3d41.51468105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2830d73ff227efe1%3A0x3e3a3d58e3d5a3aa!2sSparkle%20Auto%20Detailing!5e0!3m2!1sen!2sus!4v1761578977290!5m2!1sen!2sus" width="100%" height="450" style={{
+              border: 0
+            }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Sparkle Auto Detailing service area map"></iframe>
             </motion.div>
           </div>
         </div>
@@ -330,12 +333,17 @@ export default function Home() {
       {/* CTA */}
       <section className="gradient-hero text-primary-foreground py-20">
         <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.6
+        }}>
             <h2 className="text-xl md:text-2xl font-bold mb-6">Ready to Make Your Car Sparkle?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Don't wait - give your vehicle the premium care it deserves. Book your appointment today and experience
@@ -349,6 +357,5 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-    </>
-  );
+    </>;
 }
