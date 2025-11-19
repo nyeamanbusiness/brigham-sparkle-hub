@@ -1,7 +1,7 @@
 import React, { Suspense, useRef, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useGLTF, Float, Text3D, Center } from "@react-three/drei";
+import { useGLTF, Text3D, Center } from "@react-three/drei";
 
 const MODEL_PATH = "/2019_chevrolet_corvette_c8_stingray.glb";
 const FONT_PATH = "/fonts/helvetiker_regular.typeface.json";
@@ -90,6 +90,7 @@ function CarModel() {
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     if (group.current) {
+      // Spin on a fixed Y axis (no bobbing)
       group.current.rotation.y = t * 0.4;
     }
     if (sweep.current) {
@@ -99,16 +100,15 @@ function CarModel() {
     }
   });
 
-  // Slightly larger car and a bit higher so it sits nicely above the text
   return (
+    // Car sits above the text, fixed in place, just rotating
     <group ref={group} position={[0, 0.8, 0]} scale={50.0}>
       <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#222222" />
       <directionalLight position={[5, 6, 7]} intensity={1.2} />
       <directionalLight position={[-4, 3, 2]} intensity={0.6} />
       <pointLight ref={sweep} color="#b7a4ff" distance={9} decay={2} intensity={1.1} />
-      <Float speed={1.2} rotationIntensity={0.06} floatIntensity={0.35}>
-        <primitive object={cloned} />
-      </Float>
+      {/* No <Float /> here, so no up/down motion */}
+      <primitive object={cloned} />
     </group>
   );
 }
@@ -119,14 +119,10 @@ function FloatingText() {
   const { viewport } = useThree();
   const isMobile = viewport.width < 6;
 
-  // Slightly smaller sizes so the long domain fits
   const titleSize = isMobile ? 0.32 : 0.4;
   const subSize = isMobile ? 0.16 : 0.22;
 
-  // Reduce scale a bit so we're not hitting the edges
   const scale = THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
-
-  // Raise text higher so it's not hugging the bottom
   const posY = isMobile ? -0.35 : -0.45;
 
   useFrame(({ clock }) => {
@@ -138,7 +134,6 @@ function FloatingText() {
 
   return (
     <group ref={group} position={[0, posY, 0]} scale={scale}>
-      {/* Main domain text */}
       <Center>
         <Text3D font={FONT_PATH} size={titleSize} height={0.07} bevelEnabled bevelThickness={0.02} bevelSize={0.01}>
           SparkleAutoDetailingLLC.com
@@ -146,7 +141,6 @@ function FloatingText() {
         </Text3D>
       </Center>
 
-      {/* Subtitle */}
       <Center position={[0, -(isMobile ? 0.34 : 0.42), 0]}>
         <Text3D font={FONT_PATH} size={subSize} height={0.03}>
           Auto Detailing Service
