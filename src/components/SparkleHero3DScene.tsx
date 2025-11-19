@@ -131,7 +131,7 @@ function CarModel() {
     <group
       ref={group}
       position={[0, isMobile ? 0.55 : 0.8, 0]} // <-- FIXED
-      scale={isMobile ? 36.0 : 50.0}
+      scale={isMobile ? 50.0 : 90.0}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
@@ -177,7 +177,7 @@ function FloatingText() {
         </Text3D>
       </Center>
 
-      <Center position={[0, -(isMobile ? 0.28 : 0.42), 0]}>
+      <Center position={[0, -(isMobile ? 0.39 : 0.42), 0]}>
         <Text3D font={FONT_PATH} size={subSize} height={0.03}>
           Auto Detailing Service
           <meshStandardMaterial color="#f3e5ff" metalness={0.9} roughness={0.18} />
