@@ -81,6 +81,101 @@ export default function Home() {
         <SparkleHero3DScene />
       </section>
 
+      {/* Pricing Cards Section */}
+      <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Our Most Popular Services</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Choose the perfect detailing package for your vehicle
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Interior Detailing Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border/50"
+            >
+              <div className="p-8 text-center">
+                <h3 className="text-2xl font-bold mb-2">Interior Detailing</h3>
+                <div className="mb-6">
+                  <span className="text-5xl font-bold text-primary">$149</span>
+                </div>
+                <p className="text-muted-foreground mb-8 min-h-[48px]">
+                  Deep clean and restore your vehicle's interior
+                </p>
+                <Link to="/booking" className="block">
+                  <Button className="w-full text-lg py-6 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
+                    Book Now
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Full Detail Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-card rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-primary relative"
+            >
+              <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
+                Most Popular
+              </div>
+              <div className="p-8 text-center">
+                <h3 className="text-2xl font-bold mb-2">Full Detail</h3>
+                <div className="mb-6">
+                  <span className="text-5xl font-bold text-primary">$229</span>
+                </div>
+                <p className="text-muted-foreground mb-8 min-h-[48px]">
+                  Complete interior and exterior detailing package
+                </p>
+                <Link to="/booking" className="block">
+                  <Button className="w-full text-lg py-6 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
+                    Book Now
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Ceramic Coating Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-border/50"
+            >
+              <div className="p-8 text-center">
+                <h3 className="text-2xl font-bold mb-2">Ceramic Coating</h3>
+                <div className="mb-6">
+                  <span className="text-5xl font-bold text-primary">$799</span>
+                </div>
+                <p className="text-muted-foreground mb-8 min-h-[48px]">
+                  Premium protection with 2-5 year durability
+                </p>
+                <Link to="/booking" className="block">
+                  <Button className="w-full text-lg py-6 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
+                    Book Now
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Services */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
