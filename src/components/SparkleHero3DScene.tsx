@@ -101,7 +101,7 @@ function CarModel() {
 
   // Slightly larger car and a bit higher so it sits nicely above the text
   return (
-    <group ref={group} position={[0, 0.8, 0]} scale={4.0}>
+    <group ref={group} position={[0, 0.8, 0]} scale={9.0}>
       <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#222222" />
       <directionalLight position={[5, 6, 7]} intensity={1.2} />
       <directionalLight position={[-4, 3, 2]} intensity={0.6} />
