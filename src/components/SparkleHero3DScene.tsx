@@ -2,7 +2,6 @@ import React, { Suspense, useRef, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Float, Text3D, Center } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
 const MODEL_PATH = "/2019_chevrolet_corvette_c8_stingray.glb";
 const FONT_PATH = "/fonts/helvetiker_regular.typeface.json";
@@ -161,9 +160,6 @@ function HeroScene() {
       <LiquidBackground />
       <CarModel />
       <FloatingText />
-      <EffectComposer>
-        <Bloom intensity={0.8} luminanceThreshold={0.55} luminanceSmoothing={0.25} />
-      </EffectComposer>
     </>
   );
 }
