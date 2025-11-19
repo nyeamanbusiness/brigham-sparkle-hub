@@ -233,8 +233,8 @@ useGLTF.preload(MODEL_PATH);
 /* --------------------------- EXPORTED COMPONENT --------------------------- */
 export function SparkleHero3DScene() {
   return (
-    // Wrapper enables proper pointer events on mobile (swipe-to-spin)
-    <div style={{ width: "100%", height: "100%", touchAction: "none" }}>
+    // Wrapper allows vertical scroll while enabling car swipe-to-spin
+    <div style={{ width: "100%", height: "100%", touchAction: "pan-y" }}>
       <Canvas
         camera={{ position: [0, 0, 8.5], fov: 45 }}
         gl={{ antialias: true, outputColorSpace: THREE.SRGBColorSpace }}
