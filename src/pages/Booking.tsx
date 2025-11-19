@@ -9,6 +9,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -16,6 +21,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -32,6 +38,8 @@ const bookingSchema = z.object({
   zip: z.string().min(5, "ZIP code is required"),
   base_service_id: z.string().min(1, "Please select a service"),
   addon_ids: z.array(z.string()).default([]),
+  appointment_date: z.date({ required_error: "Please select an appointment date" }),
+  appointment_time: z.string().min(1, "Please select an appointment time"),
   vehicle_details: z.string().optional(),
   notes: z.string().optional(),
 });
@@ -46,11 +54,18 @@ interface Service {
   description: string | null;
 }
 
+interface TimeSlot {
+  time: string;
+  label: string;
+}
+
 export default function Booking() {
   const [loading, setLoading] = useState(false);
   const [baseServices, setBaseServices] = useState<Service[]>([]);
   const [addons, setAddons] = useState<Service[]>([]);
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
+  const [availableTimeSlots, setAvailableTimeSlots] = useState<TimeSlot[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
 
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
@@ -64,6 +79,8 @@ export default function Booking() {
       zip: "",
       base_service_id: "",
       addon_ids: [],
+      appointment_date: undefined,
+      appointment_time: "",
       vehicle_details: "",
       notes: "",
     },
@@ -117,6 +134,24 @@ export default function Booking() {
     });
   };
 
+  const fetchAvailableTimeSlots = async (date: Date) => {
+    setLoadingSlots(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("get-available-times", {
+        body: { date: format(date, "yyyy-MM-dd") },
+      });
+
+      if (error) throw error;
+      setAvailableTimeSlots(data.slots || []);
+    } catch (error: any) {
+      console.error("Error fetching time slots:", error);
+      toast.error("Failed to load available times");
+      setAvailableTimeSlots([]);
+    } finally {
+      setLoadingSlots(false);
+    }
+  };
+
   const onSubmit = async (data: BookingFormData) => {
     setLoading(true);
     try {
@@ -126,6 +161,7 @@ export default function Booking() {
           body: {
             ...data,
             addon_ids: selectedAddons,
+            appointment_date: format(data.appointment_date, "yyyy-MM-dd"),
           },
         }
       );
@@ -240,6 +276,111 @@ export default function Booking() {
                 </CardContent>
               </Card>
             )}
+
+            {/* Appointment Scheduling */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Schedule Your Appointment</CardTitle>
+                <CardDescription>Select your preferred date and time slot (3-hour appointment)</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="appointment_date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>Appointment Date</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              className={cn(
+                                "w-full pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={(date) => {
+                              field.onChange(date);
+                              if (date) {
+                                fetchAvailableTimeSlots(date);
+                                form.setValue("appointment_time", "");
+                              }
+                            }}
+                            disabled={(date) =>
+                              date < new Date() || date < new Date(new Date().setHours(0, 0, 0, 0))
+                            }
+                            initialFocus
+                            className={cn("p-3 pointer-events-auto")}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormDescription>
+                        Select a date for your appointment
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {form.watch("appointment_date") && (
+                  <FormField
+                    control={form.control}
+                    name="appointment_time"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Available Time Slots</FormLabel>
+                        <FormControl>
+                          {loadingSlots ? (
+                            <div className="flex items-center justify-center p-8">
+                              <Loader2 className="h-6 w-6 animate-spin" />
+                            </div>
+                          ) : (
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              value={field.value}
+                              className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                            >
+                              {availableTimeSlots.map((slot) => (
+                                <div
+                                  key={slot.time}
+                                  className="flex items-center space-x-3 border rounded-lg p-4 hover:bg-accent/50 transition-colors"
+                                >
+                                  <RadioGroupItem value={slot.time} id={slot.time} />
+                                  <Label
+                                    htmlFor={slot.time}
+                                    className="flex-1 cursor-pointer font-medium"
+                                  >
+                                    {slot.label}
+                                  </Label>
+                                </div>
+                              ))}
+                            </RadioGroup>
+                          )}
+                        </FormControl>
+                        <FormDescription>
+                          Each appointment is 3 hours long (7 AM - 7 PM business hours)
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+              </CardContent>
+            </Card>
 
             {/* Contact Information */}
             <Card>

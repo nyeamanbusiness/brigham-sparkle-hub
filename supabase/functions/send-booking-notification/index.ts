@@ -19,6 +19,8 @@ interface BookingNotification {
   zip?: string;
   base_service: string;
   addons: string[];
+  appointment_date?: string;
+  appointment_time?: string;
   vehicle_details?: string;
   notes?: string;
   stripe_session_id: string;
@@ -92,6 +94,18 @@ const handler = async (req: Request): Promise<Response> => {
           </tr>
           ` : ''}
         </table>
+        ` : ''}
+
+        ${booking.appointment_date && booking.appointment_time ? `
+        <h3 style="color: #374151; margin-top: 30px;">Appointment Schedule</h3>
+        <div style="background: #dbeafe; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+          <p style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #1e40af;">
+            📅 ${booking.appointment_date}
+          </p>
+          <p style="margin: 0; font-size: 16px; color: #1e3a8a;">
+            🕐 ${booking.appointment_time} (3-hour appointment)
+          </p>
+        </div>
         ` : ''}
 
         <h3 style="color: #374151; margin-top: 30px;">Services Requested</h3>
