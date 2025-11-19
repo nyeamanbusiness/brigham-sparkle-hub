@@ -122,33 +122,7 @@ serve(async (req) => {
     await supabaseClient.from("orders").update({ stripe_session_id: session.id }).eq("id", order.id);
 
     console.log("[BOOKING] Stripe session created:", session.id);
-
-    // Send booking notification email
-    try {
-      await supabaseClient.functions.invoke("send-booking-notification", {
-        body: {
-          order_id: order.id,
-          full_name,
-          email,
-          phone,
-          street,
-          city,
-          state,
-          zip,
-          base_service: baseService.name,
-          addons: addons.map((a: any) => a.name),
-          appointment_date,
-          appointment_time,
-          vehicle_details,
-          notes,
-          stripe_session_id: session.id,
-        },
-      });
-      console.log("[BOOKING] Notification email sent");
-    } catch (emailError) {
-      console.error("[BOOKING] Email notification failed:", emailError);
-      // Don't fail the booking if email fails
-    }
+    console.log("[BOOKING] Email and calendar event will be sent via webhook after payment");
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
