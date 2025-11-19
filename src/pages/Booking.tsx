@@ -133,8 +133,7 @@ export default function Booking() {
       if (error) throw error;
 
       if (result?.url) {
-        window.open(result.url, "_blank");
-        toast.success("Redirecting to checkout...");
+        window.location.href = result.url;
       }
     } catch (error: any) {
       console.error("Booking error:", error);
