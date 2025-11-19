@@ -15,6 +15,8 @@ import CeramicCoating from "./pages/services/CeramicCoating";
 import Gallery from "./pages/Gallery";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import Booking from "./pages/Booking";
+import BookingSuccess from "./pages/BookingSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +39,8 @@ const App = () => (
               <Route path="gallery" element={<Gallery />} />
               <Route path="faq" element={<FAQ />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="booking" element={<Booking />} />
+              <Route path="booking-success" element={<BookingSuccess />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
