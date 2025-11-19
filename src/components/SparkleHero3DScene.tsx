@@ -161,7 +161,7 @@ function CarModel() {
     <group
       ref={group}
       position={[0, isMobile ? 0.55 : 0.8, 0]} // <-- FIXED
-      scale={isMobile ? 50.0 : 90.0}
+      scale={isMobile ? 60.0 : 90.0}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
@@ -183,7 +183,7 @@ function FloatingText() {
   const isMobile = viewport.width < 6;
 
   const titleSize = isMobile ? 0.33 : 0.4;
-  const subSize = isMobile ? 0.18 : 0.22;
+  const subSize = isMobile ? 0.23 : 0.28;
 
   const scale = isMobile
     ? THREE.MathUtils.clamp(viewport.width / 9, 0.42, 0.55)
