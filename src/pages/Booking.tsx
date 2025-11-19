@@ -309,7 +309,7 @@ export default function Booking() {
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
+                        <PopoverContent className="w-auto p-0 bg-card border-2 shadow-xl z-50" align="start">
                           <Calendar
                             mode="single"
                             selected={field.value}
@@ -324,7 +324,7 @@ export default function Booking() {
                               date < new Date() || date < new Date(new Date().setHours(0, 0, 0, 0))
                             }
                             initialFocus
-                            className={cn("p-3 pointer-events-auto")}
+                            className={cn("p-3 pointer-events-auto bg-card")}
                           />
                         </PopoverContent>
                       </Popover>
