@@ -152,12 +152,12 @@ function FloatingText() {
   const { viewport } = useThree();
   const isMobile = viewport.width < 6;
 
-  const titleSize = isMobile ? 0.26 : 0.4;
-  const subSize = isMobile ? 0.13 : 0.22;
+  const titleSize = isMobile ? 0.45 : 0.4;
+  const subSize = isMobile ? 0.26 : 0.22;
 
   // Smaller overall scale on mobile so text fits nicely
   const scale = isMobile
-    ? THREE.MathUtils.clamp(viewport.width / 10, 0.28, 0.45)
+    ? THREE.MathUtils.clamp(viewport.width / 7, 0.55, 0.7)
     : THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
 
   // Move text higher on mobile, closer to the car
