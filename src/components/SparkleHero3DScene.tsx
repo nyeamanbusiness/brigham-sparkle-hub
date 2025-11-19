@@ -152,11 +152,16 @@ function FloatingText() {
   const { viewport } = useThree();
   const isMobile = viewport.width < 6;
 
-  const titleSize = isMobile ? 0.32 : 0.4;
-  const subSize = isMobile ? 0.16 : 0.22;
-  const scale = THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
+  const titleSize = isMobile ? 0.26 : 0.4;
+  const subSize = isMobile ? 0.13 : 0.22;
 
-  const posY = isMobile ? -0.85 : -0.55;
+  // Smaller overall scale on mobile so text fits nicely
+  const scale = isMobile
+    ? THREE.MathUtils.clamp(viewport.width / 10, 0.28, 0.45)
+    : THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
+
+  // Move text higher on mobile, closer to the car
+  const posY = isMobile ? -0.55 : -0.45;
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -174,7 +179,7 @@ function FloatingText() {
         </Text3D>
       </Center>
 
-      <Center position={[0, -(isMobile ? 0.38 : 0.42), 0]}>
+      <Center position={[0, -(isMobile ? 0.28 : 0.42), 0]}>
         <Text3D font={FONT_PATH} size={subSize} height={0.03}>
           Auto Detailing Service
           <meshStandardMaterial color="#f3e5ff" metalness={0.9} roughness={0.18} />
