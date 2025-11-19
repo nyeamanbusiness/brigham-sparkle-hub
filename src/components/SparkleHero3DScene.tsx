@@ -87,25 +87,29 @@ function CarModel() {
   const sweep = useRef<THREE.PointLight>(null!);
   const cloned = useMemo(() => scene.clone(true), [scene]);
 
+  // Make the car MUCH bigger
+  const carScale = 5.5;
+
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     if (group.current) {
       group.current.rotation.y = t * 0.4;
     }
     if (sweep.current) {
-      sweep.current.position.x = Math.sin(t * 1.3) * 2.6;
-      sweep.current.position.y = 0.6 + Math.sin(t * 0.9) * 0.5;
-      sweep.current.intensity = 0.9 + Math.max(0, Math.sin(t * 2.1)) * 0.8;
+      sweep.current.position.x = Math.sin(t * 1.3) * 3.5;
+      sweep.current.position.y = 1.2 + Math.sin(t * 0.9) * 0.7;
+      sweep.current.intensity = 1.2 + Math.max(0, Math.sin(t * 2.1)) * 0.8;
     }
   });
 
   return (
-    <group ref={group} position={[0, 0.4, 0]} scale={3.2}>
-      <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#222222" />
-      <directionalLight position={[5, 6, 7]} intensity={1.2} />
-      <directionalLight position={[-4, 3, 2]} intensity={0.6} />
-      <pointLight ref={sweep} color="#b7a4ff" distance={9} decay={2} intensity={1.1} />
-      <Float speed={1.2} rotationIntensity={0.06} floatIntensity={0.35}>
+    <group ref={group} position={[0, -0.4, 0]} scale={carScale}>
+      <hemisphereLight intensity={0.8} color="#ffffff" groundColor="#222222" />
+      <directionalLight position={[5, 6, 7]} intensity={1.4} />
+      <directionalLight position={[-4, 3, 2]} intensity={0.8} />
+      <pointLight ref={sweep} color="#b7a4ff" distance={12} decay={2} intensity={1.4} />
+
+      <Float speed={1.2} rotationIntensity={0.02} floatIntensity={0.3}>
         <primitive object={cloned} />
       </Float>
     </group>
@@ -116,11 +120,15 @@ function CarModel() {
 function FloatingText() {
   const group = useRef<THREE.Group>(null!);
   const { viewport } = useThree();
+
   const isMobile = viewport.width < 6;
-  const titleSize = isMobile ? 0.42 : 0.58;
-  const subSize = isMobile ? 0.18 : 0.24;
-  const scale = THREE.MathUtils.clamp(viewport.width / 10, 0.55, 1.0);
-  const posY = isMobile ? -1.0 : -1.25;
+
+  const titleSize = isMobile ? 0.26 : 0.34;
+  const subSize = isMobile ? 0.13 : 0.18;
+
+  const scale = THREE.MathUtils.clamp(viewport.width / 14, 0.42, 0.78);
+
+  const posY = isMobile ? -0.35 : -0.55;
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -130,23 +138,16 @@ function FloatingText() {
   return (
     <group ref={group} position={[0, posY, 0]} scale={scale}>
       <Center>
-        <Text3D
-          font={FONT_PATH}
-          size={titleSize}
-          height={0.07}
-          bevelEnabled
-          bevelThickness={0.02}
-          bevelSize={0.01}
-        >
+        <Text3D font={FONT_PATH} size={titleSize} height={0.06} bevelEnabled bevelThickness={0.015} bevelSize={0.01}>
           SparkleAutoDetailingLLC.com
-          <meshStandardMaterial color="#f9fafb" metalness={1} roughness={0.08} />
+          <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.08} />
         </Text3D>
       </Center>
 
-      <Center position={[0, -(isMobile ? 0.46 : 0.58), 0]}>
-        <Text3D font={FONT_PATH} size={subSize} height={0.03}>
+      <Center position={[0, -(isMobile ? 0.32 : 0.45), 0]}>
+        <Text3D font={FONT_PATH} size={subSize} height={0.02}>
           Auto Detailing Service
-          <meshStandardMaterial color="#e9d5ff" metalness={0.9} roughness={0.18} />
+          <meshStandardMaterial color="#f3e5ff" metalness={0.9} roughness={0.18} />
         </Text3D>
       </Center>
     </group>
@@ -169,7 +170,7 @@ useGLTF.preload(MODEL_PATH);
 export function SparkleHero3DScene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 8.5], fov: 45 }}
+      camera={{ position: [0, 0, 10], fov: 45 }}
       gl={{ antialias: true, outputColorSpace: THREE.SRGBColorSpace }}
       dpr={[1, 2]}
     >
