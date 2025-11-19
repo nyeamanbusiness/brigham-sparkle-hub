@@ -17,7 +17,10 @@ export type Database = {
       orders: {
         Row: {
           addon_ids: string[] | null
+          appointment_date: string | null
+          appointment_time: string | null
           base_service_id: string
+          calendar_event_id: string | null
           city: string | null
           created_at: string | null
           email: string
@@ -34,7 +37,10 @@ export type Database = {
         }
         Insert: {
           addon_ids?: string[] | null
+          appointment_date?: string | null
+          appointment_time?: string | null
           base_service_id: string
+          calendar_event_id?: string | null
           city?: string | null
           created_at?: string | null
           email: string
@@ -51,7 +57,10 @@ export type Database = {
         }
         Update: {
           addon_ids?: string[] | null
+          appointment_date?: string | null
+          appointment_time?: string | null
           base_service_id?: string
+          calendar_event_id?: string | null
           city?: string | null
           created_at?: string | null
           email?: string
