@@ -77,7 +77,7 @@ export default function Home() {
       />
 
       {/* Hero Section - 3D Scene */}
-      <section className="relative w-full h-screen overflow-hidden">
+      <section className="relative w-full h-[70vh] md:h-screen overflow-hidden">
         <SparkleHero3DScene />
       </section>
 
