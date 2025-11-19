@@ -130,7 +130,7 @@ function CarModel() {
   return (
     <group
       ref={group}
-      position={[0, isMobile ? 0.9 : 0.8, 0]}
+      position={[0, isMobile ? 0.75 : 0.8, 0]}
       scale={isMobile ? 36.0 : 50.0}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
@@ -161,7 +161,7 @@ function FloatingText() {
     : THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
 
   // Move text higher on mobile, closer to the car
-  const posY = isMobile ? -0.55 : -0.45;
+  const posY = isMobile ? -0.58 : -0.45;
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
