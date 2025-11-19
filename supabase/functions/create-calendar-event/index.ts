@@ -54,6 +54,8 @@ serve(async (req) => {
       const pemClean = pem
         .replace("-----BEGIN PRIVATE KEY-----", "")
         .replace("-----END PRIVATE KEY-----", "")
+        // Handle keys stored with escaped newlines ("\\n") in environment variables
+        .replace(/\\n/g, "")
         .replace(/\s+/g, "");
       const binary = atob(pemClean);
       const bytes = new Uint8Array(binary.length);
