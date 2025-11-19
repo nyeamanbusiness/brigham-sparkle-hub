@@ -117,7 +117,7 @@ export default function ServicesHub() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="gradient-cta">
-                <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
+                <Link to="/booking">Book Now</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
                 <Link to="/pricing">View Pricing</Link>

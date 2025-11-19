@@ -1,7 +1,8 @@
 import { Meta } from "@/utils/seo";
 import BreadcrumbsJsonLd from "@/components/BreadcrumbsJsonLd";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 
 export default function Gallery() {
@@ -146,9 +147,7 @@ export default function Gallery() {
               Let us transform your vehicle. Book your detailing service today and see the Sparkle difference.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                Book Now
-              </a>
+              <Link to="/booking">Book Now</Link>
             </Button>
           </motion.div>
         </div>

@@ -66,9 +66,7 @@ export default function AutoDetailingInterior() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="gradient-cta">
-                <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                  Book Now
-                </a>
+                <Link to="/booking">Book Now</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
                 <a href="tel:+14355356484">Call Now</a>
@@ -194,9 +192,7 @@ export default function AutoDetailingInterior() {
                 <div className="p-6">
                   
                   <Button asChild className="w-full gradient-cta">
-                    <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                      Book Now
-                    </a>
+                    <Link to="/booking">Book Now</Link>
                   </Button>
                 </div>
               </motion.div>)}
@@ -281,9 +277,7 @@ export default function AutoDetailingInterior() {
               Book your interior detailing service today and experience a showroom-fresh cabin.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                Schedule Service
-              </a>
+              <Link to="/booking">Schedule Service</Link>
             </Button>
           </motion.div>
         </div>

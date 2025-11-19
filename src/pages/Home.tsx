@@ -350,9 +350,7 @@ export default function Home() {
               the Sparkle difference.
             </p>
             <Button asChild size="lg" className="gradient-cta text-lg">
-              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                Book Now
-              </a>
+              <Link to="/booking">Book Now</Link>
             </Button>
           </motion.div>
         </div>
