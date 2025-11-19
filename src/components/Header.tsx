@@ -1,41 +1,40 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Menu, X, Phone } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
-import logo from '@/assets/sparkle-logo.webp';
+} from "@/components/ui/navigation-menu";
+import logo from "@/assets/sparkle-logo.webp";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Gallery', href: '/gallery' },
-    { name: 'FAQ', href: '/faq' },
-    { name: 'Contact', href: '/contact' }
+    { name: "Home", href: "/" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "FAQ", href: "/faq" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const services = [
-    { name: 'All Services', href: '/services' },
-    { name: 'Interior Detailing', href: '/services/auto-detailing-interior' },
-    { name: 'Exterior Detailing', href: '/services/auto-detailing-exterior' },
-    { name: 'Ceramic Coating', href: '/services/ceramic-coating' },
-    { name: 'Paint Correction', href: '/services/paint-correction' }
+    { name: "All Services", href: "/services" },
+    { name: "Interior Detailing", href: "/services/auto-detailing-interior" },
+    { name: "Exterior Detailing", href: "/services/auto-detailing-exterior" },
+    { name: "Ceramic Coating", href: "/services/ceramic-coating" },
+    { name: "Paint Correction", href: "/services/paint-correction" },
   ];
 
   const isActive = (href: string) => location.pathname === href;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm shadow-md">
-
       {/* Top bar */}
       <div className="border-b border-primary-light/20">
         <div className="container mx-auto px-4 py-1.5 flex justify-between items-center text-sm">
@@ -73,14 +72,10 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between py-3">
           <Link to="/" className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt="Sparkle Auto Detailing Logo"
-              className="h-16 w-auto"   {/* LOGO REDUCED */}
-            />
-            <span className="text-primary-foreground font-bold text-xl hidden sm:block">
-              Sparkle Auto Detailing
-            </span>
+            {/* Reduced logo height */}
+            <img src={logo} alt="Sparkle Auto Detailing Logo" className="h-16 w-auto" />
+
+            <span className="text-primary-foreground font-bold text-xl hidden sm:block">Sparkle Auto Detailing</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -90,9 +85,7 @@ export default function Header() {
                 key={item.name}
                 to={item.href}
                 className={`text-sm font-medium transition-colors ${
-                  isActive(item.href)
-                    ? 'text-accent'
-                    : 'text-primary-foreground hover:text-accent'
+                  isActive(item.href) ? "text-accent" : "text-primary-foreground hover:text-accent"
                 }`}
               >
                 {item.name}
@@ -114,8 +107,8 @@ export default function Header() {
                           to={service.href}
                           className={`block px-4 py-2 text-sm rounded-md transition-colors ${
                             isActive(service.href)
-                              ? 'text-accent bg-accent/10'
-                              : 'text-foreground hover:bg-accent/10 hover:text-accent'
+                              ? "text-accent bg-accent/10"
+                              : "text-foreground hover:bg-accent/10 hover:text-accent"
                           }`}
                         >
                           {service.name}
@@ -128,26 +121,15 @@ export default function Header() {
             </NavigationMenu>
 
             <Button asChild variant="default" className="gradient-cta">
-              <a
-                href="https://sparkleautodetailing.setmore.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
                 Book Now
               </a>
             </Button>
           </div>
 
           {/* Mobile menu button */}
-          <button
-            className="lg:hidden text-primary-foreground"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+          <button className="lg:hidden text-primary-foreground" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </nav>
       </div>
@@ -157,7 +139,7 @@ export default function Header() {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-primary border-t border-primary-light/20"
           >
@@ -168,9 +150,7 @@ export default function Header() {
                   to={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block py-2 text-sm font-medium ${
-                    isActive(item.href)
-                      ? 'text-accent'
-                      : 'text-primary-foreground'
+                    isActive(item.href) ? "text-accent" : "text-primary-foreground"
                   }`}
                 >
                   {item.name}
@@ -178,9 +158,7 @@ export default function Header() {
               ))}
 
               <div className="border-t border-primary-light/20 pt-3">
-                <div className="text-sm font-medium text-primary-foreground mb-2">
-                  Services
-                </div>
+                <div className="text-sm font-medium text-primary-foreground mb-2">Services</div>
 
                 {services.map((service) => (
                   <Link
@@ -188,9 +166,7 @@ export default function Header() {
                     to={service.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`block py-2 pl-4 text-sm ${
-                      isActive(service.href)
-                        ? 'text-accent'
-                        : 'text-primary-foreground/80'
+                      isActive(service.href) ? "text-accent" : "text-primary-foreground/80"
                     }`}
                   >
                     {service.name}
