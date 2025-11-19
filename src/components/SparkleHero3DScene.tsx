@@ -130,8 +130,8 @@ function CarModel() {
   return (
     <group
       ref={group}
-      position={[0, isMobile ? 1.4 : 0.8, 0]}
-      scale={isMobile ? 40.0 : 50.0}
+      position={[0, isMobile ? 0.9 : 0.8, 0]}   {/* UPDATED: better centered on mobile */}
+      scale={isMobile ? 36.0 : 50.0}            {/* UPDATED: adjusted mobile scale for proper centering */}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
@@ -156,8 +156,8 @@ function FloatingText() {
   const subSize = isMobile ? 0.16 : 0.22;
   const scale = THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
 
-  // lower text on mobile
-  const posY = isMobile ? -0.6 : -0.45;
+  // UPDATED: keep text centered and slightly lower on mobile
+  const posY = isMobile ? -0.85 : -0.55;
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -175,7 +175,7 @@ function FloatingText() {
         </Text3D>
       </Center>
 
-      <Center position={[0, -(isMobile ? 0.34 : 0.42), 0]}>
+      <Center position={[0, -(isMobile ? 0.38 : 0.42), 0]}>
         <Text3D font={FONT_PATH} size={subSize} height={0.03}>
           Auto Detailing Service
           <meshStandardMaterial color="#f3e5ff" metalness={0.9} roughness={0.18} />
