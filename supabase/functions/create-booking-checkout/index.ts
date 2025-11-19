@@ -34,7 +34,7 @@ serve(async (req) => {
 
     console.log("[BOOKING] Received booking request:", { full_name, email, base_service_id, addon_ids });
 
-    // Fetch base service
+    // Fetch base service for record keeping
     const { data: baseService, error: baseError } = await supabaseClient
       .from("services")
       .select("*")
@@ -47,17 +47,10 @@ serve(async (req) => {
 
     console.log("[BOOKING] Base service found:", baseService.name);
 
-    // Build line items
-    const lineItems: any[] = [
-      {
-        price: baseService.stripe_price_id,
-        quantity: 1,
-      },
-    ];
-
-    // Fetch and add addons
+    // Fetch addons for record keeping
+    let addons = [];
     if (addon_ids && addon_ids.length > 0) {
-      const { data: addons, error: addonsError } = await supabaseClient
+      const { data: addonData, error: addonsError } = await supabaseClient
         .from("services")
         .select("*")
         .in("id", addon_ids);
@@ -66,15 +59,17 @@ serve(async (req) => {
         throw new Error("Error fetching addons");
       }
 
-      console.log("[BOOKING] Addons found:", addons?.length || 0);
-
-      addons?.forEach((addon) => {
-        lineItems.push({
-          price: addon.stripe_price_id,
-          quantity: 1,
-        });
-      });
+      addons = addonData || [];
+      console.log("[BOOKING] Addons found:", addons.length);
     }
+
+    // Always charge $25 deposit regardless of services selected
+    const lineItems: any[] = [
+      {
+        price: "price_1SVJMPJpEBooz875hfebwd7p", // $25 Deposit
+        quantity: 1,
+      },
+    ];
 
     // Create order record
     const { data: order, error: orderError } = await supabaseClient
@@ -126,6 +121,31 @@ serve(async (req) => {
       .eq("id", order.id);
 
     console.log("[BOOKING] Stripe session created:", session.id);
+
+    // Send booking notification email
+    try {
+      await supabaseClient.functions.invoke("send-booking-notification", {
+        body: {
+          order_id: order.id,
+          full_name,
+          email,
+          phone,
+          street,
+          city,
+          state,
+          zip,
+          base_service: baseService.name,
+          addons: addons.map((a: any) => a.name),
+          vehicle_details,
+          notes,
+          stripe_session_id: session.id,
+        },
+      });
+      console.log("[BOOKING] Notification email sent");
+    } catch (emailError) {
+      console.error("[BOOKING] Email notification failed:", emailError);
+      // Don't fail the booking if email fails
+    }
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
