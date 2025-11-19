@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
-import CarSpinModel from "@/components/CarSpinModel";
+import { SparkleHero3DScene } from "@/components/SparkleHero3DScene";
 
 export default function Home() {
   const benefits = [
@@ -76,63 +76,9 @@ export default function Home() {
         ]}
       />
 
-      {/* Hero Section */}
-      <section className="gradient-hero text-primary-foreground pt-8 pb-14 md:pt-10 md:pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(255,255,255,0.1)_0%,_transparent_50%)]"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          {/* 3D CAR – centered, not tiny, not taking over whole viewport */}
-          <div className="w-full flex justify-center items-center mb-6">
-            <div className="w-[260px] h-[180px] md:w-[340px] md:h-[220px] lg:w-[380px] lg:h-[240px] mx-auto">
-              <CarSpinModel />
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Northern Utah’s Trusted Car Detailing Experts
-              </h1>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="gradient-cta text-lg">
-                  <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                    Book Now
-                  </a>
-                </Button>
-                <Button asChild size="lg" variant="secondary">
-                  <a href="tel:+14355356484">Call Now</a>
-                </Button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative rounded-lg overflow-hidden shadow-2xl">
-                <img
-                  src="https://dreeuacqovhldjhlynio.supabase.co/storage/v1/object/public/imagebucket/interior-detaling-job.webp"
-                  alt="Luxury car detailing"
-                  className="rounded-lg"
-                />
-                <div className="absolute bottom-4 right-4 z-20">
-                  <div className="rounded-xl px-5 py-4 shadow-2xl ring-1 ring-white/10 backdrop-blur-sm bg-purple-700/85 text-white">
-                    <div className="flex items-center gap-2">
-                      <Star className="h-5 w-5 fill-current" />
-                      <span className="text-xl font-bold">5.0</span>
-                    </div>
-                    <p className="text-xs opacity-90">Google Reviews</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
+      {/* Hero Section - 3D Scene */}
+      <section className="relative w-full h-screen overflow-hidden">
+        <SparkleHero3DScene />
       </section>
 
       {/* Featured Services */}
