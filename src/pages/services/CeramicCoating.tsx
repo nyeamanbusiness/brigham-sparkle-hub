@@ -71,9 +71,7 @@ export default function CeramicCoating() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="gradient-cta">
-                <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                  Book Now
-                </a>
+                <Link to="/booking">Book Now</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
                 <a href="tel:+14355356484">Call Now</a>
@@ -219,9 +217,7 @@ export default function CeramicCoating() {
               <div className="p-8">
                 
                 <Button asChild className="w-full gradient-cta">
-                  <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                    Book Now
-                  </a>
+                  <Link to="/booking">Book Now</Link>
                 </Button>
               </div>
             </div>
@@ -271,9 +267,7 @@ export default function CeramicCoating() {
               Schedule your ceramic coating service and enjoy years of protection and shine.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">
-                Get Started
-              </a>
+              <Link to="/booking">Get Started</Link>
             </Button>
           </motion.div>
         </div>

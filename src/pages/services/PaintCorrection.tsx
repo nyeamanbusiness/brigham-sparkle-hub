@@ -1,6 +1,7 @@
 import { Meta } from '@/utils/seo';
 import BreadcrumbsJsonLd from '@/components/BreadcrumbsJsonLd';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 export default function PaintCorrection() {
@@ -76,7 +77,7 @@ export default function PaintCorrection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="gradient-cta">
-                <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Book Now</a>
+                <Link to="/booking">Book Now</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
                 <a href="tel:+14355356484">Call Now</a>
@@ -200,7 +201,7 @@ export default function PaintCorrection() {
               Schedule your paint correction service and rediscover your vehicle's true beauty.
             </p>
             <Button asChild size="lg" className="gradient-cta">
-              <a href="https://sparkleautodetailing.setmore.com/" target="_blank" rel="noopener noreferrer">Schedule Now</a>
+              <Link to="/booking">Schedule Now</Link>
             </Button>
           </motion.div>
         </div>
