@@ -130,8 +130,8 @@ function CarModel() {
   return (
     <group
       ref={group}
-      position={[0, isMobile ? 0.9 : 0.8, 0]}   {/* UPDATED: better centered on mobile */}
-      scale={isMobile ? 36.0 : 50.0}            {/* UPDATED: adjusted mobile scale for proper centering */}
+      position={[0, isMobile ? 0.9 : 0.8, 0]}
+      scale={isMobile ? 36.0 : 50.0}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
@@ -156,7 +156,6 @@ function FloatingText() {
   const subSize = isMobile ? 0.16 : 0.22;
   const scale = THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
 
-  // UPDATED: keep text centered and slightly lower on mobile
   const posY = isMobile ? -0.85 : -0.55;
 
   useFrame(({ clock }) => {
