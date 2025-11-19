@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.reviews]
 verify_jwt = false
+
+[functions.create-booking-checkout]
+verify_jwt = false

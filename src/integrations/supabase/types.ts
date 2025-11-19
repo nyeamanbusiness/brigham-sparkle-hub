@@ -14,6 +14,107 @@ export type Database = {
   }
   public: {
     Tables: {
+      orders: {
+        Row: {
+          addon_ids: string[] | null
+          base_service_id: string
+          city: string | null
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string | null
+          state: string | null
+          status: string
+          street: string | null
+          stripe_session_id: string | null
+          vehicle_details: string | null
+          zip: string | null
+        }
+        Insert: {
+          addon_ids?: string[] | null
+          base_service_id: string
+          city?: string | null
+          created_at?: string | null
+          email: string
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          state?: string | null
+          status?: string
+          street?: string | null
+          stripe_session_id?: string | null
+          vehicle_details?: string | null
+          zip?: string | null
+        }
+        Update: {
+          addon_ids?: string[] | null
+          base_service_id?: string
+          city?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          state?: string | null
+          status?: string
+          street?: string | null
+          stripe_session_id?: string | null
+          vehicle_details?: string | null
+          zip?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_base_service_id_fkey"
+            columns: ["base_service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          name: string
+          price_cents: number
+          stripe_price_id: string
+          stripe_product_id: string
+          type: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          name: string
+          price_cents: number
+          stripe_price_id: string
+          stripe_product_id: string
+          type: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          name?: string
+          price_cents?: number
+          stripe_price_id?: string
+          stripe_product_id?: string
+          type?: string
+        }
+        Relationships: []
+      }
       site_messages: {
         Row: {
           created_at: string
