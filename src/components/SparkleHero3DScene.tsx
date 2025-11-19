@@ -86,75 +86,12 @@ function CarModel() {
   const group = useRef<THREE.Group>(null!);
   const sweep = useRef<THREE.PointLight>(null!);
   const cloned = useMemo(() => scene.clone(true), [scene]);
-  const { viewport } = useThree();
-  
-  const isDragging = useRef(false);
-  const previousPosition = useRef({ x: 0, y: 0 });
-  const velocity = useRef(0);
-  const targetRotation = useRef(0);
-
-  useEffect(() => {
-    const handleStart = (clientX: number) => {
-      isDragging.current = true;
-      previousPosition.current = { x: clientX, y: 0 };
-      velocity.current = 0;
-    };
-
-    const handleMove = (clientX: number) => {
-      if (!isDragging.current || !group.current) return;
-      const deltaX = clientX - previousPosition.current.x;
-      targetRotation.current += deltaX * 0.01;
-      velocity.current = deltaX * 0.01;
-      previousPosition.current = { x: clientX, y: 0 };
-    };
-
-    const handleEnd = () => {
-      isDragging.current = false;
-    };
-
-    const onMouseDown = (e: MouseEvent) => handleStart(e.clientX);
-    const onMouseMove = (e: MouseEvent) => handleMove(e.clientX);
-    const onMouseUp = () => handleEnd();
-    const onTouchStart = (e: TouchEvent) => handleStart(e.touches[0].clientX);
-    const onTouchMove = (e: TouchEvent) => handleMove(e.touches[0].clientX);
-    const onTouchEnd = () => handleEnd();
-
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-    window.addEventListener("touchend", onTouchEnd);
-
-    return () => {
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onTouchEnd);
-    };
-  }, []);
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    
     if (group.current) {
-      if (isDragging.current) {
-        group.current.rotation.y = targetRotation.current;
-      } else {
-        // Auto-spin with damping
-        velocity.current *= 0.95;
-        if (Math.abs(velocity.current) > 0.001) {
-          targetRotation.current += velocity.current;
-          group.current.rotation.y = targetRotation.current;
-        } else {
-          targetRotation.current += 0.005;
-          group.current.rotation.y = targetRotation.current;
-        }
-      }
+      group.current.rotation.y = t * 0.4;
     }
-    
     if (sweep.current) {
       sweep.current.position.x = Math.sin(t * 1.3) * 2.6;
       sweep.current.position.y = 0.6 + Math.sin(t * 0.9) * 0.5;
@@ -162,17 +99,16 @@ function CarModel() {
     }
   });
 
-  const isMobile = viewport.width < 6;
-  const carScale = isMobile ? 5.5 : 7.0;
-  const carY = isMobile ? 1.8 : 2.2;
-
+  // Slightly larger car and a bit higher so it sits nicely above the text
   return (
-    <group ref={group} position={[0, carY, 0]} scale={carScale}>
+    <group ref={group} position={[0, 0.8, 0]} scale={4.0}>
       <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#222222" />
       <directionalLight position={[5, 6, 7]} intensity={1.2} />
       <directionalLight position={[-4, 3, 2]} intensity={0.6} />
       <pointLight ref={sweep} color="#b7a4ff" distance={9} decay={2} intensity={1.1} />
-      <primitive object={cloned} />
+      <Float speed={1.2} rotationIntensity={0.06} floatIntensity={0.35}>
+        <primitive object={cloned} />
+      </Float>
     </group>
   );
 }
@@ -182,10 +118,16 @@ function FloatingText() {
   const group = useRef<THREE.Group>(null!);
   const { viewport } = useThree();
   const isMobile = viewport.width < 6;
-  const titleSize = isMobile ? 0.38 : 0.58;
-  const subSize = isMobile ? 0.16 : 0.24;
-  const scale = THREE.MathUtils.clamp(viewport.width / 10, 0.55, 1.0);
-  const posY = isMobile ? -2.2 : -1.8;
+
+  // Slightly smaller sizes so the long domain fits
+  const titleSize = isMobile ? 0.32 : 0.4;
+  const subSize = isMobile ? 0.16 : 0.22;
+
+  // Reduce scale a bit so we're not hitting the edges
+  const scale = THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
+
+  // Raise text higher so it's not hugging the bottom
+  const posY = isMobile ? -0.35 : -0.45;
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -196,17 +138,19 @@ function FloatingText() {
 
   return (
     <group ref={group} position={[0, posY, 0]} scale={scale}>
+      {/* Main domain text */}
       <Center>
         <Text3D font={FONT_PATH} size={titleSize} height={0.07} bevelEnabled bevelThickness={0.02} bevelSize={0.01}>
           SparkleAutoDetailingLLC.com
-          <meshStandardMaterial color="#f9fafb" metalness={1} roughness={0.08} />
+          <meshStandardMaterial color="#ffffff" metalness={1} roughness={0.08} />
         </Text3D>
       </Center>
 
-      <Center position={[0, -(isMobile ? 0.42 : 0.58), 0]}>
+      {/* Subtitle */}
+      <Center position={[0, -(isMobile ? 0.34 : 0.42), 0]}>
         <Text3D font={FONT_PATH} size={subSize} height={0.03}>
           Auto Detailing Service
-          <meshStandardMaterial color="#e9d5ff" metalness={0.9} roughness={0.18} />
+          <meshStandardMaterial color="#f3e5ff" metalness={0.9} roughness={0.18} />
         </Text3D>
       </Center>
     </group>
@@ -232,10 +176,6 @@ export function SparkleHero3DScene() {
       camera={{ position: [0, 0, 8.5], fov: 45 }}
       gl={{ antialias: true, outputColorSpace: THREE.SRGBColorSpace }}
       dpr={[1, 2]}
-      style={{ 
-        touchAction: 'none',
-        cursor: 'grab'
-      }}
     >
       <Suspense fallback={null}>
         <HeroScene />
