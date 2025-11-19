@@ -75,7 +75,7 @@ function LiquidBackground() {
   );
 }
 
-/* --------------------------- CAR MODEL --------------------------- */
+/* --------------------------- CAR MODEL (WITH SWIPE + INERTIA) --------------------------- */
 function CarModel() {
   const { scene } = useGLTF(MODEL_PATH);
   const group = useRef<THREE.Group>(null!);
@@ -85,22 +85,32 @@ function CarModel() {
   const { viewport } = useThree();
   const isMobile = viewport.width < 6;
 
-  // rotation states
+  // rotation / drag state
   const isDragging = useRef(false);
   const lastX = useRef(0);
+  const lastTime = useRef(0);
+  const velocity = useRef(0); // radians/sec-ish
   const dragRotation = useRef(0);
   const autoRotation = useRef(0);
 
-  useFrame(({ clock }, delta) => {
-    const t = clock.getElapsedTime();
+  useFrame((_, delta) => {
+    // auto spin + inertia
+    if (!isDragging.current) {
+      autoRotation.current += delta * 0.4; // base auto rotation
+
+      // inertia from swipe
+      if (Math.abs(velocity.current) > 0.001) {
+        autoRotation.current += velocity.current * delta;
+        velocity.current *= 0.92; // damping
+      }
+    }
 
     if (group.current) {
-      if (!isDragging.current) {
-        autoRotation.current += delta * 0.4;
-      }
       group.current.rotation.y = autoRotation.current + dragRotation.current;
     }
 
+    // animated sweep light
+    const t = performance.now() / 1000;
     if (sweep.current) {
       sweep.current.position.x = Math.sin(t * 1.3) * 2.6;
       sweep.current.position.y = 0.6 + Math.sin(t * 0.9) * 0.5;
@@ -111,20 +121,40 @@ function CarModel() {
   const handlePointerDown = (e: any) => {
     e.stopPropagation();
     isDragging.current = true;
-    e.target.setPointerCapture(e.pointerId);
+
     lastX.current = e.clientX;
+    lastTime.current = performance.now();
+    velocity.current = 0;
+
+    if (e.target.setPointerCapture) {
+      e.target.setPointerCapture(e.pointerId);
+    }
   };
 
   const handlePointerUp = (e: any) => {
     isDragging.current = false;
-    e.target.releasePointerCapture(e.pointerId);
+    if (e.target.releasePointerCapture) {
+      e.target.releasePointerCapture(e.pointerId);
+    }
   };
 
   const handlePointerMove = (e: any) => {
     if (!isDragging.current) return;
+
+    const now = performance.now();
     const deltaX = e.clientX - lastX.current;
+    const dt = (now - lastTime.current) / 1000; // seconds
+
     lastX.current = e.clientX;
-    dragRotation.current += deltaX * 0.01;
+    lastTime.current = now;
+
+    const deltaRot = deltaX * 0.01;
+    dragRotation.current += deltaRot;
+
+    // update velocity for inertia
+    if (dt > 0) {
+      velocity.current = (deltaX * 0.015) / dt;
+    }
   };
 
   return (
@@ -200,16 +230,20 @@ function HeroScene() {
 
 useGLTF.preload(MODEL_PATH);
 
+/* --------------------------- EXPORTED COMPONENT --------------------------- */
 export function SparkleHero3DScene() {
   return (
-    <Canvas
-      camera={{ position: [0, 0, 8.5], fov: 45 }}
-      gl={{ antialias: true, outputColorSpace: THREE.SRGBColorSpace }}
-      dpr={[1, 2]}
-    >
-      <Suspense fallback={null}>
-        <HeroScene />
-      </Suspense>
-    </Canvas>
+    // Wrapper enables proper pointer events on mobile (swipe-to-spin)
+    <div style={{ width: "100%", height: "100%", touchAction: "none" }}>
+      <Canvas
+        camera={{ position: [0, 0, 8.5], fov: 45 }}
+        gl={{ antialias: true, outputColorSpace: THREE.SRGBColorSpace }}
+        dpr={[1, 2]}
+      >
+        <Suspense fallback={null}>
+          <HeroScene />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 }
