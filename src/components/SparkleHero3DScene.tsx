@@ -61,16 +61,11 @@ function LiquidBackground() {
             float t = uTime*0.35;
             uv += 0.35*vec2(noise(uv+t), noise(uv+3.14+t));
 
-            vec2 m = (uMouse*0.5+0.5)*3.0;
-            float ripple = 0.12 * sin(10.0*distance(uv,m)-uTime*2.0)/(1.0 + 6.0*distance(uv,m));
-
-            float n = noise(uv + ripple + t);
-
             vec3 c1 = vec3(0.45, 0.12, 0.78);
             vec3 c2 = vec3(0.65, 0.25, 0.95);
 
+            float n = noise(uv + t);
             vec3 col = mix(c1, c2, smoothstep(0.2,0.8, vUv.x + 0.12*n));
-            col += 0.20 * vec3(0.95,0.9,1.0) * pow(smoothstep(0.6,1.0,n), 3.0);
 
             gl_FragColor = vec4(col,1.0);
           }
@@ -90,7 +85,7 @@ function CarModel() {
   const { viewport } = useThree();
   const isMobile = viewport.width < 6;
 
-  // drag / spin controls
+  // rotation states
   const isDragging = useRef(false);
   const lastX = useRef(0);
   const dragRotation = useRef(0);
@@ -101,7 +96,6 @@ function CarModel() {
 
     if (group.current) {
       if (!isDragging.current) {
-        // keep gentle auto-rotation when not dragging
         autoRotation.current += delta * 0.4;
       }
       group.current.rotation.y = autoRotation.current + dragRotation.current;
@@ -117,36 +111,31 @@ function CarModel() {
   const handlePointerDown = (e: any) => {
     e.stopPropagation();
     isDragging.current = true;
-    lastX.current = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+    e.target.setPointerCapture(e.pointerId);
+    lastX.current = e.clientX;
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e: any) => {
     isDragging.current = false;
+    e.target.releasePointerCapture(e.pointerId);
   };
 
   const handlePointerMove = (e: any) => {
     if (!isDragging.current) return;
-    const clientX = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
-    const deltaX = clientX - lastX.current;
-    lastX.current = clientX;
-    dragRotation.current += deltaX * 0.01; // sensitivity
+    const deltaX = e.clientX - lastX.current;
+    lastX.current = e.clientX;
+    dragRotation.current += deltaX * 0.01;
   };
 
   return (
     <group
       ref={group}
-      // higher and slightly smaller on mobile so it clears the text
       position={[0, isMobile ? 1.4 : 0.8, 0]}
       scale={isMobile ? 40.0 : 50.0}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
-      onPointerOut={handlePointerUp}
       onPointerLeave={handlePointerUp}
       onPointerMove={handlePointerMove}
-      // for touch devices
-      onTouchStart={handlePointerDown}
-      onTouchEnd={handlePointerUp}
-      onTouchMove={handlePointerMove}
     >
       <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#222222" />
       <directionalLight position={[5, 6, 7]} intensity={1.2} />
@@ -165,9 +154,9 @@ function FloatingText() {
 
   const titleSize = isMobile ? 0.32 : 0.4;
   const subSize = isMobile ? 0.16 : 0.22;
-
   const scale = THREE.MathUtils.clamp(viewport.width / 12, 0.55, 0.85);
-  // push text a bit lower on mobile to give more room to the car
+
+  // lower text on mobile
   const posY = isMobile ? -0.6 : -0.45;
 
   useFrame(({ clock }) => {
