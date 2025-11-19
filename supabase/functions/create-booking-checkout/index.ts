@@ -14,7 +14,7 @@ serve(async (req) => {
 
   const supabaseClient = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
   );
 
   try {
@@ -68,7 +68,7 @@ serve(async (req) => {
     // Always charge $25 deposit regardless of services selected
     const lineItems: any[] = [
       {
-        price: "price_1SVJMPJpEBooz875hfebwd7p", // $25 Deposit
+        price: "price_1SVJymJpEBooz875I7bVLw4C", // $25 Deposit
         quantity: 1,
       },
     ];
@@ -119,10 +119,7 @@ serve(async (req) => {
     });
 
     // Update order with session ID
-    await supabaseClient
-      .from("orders")
-      .update({ stripe_session_id: session.id })
-      .eq("id", order.id);
+    await supabaseClient.from("orders").update({ stripe_session_id: session.id }).eq("id", order.id);
 
     console.log("[BOOKING] Stripe session created:", session.id);
 
