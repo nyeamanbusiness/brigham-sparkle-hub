@@ -183,7 +183,7 @@ function FloatingText() {
   const isMobile = viewport.width < 6;
 
   const titleSize = isMobile ? 0.33 : 0.4;
-  const subSize = isMobile ? 0.23 : 0.28;
+  const subSize = isMobile ? 0.21 : 0.25;
 
   const scale = isMobile
     ? THREE.MathUtils.clamp(viewport.width / 9, 0.42, 0.55)
