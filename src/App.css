@@ -16,7 +16,7 @@ h6,
 span,
 div {
   overflow: visible;
-  padding-bottom: 0.15em; /* Extra space for descenders */
+  padding-bottom: 0.3em; /* Extra space for descenders */
 }
 
 /* Root container */
