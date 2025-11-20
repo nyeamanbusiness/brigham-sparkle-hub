@@ -1,3 +1,22 @@
+/* Global fix so letters like g, y, p are never clipped */
+html,
+body {
+  line-height: 1.5; /* Prevent clipped descenders */
+  overflow-x: hidden; /* Safe + common */
+}
+
+/* Ensure text itself never clips */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow: visible;
+}
+
+/* Root container */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -23,7 +42,7 @@
   animation-play-state: running !important;
 }
 
-/* Optional — if you want smoother motion on multiple axes */
+/* Optional — smoother motion on multiple axes */
 @keyframes spin-y {
   0% {
     transform: rotateY(0deg);
