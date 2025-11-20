@@ -162,9 +162,7 @@ export default function AutoDetailingInterior() {
         }} transition={{
           duration: 0.6
         }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">
-              Our Interior Detailing Packages & Pricing
-            </h2>
+            
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
@@ -180,21 +178,8 @@ export default function AutoDetailingInterior() {
             duration: 0.6,
             delay: index * 0.1
           }} className="bg-card rounded-lg shadow-lg overflow-hidden hover-lift">
-                <div className={`${index === 0 ? "bg-primary" : "bg-secondary"} text-white p-6`}>
-                  <h3 className="text-2xl font-bold mb-4">{pkg.name}</h3>
-                  <div className="space-y-2">
-                    {pkg.prices.map(priceItem => <div key={priceItem.vehicle} className="flex justify-between items-center border-t border-white/20 pt-2">
-                        <span className="text-sm opacity-90">{priceItem.vehicle}</span>
-                        <span className="text-2xl font-bold">{priceItem.price}</span>
-                      </div>)}
-                  </div>
-                </div>
-                <div className="p-6">
-                  
-                  <Button asChild className="w-full gradient-cta">
-                    <Link to="/booking">Book Now</Link>
-                  </Button>
-                </div>
+                
+                
               </motion.div>)}
           </div>
 
