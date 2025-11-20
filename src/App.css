@@ -1,8 +1,8 @@
 /* Global fix so letters like g, y, p are never clipped */
 html,
 body {
-  line-height: 1.5; /* Prevent clipped descenders */
-  overflow-x: hidden; /* Safe + common */
+  line-height: 1.6; /* Increased to prevent clipped descenders */
+  overflow-x: hidden;
 }
 
 /* Ensure text itself never clips */
@@ -12,8 +12,11 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+span,
+div {
   overflow: visible;
+  padding-bottom: 0.15em; /* Extra space for descenders */
 }
 
 /* Root container */
