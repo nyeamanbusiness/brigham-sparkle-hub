@@ -77,8 +77,11 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  p {
     @apply font-bold;
+    line-height: 1.6;
+    padding-bottom: 0.2em; /* Extra room for descenders like g, y, p */
   }
 }
 
