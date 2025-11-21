@@ -5,12 +5,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
-import { Skeleton } from "@/components/ui/skeleton";
-import { lazy, Suspense } from "react";
-
-const SparkleHero3DScene = lazy(() => 
-  import("@/components/SparkleHero3DScene").then(module => ({ default: module.SparkleHero3DScene }))
-);
 
 export default function Home() {
   const benefits = [
@@ -81,21 +75,9 @@ export default function Home() {
         ]}
       />
 
-      {/* Hero Section - 3D Scene */}
+      {/* Hero Section - 3D Scene Placeholder (Actual scene is in Layout for caching) */}
       <section className="relative w-full h-screen overflow-hidden">
-        <Suspense
-          fallback={
-            <div className="w-full h-full bg-gradient-to-b from-primary/20 to-background flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <Skeleton className="h-32 w-32 rounded-full mx-auto" />
-                <Skeleton className="h-8 w-64 mx-auto" />
-                <Skeleton className="h-6 w-48 mx-auto" />
-              </div>
-            </div>
-          }
-        >
-          <SparkleHero3DScene />
-        </Suspense>
+        {/* The 3D scene is positioned absolutely in the Layout component to persist across navigation */}
       </section>
 
       {/* Pricing Cards Section */}
