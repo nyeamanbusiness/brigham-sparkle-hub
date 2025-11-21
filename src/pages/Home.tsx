@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Shield, Sparkles, Clock, Star, CheckCircle2 } from "lucide-react";
 import CustomerReviews from "@/components/CustomerReviews";
 import { Skeleton } from "@/components/ui/skeleton";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 const SparkleHero3DScene = lazy(() => 
   import("@/components/SparkleHero3DScene").then(module => ({ default: module.SparkleHero3DScene }))
@@ -65,6 +65,35 @@ export default function Home() {
     },
   ];
 
+  const [shouldRender3DHero, setShouldRender3DHero] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const isSmallScreen = window.matchMedia?.("(max-width: 768px)").matches;
+
+    if (prefersReducedMotion || isSmallScreen) {
+      setShouldRender3DHero(false);
+      return;
+    }
+
+    const win = window as any;
+    const idleCallback =
+      win.requestIdleCallback ??
+      ((cb: () => void) => window.setTimeout(cb, 1200));
+
+    const id = idleCallback(() => setShouldRender3DHero(true));
+
+    return () => {
+      if (win.cancelIdleCallback) {
+        win.cancelIdleCallback(id);
+      } else {
+        clearTimeout(id);
+      }
+    };
+  }, []);
+
   return (
     <>
       <Meta
@@ -83,19 +112,41 @@ export default function Home() {
 
       {/* Hero Section - 3D Scene */}
       <section className="relative w-full h-screen overflow-hidden">
-        <Suspense
-          fallback={
-            <div className="w-full h-full bg-gradient-to-b from-primary/20 to-background flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <Skeleton className="h-32 w-32 rounded-full mx-auto" />
-                <Skeleton className="h-8 w-64 mx-auto" />
-                <Skeleton className="h-6 w-48 mx-auto" />
+        {shouldRender3DHero ? (
+          <Suspense
+            fallback={
+              <div className="w-full h-full bg-gradient-to-b from-primary/20 to-background flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <Skeleton className="h-32 w-32 rounded-full mx-auto" />
+                  <Skeleton className="h-8 w-64 mx-auto" />
+                  <Skeleton className="h-6 w-48 mx-auto" />
+                </div>
               </div>
+            }
+          >
+            <SparkleHero3DScene />
+          </Suspense>
+        ) : (
+          <div className="w-full h-full bg-gradient-to-b from-primary/20 to-background flex flex-col items-center justify-center text-center px-4">
+            <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground mb-3">
+              Brigham City's Premier Mobile Detailing
+            </p>
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 text-gradient">
+              Showroom Shine, Every Time
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-xl mb-8">
+              Professional interior &amp; exterior detailing, ceramic coating, and paint correction  booked in minutes.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" asChild>
+                <Link to="/booking">Book Now</Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link to="/services">View Services</Link>
+              </Button>
             </div>
-          }
-        >
-          <SparkleHero3DScene />
-        </Suspense>
+          </div>
+        )}
       </section>
 
       {/* Pricing Cards Section */}
