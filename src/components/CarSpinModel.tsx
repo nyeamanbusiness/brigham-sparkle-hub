@@ -81,7 +81,7 @@ function InnerCarModel() {
 
     // Auto spin when not dragging
     if (!dragging.current) {
-      const autoSpeed = 0.7; // rad/sec
+      const autoSpeed = 0.3; // rad/sec - reduced for better performance
       velRef.current += (autoSpeed * delta - velRef.current) * 0.08;
     } else {
       // Damping when user flings it
