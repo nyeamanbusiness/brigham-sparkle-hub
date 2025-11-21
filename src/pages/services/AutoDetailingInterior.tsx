@@ -99,7 +99,7 @@ export default function AutoDetailingInterior() {
 
             {/* Basic */}
             <div className="mb-10">
-              <h3 className="text-2xl font-bold mb-4 text-primary">Basic</h3>
+              
               <p className="text-muted-foreground mb-4">Perfect for regular maintenance and fresh interior.</p>
               <div className="grid md:grid-cols-2 gap-4">
                 {basicFeatures.map((feature, index) => <motion.div key={feature} initial={{
@@ -122,27 +122,9 @@ export default function AutoDetailingInterior() {
 
             {/* Standard */}
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-secondary">Standard</h3>
-              <p className="text-muted-foreground mb-4">
-                Intensive deep cleaning with ceramic coating preparation bonus.
-              </p>
-              <div className="grid md:grid-cols-2 gap-4">
-                {standardFeatures.map((feature, index) => <motion.div key={feature} initial={{
-                opacity: 0,
-                x: -20
-              }} whileInView={{
-                opacity: 1,
-                x: 0
-              }} viewport={{
-                once: true
-              }} transition={{
-                duration: 0.4,
-                delay: index * 0.05
-              }} className="flex items-start gap-3 bg-card p-4 rounded-lg">
-                    <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </motion.div>)}
-              </div>
+              
+              
+              
             </div>
           </motion.div>
         </div>
