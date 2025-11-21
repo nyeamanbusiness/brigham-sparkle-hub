@@ -237,8 +237,8 @@ export function SparkleHero3DScene() {
     <div style={{ width: "100%", height: "100%", touchAction: "pan-y" }}>
       <Canvas
         camera={{ position: [0, 0, 8.5], fov: 45 }}
-        gl={{ antialias: true, outputColorSpace: THREE.SRGBColorSpace }}
-        dpr={[1, 2]}
+        gl={{ antialias: false, outputColorSpace: THREE.SRGBColorSpace, powerPreference: "high-performance" }}
+        dpr={[1, 1.5]}
       >
         <Suspense fallback={null}>
           <HeroScene />
