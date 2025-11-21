@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Text3D, Center } from "@react-three/drei";
 
-const MODEL_PATH = "/2019_chevrolet_corvette_c8_stingray.glb";
+const MODEL_PATH = "/2019_chevrolet_corvette_c8_stingray_draco.glb";
 const FONT_PATH = "/fonts/helvetiker_regular.typeface.json";
 
 /* ---------------------- LIQUID PURPLE BACKGROUND ---------------------- */
