@@ -543,9 +543,15 @@ export default function Booking() {
             {/* Total and Submit */}
             <Card className="bg-primary/5">
               <CardContent className="pt-6">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold">Total:</span>
                   <span className="text-3xl font-bold">{calculateTotal()}</span>
+                </div>
+
+                <div className="bg-accent/50 border border-border rounded-lg p-4 mb-6">
+                  <p className="text-sm text-foreground">
+                    <span className="font-semibold">$25.00</span> deposit charged now. After service completion, remaining balance will be invoiced.
+                  </p>
                 </div>
 
                 <Separator className="my-6" />
