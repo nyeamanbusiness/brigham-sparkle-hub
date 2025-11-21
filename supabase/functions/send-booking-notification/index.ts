@@ -8,6 +8,21 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Helper function to convert 24-hour time to 12-hour format with AM/PM
+const formatTime12Hour = (time24: string): string => {
+  const [hours, minutes] = time24.split(':').map(Number);
+  const period = hours >= 12 ? 'PM' : 'AM';
+  const hours12 = hours % 12 || 12;
+  return `${hours12}:${minutes.toString().padStart(2, '0')} ${period}`;
+};
+
+// Helper function to add hours to a time string
+const addHours = (time: string, hoursToAdd: number): string => {
+  const [hours, minutes] = time.split(':').map(Number);
+  const newHours = (hours + hoursToAdd) % 24;
+  return `${newHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+};
+
 interface BookingNotification {
   order_id: string;
   full_name: string;
@@ -103,7 +118,7 @@ const handler = async (req: Request): Promise<Response> => {
             📅 ${booking.appointment_date}
           </p>
           <p style="margin: 0; font-size: 16px; color: #1e3a8a;">
-            🕐 ${booking.appointment_time} (3-hour appointment)
+            🕐 ${formatTime12Hour(booking.appointment_time)} - ${formatTime12Hour(addHours(booking.appointment_time, 3))} MT (3-hour appointment)
           </p>
         </div>
         ` : ''}
