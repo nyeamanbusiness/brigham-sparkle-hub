@@ -282,21 +282,21 @@ export default function Home() {
 
               <div className="grid grid-cols-2 gap-x-8 gap-y-2 mb-8">
                 <ul className="space-y-2">
-                  <li className="text-foreground list-disc ml-5">Brigham City</li>
-                  <li className="text-foreground list-disc ml-5">Perry</li>
-                  <li className="text-foreground list-disc ml-5">Willard</li>
-                  <li className="text-foreground list-disc ml-5">Mantua</li>
-                  <li className="text-foreground list-disc ml-5">Corinne</li>
-                  <li className="text-foreground list-disc ml-5">Tremonton</li>
-                  <li className="text-foreground list-disc ml-5">Pleasant View</li>
+                  <li className="text-foreground list-disc ml-5">Ogden</li>
+                  <li className="text-foreground list-disc ml-5">North Ogden</li>
+                  <li className="text-foreground list-disc ml-5">South Ogden</li>
+                  <li className="text-foreground list-disc ml-5">Riverdale</li>
+                  <li className="text-foreground list-disc ml-5">Roy</li>
+                  <li className="text-foreground list-disc ml-5">Hooper</li>
+                  <li className="text-foreground list-disc ml-5">West Haven</li>
                 </ul>
                 <ul className="space-y-2">
-                  <li className="text-foreground list-disc ml-5">West Haven</li>
-                  <li className="text-foreground list-disc ml-5">Honeyville</li>
-                  <li className="text-foreground list-disc ml-5">Bear River City</li>
-                  <li className="text-foreground list-disc ml-5">Hooper</li>
-                  <li className="text-foreground list-disc ml-5">Ogden</li>
-                  <li className="text-foreground list-disc ml-5">Plain City</li>
+                  <li className="text-foreground list-disc ml-5">Layton</li>
+                  <li className="text-foreground list-disc ml-5">Kaysville</li>
+                  <li className="text-foreground list-disc ml-5">Farmington</li>
+                  <li className="text-foreground list-disc ml-5">Clearfield</li>
+                  <li className="text-foreground list-disc ml-5">Syracuse</li>
+                  <li className="text-foreground list-disc ml-5">Clinton</li>
                   <li className="text-foreground list-disc ml-5">Farr West</li>
                 </ul>
               </div>
