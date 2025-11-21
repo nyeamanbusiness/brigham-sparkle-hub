@@ -95,6 +95,18 @@ async function getGoogleAccessToken(serviceAccountKey: any): Promise<string> {
   return tokenJson.access_token;
 }
 
+function normalizeToHourMinute(time: string): string {
+  const [hour = "00", minute = "00"] = time.split(":");
+  return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+}
+
+function addHours(time: string, hoursToAdd: number): string {
+  const [hourStr = "00", minuteStr = "00"] = time.split(":");
+  const hour = parseInt(hourStr, 10);
+  const endHour = (hour + hoursToAdd) % 24;
+  return `${String(endHour).padStart(2, "0")}:${minuteStr}`;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -122,8 +134,11 @@ serve(async (req) => {
     const serviceAccountKey = JSON.parse(serviceAccountKeyRaw);
     const accessToken = await getGoogleAccessToken(serviceAccountKey);
 
-    const startDate = new Date(`${appointment_date}T${appointment_time}:00-07:00`);
-    const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3-hour duration in MT
+    const baseTime = normalizeToHourMinute(appointment_time);
+    const endTime = addHours(baseTime, 3);
+
+    const startDate = new Date(`${appointment_date}T${baseTime}:00-07:00`);
+    const endDate = new Date(`${appointment_date}T${endTime}:00-07:00`);
 
     // Check if slot is still available before creating event (prevent race conditions)
     const freeBusyUrl = "https://www.googleapis.com/calendar/v3/freeBusy";
@@ -164,11 +179,11 @@ serve(async (req) => {
       summary: `${service_name} - ${customer_name}`,
       description: `Auto detailing appointment\nCustomer: ${customer_name}\nEmail: ${customer_email}`,
       start: {
-        dateTime: startDate.toISOString(),
+        dateTime: `${appointment_date}T${baseTime}:00`,
         timeZone: "America/Denver",
       },
       end: {
-        dateTime: endDate.toISOString(),
+        dateTime: `${appointment_date}T${endTime}:00`,
         timeZone: "America/Denver",
       },
     };
