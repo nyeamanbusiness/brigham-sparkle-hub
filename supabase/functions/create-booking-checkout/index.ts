@@ -68,7 +68,7 @@ serve(async (req) => {
     // Always charge $25 deposit regardless of services selected
     const lineItems: any[] = [
       {
-        price: "price_1SVJymJpEBooz875I7bVLw4C", // $25 Deposit
+        price: "price_1SVJMPJpEBooz875hfebwd7p", // $25 Deposit
         quantity: 1,
       },
     ];
