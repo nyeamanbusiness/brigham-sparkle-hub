@@ -122,8 +122,8 @@ serve(async (req) => {
     const serviceAccountKey = JSON.parse(serviceAccountKeyRaw);
     const accessToken = await getGoogleAccessToken(serviceAccountKey);
 
-    const startDate = new Date(`${appointment_date}T${appointment_time}`);
-    const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3-hour duration
+    const startDate = new Date(`${appointment_date}T${appointment_time}:00-07:00`);
+    const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3-hour duration in MT
 
     // Check if slot is still available before creating event (prevent race conditions)
     const freeBusyUrl = "https://www.googleapis.com/calendar/v3/freeBusy";
